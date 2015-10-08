@@ -3,6 +3,7 @@
 #include "Entity.h"
 #include "Bubble.h"
 #include "Global.h"
+#include <math.h>
 
 int worldSize = 2000;
 int initialFood = 100;
