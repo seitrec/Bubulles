@@ -26,7 +26,7 @@ bool checkCollision(Entity bubble, Entity entity)
 
 int main()
 {
-	// création de la fenêtre
+	// crï¿½ation de la fenï¿½tre
 	sf::RenderWindow window(sf::VideoMode(800, 800), "Agar");
 	sf::View view(sf::Vector2f(300, 300), sf::Vector2f(800, 800));
 	window.setVerticalSyncEnabled(true);
@@ -48,20 +48,20 @@ int main()
 		lEntity.push_back(entity);
 	}
 
-	// on fait tourner le programme tant que la fenêtre n'a pas été fermée
+	// on fait tourner le programme tant que la fenï¿½tre n'a pas ï¿½tï¿½ fermï¿½e
 	while (window.isOpen())
 	{
-		float mouseX = static_cast<float>(window.mapPixelToCoords(sf::Mouse::getPosition(window)).x);
-		float mouseY = static_cast<float>(window.mapPixelToCoords(sf::Mouse::getPosition(window)).y);
+		float mouseX = window.mapPixelToCoords(sf::Mouse::getPosition(window)).x;
+		float mouseY = window.mapPixelToCoords(sf::Mouse::getPosition(window)).y;
 
-		// on traite tous les évènements de la fenêtre qui ont été générés depuis la dernière itération de la boucle
+		// on traite tous les ï¿½vï¿½nements de la fenï¿½tre qui ont ï¿½tï¿½ gï¿½nï¿½rï¿½s depuis la derniï¿½re itï¿½ration de la boucle
 		sf::Event event;
 		while (window.pollEvent(event))
 		{
-			// on regarde le type de l'évènement...
+			// on regarde le type de l'ï¿½vï¿½nement...
 			switch (event.type)
 			{
-				// fenêtre fermée
+				// fenï¿½tre fermï¿½e
 			case sf::Event::Closed:
 				window.close();
 				break;
