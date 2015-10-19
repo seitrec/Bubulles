@@ -8,7 +8,7 @@
 int worldSize = 2000;
 int initialFood = 100;
 using namespace std;
-//test melchior voire si vous me voyez
+//test melchior voire si vous me voyez. et là je push.
 
 bool checkCollision(Entity bubble, Entity entity)
 {
