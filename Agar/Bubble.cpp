@@ -69,8 +69,10 @@ void Bubble::setSize(float radius)
 Bubble Bubble::Split(float mouseX, float mouseY)
 {
 	float size = getSize() / sqrt(2);
+	sf::Color color = getColor();
 	Bubble bubble;
 	bubble.setSize(size);
+	bubble.setColor(color);
 	this->setSize(size);
 	float relativeCenterMouseX = mouseX - (this->getPosition().x + m_size);
 	float relativeCenterMouseY = mouseY - (this->getPosition().y + m_size);

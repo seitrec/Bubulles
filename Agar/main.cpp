@@ -37,6 +37,9 @@ int main()
 	vector<Entity> lEntity;
 	vector<Bubble> lBubble;
 	Bubble bubble;
+	bubble.setSize(10);
+	Bubble bot;
+	bot.setSize(10);
 	lBubble.push_back(bubble);
 	int lBubblesize;
 
@@ -66,13 +69,27 @@ int main()
 				window.close();
 				break;
 
+				//Split, on ne split que si la taille minimum des bulles est > taille nourriture
 			case sf::Event::KeyPressed:
 				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 				{
 					lBubblesize = lBubble.size();
-					for (int i(0); i < lBubblesize; ++i)
-					{
-						lBubble.push_back(lBubble[i].Split(mouseX, mouseY));
+					float min_size = lBubble[0].getSize();
+
+					for (int i(0); i< lBubblesize; ++i){
+						if (lBubble[i].getSize() < min_size){
+							min_size = lBubble[i].getSize();
+						}
+						if (min_size <= 5){
+							break;
+						}
+					}
+
+					if (min_size > 5) {
+						lBubblesize = lBubble.size();
+						for (int i(0); i < lBubblesize; ++i) {
+							lBubble.push_back(lBubble[i].Split(mouseX, mouseY));
+						}
 					}
 				}
 				break;
@@ -99,12 +116,19 @@ int main()
 		{
 			window.draw(lEntity[i]);
 		}
+
+		// Gestion de la nourriture
 		for (int i(0); i < lBubble.size(); ++i)
 		{
 			view.setCenter(lBubble[i].getCenter());
-			window.draw(lBubble[i]);
+			/*window.draw(lBubble[i]);
+			lBubble[i].Move(mouseX, mouseY);*/
 
-			lBubble[i].Move(mouseX, mouseY);
+			//on peut également faire bouger le truc tout seul
+			Entity closest = lBubble[i].getClosest(lEntity);
+			view.setCenter(lBubble[i].getCenter());
+			window.draw(lBubble[i]);
+			lBubble[i].Move(closest.getPosition().x, closest.getPosition().y);
 
 			for (int u(0); u < lEntity.size(); ++u)
 			{
@@ -120,6 +144,23 @@ int main()
 				}
 			}
 		}
+
+		// Refusion des bubbles splitées
+		if (lBubble.size() > 1)
+		{
+			for (int i(0); i < lBubble.size(); ++i)
+			{
+				for (int j=i+1; j < lBubble.size(); ++j)
+				{
+					if (checkCollision(lBubble[i], lBubble[j]))
+					{
+						lBubble[i].Eat(lBubble[j].getSize());
+						lBubble.erase(lBubble.begin() + j);
+					}
+				}
+			}
+		}
+
 		window.display();
 		window.setView(view);
 	}
