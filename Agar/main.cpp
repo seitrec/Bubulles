@@ -6,15 +6,15 @@
 #include <math.h>
 
 int worldSize = 2000;
-int initialFood = 100;
+int initialFood = 200;
 using namespace std;
+
 //test melchior voire si vous me voyez. et là je push.
 
 bool checkCollision(Entity bubble, Entity entity)
 {
-	if (sqrt((bubble.getCenter().x - entity.getCenter().x)*(bubble.getCenter().x - entity.getCenter().x)
-		+ (bubble.getCenter().y - entity.getCenter().y)*(bubble.getCenter().y - entity.getCenter().y))
-		< abs(bubble.getSize()-entity.getSize()/2))
+	if (sqrt(pow((bubble.getCenter().x - entity.getCenter().x),2) + pow((bubble.getCenter().y - entity.getCenter().y),2))
+		< fabs(bubble.getSize()-entity.getSize()/2))
 	{
 		return true;
 	}

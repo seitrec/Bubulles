@@ -14,8 +14,7 @@ Entity::~Entity()
 {
 }
 
-sf::Vector2f Entity
-::getCenter()
+sf::Vector2f Entity::getCenter()
 {
 	sf::Vector2f r(this->getPosition().x + m_size, this->getPosition().y + m_size);
 	return r;
@@ -27,7 +26,7 @@ void Entity::setSize(float radius)
 	setRadius(radius);
 }
 
-int Entity::getSize()
+float Entity::getSize()
 {
 	return m_size;
 }

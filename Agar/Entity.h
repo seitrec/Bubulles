@@ -10,7 +10,7 @@ public:
 	Entity();
 	~Entity();
 	sf::Vector2f getCenter();
-	int getSize();
+	float getSize();
 	void setSize(float radius);
 
 protected:

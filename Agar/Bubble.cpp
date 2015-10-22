@@ -10,7 +10,7 @@ using namespace std;
 Bubble::Bubble(): Entity()
 {
 	m_currentY = 100;
-	m_currentX=100;
+	m_currentX = 100;
 	setPosition(sf::Vector2f(m_currentX, m_currentY));
 	setSize(5);
 }
@@ -63,7 +63,7 @@ void Bubble::setSize(float radius)
 {
 	setRadius(radius);
 	m_size = radius;
-	m_speed = 40 / radius;
+	m_speed = 10/sqrt(radius);
 }
 
 Bubble Bubble::Split(float mouseX, float mouseY)
@@ -74,10 +74,10 @@ Bubble Bubble::Split(float mouseX, float mouseY)
 	this->setSize(size);
 	float relativeCenterMouseX = mouseX - (this->getPosition().x + m_size);
 	float relativeCenterMouseY = mouseY - (this->getPosition().y + m_size);
-	if (fabs(relativeCenterMouseX) > 3 || fabs(relativeCenterMouseY) > 3)
-	{
-		float c = sqrt(((m_speed+3*m_size)*(m_speed+3*m_size)) / (relativeCenterMouseX*relativeCenterMouseX + relativeCenterMouseY*relativeCenterMouseY));
-		bubble.setPosition(getPosition().x + c*relativeCenterMouseX, getPosition().y + c*relativeCenterMouseY);
+	if (fabs(relativeCenterMouseX) > 3 || fabs(relativeCenterMouseY) > 3) {
+		float c = sqrt(((m_speed + 3 * m_size) * (m_speed + 3 * m_size)) /
+					   (relativeCenterMouseX * relativeCenterMouseX + relativeCenterMouseY * relativeCenterMouseY));
+		bubble.setPosition(getPosition().x + c * relativeCenterMouseX, getPosition().y + c * relativeCenterMouseY);
 	}
 	return bubble;
 }

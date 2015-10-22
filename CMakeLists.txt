@@ -4,7 +4,7 @@ project(Bubulles)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 set(SOURCE_FILES Agar)
-add_executable(Bubulles ${SOURCE_FILES}/Carre.cpp
+add_executable(Bubulles ${SOURCE_FILES}/main.cpp
                         ${SOURCE_FILES}/Bubble.cpp
                         ${SOURCE_FILES}/Entity.cpp
                         ${SOURCE_FILES}/Global.h)
