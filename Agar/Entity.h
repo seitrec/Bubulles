@@ -17,6 +17,7 @@ public:
 	void setColor(sf::Color);
 	bool checkCollision(Entity entity);
 	void draw(sf::RenderWindow * ptrWindow);
+    void getEaten(Entity cell);
 
 protected:
 	sf::Vector2f m_position;

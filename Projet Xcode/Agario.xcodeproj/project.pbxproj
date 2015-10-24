@@ -8,31 +8,87 @@
 
 /* Begin PBXBuildFile section */
 		CA19EC441BD4F05E00A57472 /* sansation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CA19EC431BD4F05E00A57472 /* sansation.ttf */; };
-		CA19EC581BD4F09F00A57472 /* Bubble.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CA19EC4D1BD4F09F00A57472 /* Bubble.cpp */; settings = {ASSET_TAGS = (); }; };
-		CA19EC591BD4F09F00A57472 /* Carre.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CA19EC4F1BD4F09F00A57472 /* Carre.cpp */; settings = {ASSET_TAGS = (); }; };
-		CA19EC5A1BD4F09F00A57472 /* Carre.sln in Resources */ = {isa = PBXBuildFile; fileRef = CA19EC501BD4F09F00A57472 /* Carre.sln */; settings = {ASSET_TAGS = (); }; };
-		CA19EC5B1BD4F09F00A57472 /* Carre.vcxproj in Resources */ = {isa = PBXBuildFile; fileRef = CA19EC511BD4F09F00A57472 /* Carre.vcxproj */; settings = {ASSET_TAGS = (); }; };
-		CA19EC5C1BD4F09F00A57472 /* Carre.vcxproj.filters in Resources */ = {isa = PBXBuildFile; fileRef = CA19EC521BD4F09F00A57472 /* Carre.vcxproj.filters */; settings = {ASSET_TAGS = (); }; };
-		CA19EC5D1BD4F09F00A57472 /* Entity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CA19EC531BD4F09F00A57472 /* Entity.cpp */; settings = {ASSET_TAGS = (); }; };
-		CA19EC5E1BD4F09F00A57472 /* image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CA19EC561BD4F09F00A57472 /* image.jpg */; settings = {ASSET_TAGS = (); }; };
-		CA19EC5F1BD4F09F00A57472 /* image.png in Resources */ = {isa = PBXBuildFile; fileRef = CA19EC571BD4F09F00A57472 /* image.png */; settings = {ASSET_TAGS = (); }; };
+		CA2DE9AF1BDBDBD2003C0140 /* Bubble.cpp~ in Resources */ = {isa = PBXBuildFile; fileRef = CA2DE9781BDBDBD1003C0140 /* Bubble.cpp~ */; settings = {ASSET_TAGS = (); }; };
+		CA2DE9B01BDBDBD2003C0140 /* Carre.ilk in Resources */ = {isa = PBXBuildFile; fileRef = CA2DE97B1BDBDBD1003C0140 /* Carre.ilk */; settings = {ASSET_TAGS = (); }; };
+		CA2DE9B11BDBDBD2003C0140 /* Carre.pdb in Resources */ = {isa = PBXBuildFile; fileRef = CA2DE97C1BDBDBD1003C0140 /* Carre.pdb */; settings = {ASSET_TAGS = (); }; };
+		CA2DE9B71BDBDBD2003C0140 /* Cell.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CA2DE9821BDBDBD1003C0140 /* Cell.cpp */; settings = {ASSET_TAGS = (); }; };
+		CA2DE9B81BDBDBD2003C0140 /* Carre.log in Resources */ = {isa = PBXBuildFile; fileRef = CA2DE9851BDBDBD1003C0140 /* Carre.log */; settings = {ASSET_TAGS = (); }; };
+		CA2DE9B91BDBDBD2003C0140 /* Carre.lastbuildstate in Resources */ = {isa = PBXBuildFile; fileRef = CA2DE9871BDBDBD1003C0140 /* Carre.lastbuildstate */; settings = {ASSET_TAGS = (); }; };
+		CA2DE9BA1BDBDBD2003C0140 /* CL.command.1.tlog in Resources */ = {isa = PBXBuildFile; fileRef = CA2DE9881BDBDBD1003C0140 /* CL.command.1.tlog */; settings = {ASSET_TAGS = (); }; };
+		CA2DE9BB1BDBDBD2003C0140 /* CL.read.1.tlog in Resources */ = {isa = PBXBuildFile; fileRef = CA2DE9891BDBDBD1003C0140 /* CL.read.1.tlog */; settings = {ASSET_TAGS = (); }; };
+		CA2DE9BC1BDBDBD2003C0140 /* CL.write.1.tlog in Resources */ = {isa = PBXBuildFile; fileRef = CA2DE98A1BDBDBD1003C0140 /* CL.write.1.tlog */; settings = {ASSET_TAGS = (); }; };
+		CA2DE9BD1BDBDBD2003C0140 /* link.command.1.tlog in Resources */ = {isa = PBXBuildFile; fileRef = CA2DE98B1BDBDBD1003C0140 /* link.command.1.tlog */; settings = {ASSET_TAGS = (); }; };
+		CA2DE9BE1BDBDBD2003C0140 /* link.read.1.tlog in Resources */ = {isa = PBXBuildFile; fileRef = CA2DE98C1BDBDBD1003C0140 /* link.read.1.tlog */; settings = {ASSET_TAGS = (); }; };
+		CA2DE9BF1BDBDBD2003C0140 /* link.write.1.tlog in Resources */ = {isa = PBXBuildFile; fileRef = CA2DE98D1BDBDBD1003C0140 /* link.write.1.tlog */; settings = {ASSET_TAGS = (); }; };
+		CA2DE9C01BDBDBD2003C0140 /* sfml-audio-d-2.ilk in Resources */ = {isa = PBXBuildFile; fileRef = CA2DE98E1BDBDBD1003C0140 /* sfml-audio-d-2.ilk */; settings = {ASSET_TAGS = (); }; };
+		CA2DE9C11BDBDBD2003C0140 /* sfml-audio-d.exp in Sources */ = {isa = PBXBuildFile; fileRef = CA2DE98F1BDBDBD1003C0140 /* sfml-audio-d.exp */; settings = {ASSET_TAGS = (); }; };
+		CA2DE9C21BDBDBD2003C0140 /* sfml-audio-d.pdb in Resources */ = {isa = PBXBuildFile; fileRef = CA2DE9901BDBDBD1003C0140 /* sfml-audio-d.pdb */; settings = {ASSET_TAGS = (); }; };
+		CA2DE9C31BDBDBD2003C0140 /* sfml-graphics-d-2.ilk in Resources */ = {isa = PBXBuildFile; fileRef = CA2DE9911BDBDBD1003C0140 /* sfml-graphics-d-2.ilk */; settings = {ASSET_TAGS = (); }; };
+		CA2DE9C41BDBDBD2003C0140 /* sfml-graphics-d.exp in Sources */ = {isa = PBXBuildFile; fileRef = CA2DE9921BDBDBD1003C0140 /* sfml-graphics-d.exp */; settings = {ASSET_TAGS = (); }; };
+		CA2DE9C51BDBDBD2003C0140 /* sfml-graphics-d.pdb in Resources */ = {isa = PBXBuildFile; fileRef = CA2DE9931BDBDBD1003C0140 /* sfml-graphics-d.pdb */; settings = {ASSET_TAGS = (); }; };
+		CA2DE9C61BDBDBD2003C0140 /* sfml-network-d-2.ilk in Resources */ = {isa = PBXBuildFile; fileRef = CA2DE9941BDBDBD1003C0140 /* sfml-network-d-2.ilk */; settings = {ASSET_TAGS = (); }; };
+		CA2DE9C71BDBDBD2003C0140 /* sfml-network-d.exp in Sources */ = {isa = PBXBuildFile; fileRef = CA2DE9951BDBDBD1003C0140 /* sfml-network-d.exp */; settings = {ASSET_TAGS = (); }; };
+		CA2DE9C81BDBDBD2003C0140 /* sfml-network-d.pdb in Resources */ = {isa = PBXBuildFile; fileRef = CA2DE9961BDBDBD1003C0140 /* sfml-network-d.pdb */; settings = {ASSET_TAGS = (); }; };
+		CA2DE9C91BDBDBD2003C0140 /* sfml-system-d-2.ilk in Resources */ = {isa = PBXBuildFile; fileRef = CA2DE9971BDBDBD2003C0140 /* sfml-system-d-2.ilk */; settings = {ASSET_TAGS = (); }; };
+		CA2DE9CA1BDBDBD2003C0140 /* sfml-system-d.exp in Sources */ = {isa = PBXBuildFile; fileRef = CA2DE9981BDBDBD2003C0140 /* sfml-system-d.exp */; settings = {ASSET_TAGS = (); }; };
+		CA2DE9CB1BDBDBD2003C0140 /* sfml-system-d.pdb in Resources */ = {isa = PBXBuildFile; fileRef = CA2DE9991BDBDBD2003C0140 /* sfml-system-d.pdb */; settings = {ASSET_TAGS = (); }; };
+		CA2DE9CC1BDBDBD2003C0140 /* sfml-window-d-2.ilk in Resources */ = {isa = PBXBuildFile; fileRef = CA2DE99A1BDBDBD2003C0140 /* sfml-window-d-2.ilk */; settings = {ASSET_TAGS = (); }; };
+		CA2DE9CD1BDBDBD2003C0140 /* sfml-window-d.exp in Sources */ = {isa = PBXBuildFile; fileRef = CA2DE99B1BDBDBD2003C0140 /* sfml-window-d.exp */; settings = {ASSET_TAGS = (); }; };
+		CA2DE9CE1BDBDBD2003C0140 /* sfml-window-d.pdb in Resources */ = {isa = PBXBuildFile; fileRef = CA2DE99C1BDBDBD2003C0140 /* sfml-window-d.pdb */; settings = {ASSET_TAGS = (); }; };
+		CA2DE9CF1BDBDBD2003C0140 /* vc140.idb in Resources */ = {isa = PBXBuildFile; fileRef = CA2DE99D1BDBDBD2003C0140 /* vc140.idb */; settings = {ASSET_TAGS = (); }; };
+		CA2DE9D01BDBDBD2003C0140 /* vc140.pdb in Resources */ = {isa = PBXBuildFile; fileRef = CA2DE99E1BDBDBD2003C0140 /* vc140.pdb */; settings = {ASSET_TAGS = (); }; };
+		CA2DE9D11BDBDBD2003C0140 /* Entity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CA2DE99F1BDBDBD2003C0140 /* Entity.cpp */; settings = {ASSET_TAGS = (); }; };
+		CA2DE9D21BDBDBD2003C0140 /* Food.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CA2DE9A11BDBDBD2003C0140 /* Food.cpp */; settings = {ASSET_TAGS = (); }; };
+		CA2DE9D31BDBDBD2003C0140 /* image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CA2DE9A41BDBDBD2003C0140 /* image.jpg */; settings = {ASSET_TAGS = (); }; };
+		CA2DE9D41BDBDBD2003C0140 /* image.png in Resources */ = {isa = PBXBuildFile; fileRef = CA2DE9A51BDBDBD2003C0140 /* image.png */; settings = {ASSET_TAGS = (); }; };
+		CA2DE9D51BDBDBD2003C0140 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CA2DE9A61BDBDBD2003C0140 /* main.cpp */; settings = {ASSET_TAGS = (); }; };
+		CA2DE9D91BDBDBD2003C0140 /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CA2DE9AD1BDBDBD2003C0140 /* Player.cpp */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		CA19EC341BD4F05E00A57472 /* Agario.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Agario.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA19EC381BD4F05E00A57472 /* Agario-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Agario-Info.plist"; sourceTree = "<group>"; };
 		CA19EC431BD4F05E00A57472 /* sansation.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = sansation.ttf; sourceTree = "<group>"; };
-		CA19EC4D1BD4F09F00A57472 /* Bubble.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Bubble.cpp; sourceTree = "<group>"; };
-		CA19EC4E1BD4F09F00A57472 /* Bubble.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bubble.h; sourceTree = "<group>"; };
-		CA19EC4F1BD4F09F00A57472 /* Carre.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Carre.cpp; sourceTree = "<group>"; };
-		CA19EC501BD4F09F00A57472 /* Carre.sln */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Carre.sln; sourceTree = "<group>"; };
-		CA19EC511BD4F09F00A57472 /* Carre.vcxproj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Carre.vcxproj; sourceTree = "<group>"; };
-		CA19EC521BD4F09F00A57472 /* Carre.vcxproj.filters */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Carre.vcxproj.filters; sourceTree = "<group>"; };
-		CA19EC531BD4F09F00A57472 /* Entity.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Entity.cpp; sourceTree = "<group>"; };
-		CA19EC541BD4F09F00A57472 /* Entity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Entity.h; sourceTree = "<group>"; };
-		CA19EC551BD4F09F00A57472 /* Global.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Global.h; sourceTree = "<group>"; };
-		CA19EC561BD4F09F00A57472 /* image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image.jpg; sourceTree = "<group>"; };
-		CA19EC571BD4F09F00A57472 /* image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image.png; sourceTree = "<group>"; };
+		CA2DE9781BDBDBD1003C0140 /* Bubble.cpp~ */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "Bubble.cpp~"; path = "../Agar/Bubble.cpp~"; sourceTree = "<group>"; };
+		CA2DE97B1BDBDBD1003C0140 /* Carre.ilk */ = {isa = PBXFileReference; lastKnownFileType = file; path = Carre.ilk; sourceTree = "<group>"; };
+		CA2DE97C1BDBDBD1003C0140 /* Carre.pdb */ = {isa = PBXFileReference; lastKnownFileType = file; path = Carre.pdb; sourceTree = "<group>"; };
+		CA2DE9821BDBDBD1003C0140 /* Cell.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Cell.cpp; path = ../Agar/Cell.cpp; sourceTree = "<group>"; };
+		CA2DE9831BDBDBD1003C0140 /* Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Cell.h; path = ../Agar/Cell.h; sourceTree = "<group>"; };
+		CA2DE9851BDBDBD1003C0140 /* Carre.log */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Carre.log; sourceTree = "<group>"; };
+		CA2DE9871BDBDBD1003C0140 /* Carre.lastbuildstate */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Carre.lastbuildstate; sourceTree = "<group>"; };
+		CA2DE9881BDBDBD1003C0140 /* CL.command.1.tlog */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CL.command.1.tlog; sourceTree = "<group>"; };
+		CA2DE9891BDBDBD1003C0140 /* CL.read.1.tlog */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CL.read.1.tlog; sourceTree = "<group>"; };
+		CA2DE98A1BDBDBD1003C0140 /* CL.write.1.tlog */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CL.write.1.tlog; sourceTree = "<group>"; };
+		CA2DE98B1BDBDBD1003C0140 /* link.command.1.tlog */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = link.command.1.tlog; sourceTree = "<group>"; };
+		CA2DE98C1BDBDBD1003C0140 /* link.read.1.tlog */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = link.read.1.tlog; sourceTree = "<group>"; };
+		CA2DE98D1BDBDBD1003C0140 /* link.write.1.tlog */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = link.write.1.tlog; sourceTree = "<group>"; };
+		CA2DE98E1BDBDBD1003C0140 /* sfml-audio-d-2.ilk */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sfml-audio-d-2.ilk"; sourceTree = "<group>"; };
+		CA2DE98F1BDBDBD1003C0140 /* sfml-audio-d.exp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.exports; path = "sfml-audio-d.exp"; sourceTree = "<group>"; };
+		CA2DE9901BDBDBD1003C0140 /* sfml-audio-d.pdb */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sfml-audio-d.pdb"; sourceTree = "<group>"; };
+		CA2DE9911BDBDBD1003C0140 /* sfml-graphics-d-2.ilk */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sfml-graphics-d-2.ilk"; sourceTree = "<group>"; };
+		CA2DE9921BDBDBD1003C0140 /* sfml-graphics-d.exp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.exports; path = "sfml-graphics-d.exp"; sourceTree = "<group>"; };
+		CA2DE9931BDBDBD1003C0140 /* sfml-graphics-d.pdb */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sfml-graphics-d.pdb"; sourceTree = "<group>"; };
+		CA2DE9941BDBDBD1003C0140 /* sfml-network-d-2.ilk */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sfml-network-d-2.ilk"; sourceTree = "<group>"; };
+		CA2DE9951BDBDBD1003C0140 /* sfml-network-d.exp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.exports; path = "sfml-network-d.exp"; sourceTree = "<group>"; };
+		CA2DE9961BDBDBD1003C0140 /* sfml-network-d.pdb */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sfml-network-d.pdb"; sourceTree = "<group>"; };
+		CA2DE9971BDBDBD2003C0140 /* sfml-system-d-2.ilk */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sfml-system-d-2.ilk"; sourceTree = "<group>"; };
+		CA2DE9981BDBDBD2003C0140 /* sfml-system-d.exp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.exports; path = "sfml-system-d.exp"; sourceTree = "<group>"; };
+		CA2DE9991BDBDBD2003C0140 /* sfml-system-d.pdb */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sfml-system-d.pdb"; sourceTree = "<group>"; };
+		CA2DE99A1BDBDBD2003C0140 /* sfml-window-d-2.ilk */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sfml-window-d-2.ilk"; sourceTree = "<group>"; };
+		CA2DE99B1BDBDBD2003C0140 /* sfml-window-d.exp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.exports; path = "sfml-window-d.exp"; sourceTree = "<group>"; };
+		CA2DE99C1BDBDBD2003C0140 /* sfml-window-d.pdb */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sfml-window-d.pdb"; sourceTree = "<group>"; };
+		CA2DE99D1BDBDBD2003C0140 /* vc140.idb */ = {isa = PBXFileReference; lastKnownFileType = file; path = vc140.idb; sourceTree = "<group>"; };
+		CA2DE99E1BDBDBD2003C0140 /* vc140.pdb */ = {isa = PBXFileReference; lastKnownFileType = file; path = vc140.pdb; sourceTree = "<group>"; };
+		CA2DE99F1BDBDBD2003C0140 /* Entity.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Entity.cpp; path = ../Agar/Entity.cpp; sourceTree = "<group>"; };
+		CA2DE9A01BDBDBD2003C0140 /* Entity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Entity.h; path = ../Agar/Entity.h; sourceTree = "<group>"; };
+		CA2DE9A11BDBDBD2003C0140 /* Food.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Food.cpp; path = ../Agar/Food.cpp; sourceTree = "<group>"; };
+		CA2DE9A21BDBDBD2003C0140 /* Food.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Food.h; path = ../Agar/Food.h; sourceTree = "<group>"; };
+		CA2DE9A31BDBDBD2003C0140 /* Global.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Global.h; path = ../Agar/Global.h; sourceTree = "<group>"; };
+		CA2DE9A41BDBDBD2003C0140 /* image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = image.jpg; path = ../Agar/image.jpg; sourceTree = "<group>"; };
+		CA2DE9A51BDBDBD2003C0140 /* image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = image.png; path = ../Agar/image.png; sourceTree = "<group>"; };
+		CA2DE9A61BDBDBD2003C0140 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../Agar/main.cpp; sourceTree = "<group>"; };
+		CA2DE9AD1BDBDBD2003C0140 /* Player.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Player.cpp; path = ../Agar/Player.cpp; sourceTree = "<group>"; };
+		CA2DE9AE1BDBDBD2003C0140 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Player.h; path = ../Agar/Player.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,6 +105,21 @@
 		CA19EC2A1BD4F05E00A57472 = {
 			isa = PBXGroup;
 			children = (
+				CA2DE9781BDBDBD1003C0140 /* Bubble.cpp~ */,
+				CA2DE9791BDBDBD1003C0140 /* Build */,
+				CA2DE9821BDBDBD1003C0140 /* Cell.cpp */,
+				CA2DE9831BDBDBD1003C0140 /* Cell.h */,
+				CA2DE9841BDBDBD1003C0140 /* Debug */,
+				CA2DE99F1BDBDBD2003C0140 /* Entity.cpp */,
+				CA2DE9A01BDBDBD2003C0140 /* Entity.h */,
+				CA2DE9A11BDBDBD2003C0140 /* Food.cpp */,
+				CA2DE9A21BDBDBD2003C0140 /* Food.h */,
+				CA2DE9A31BDBDBD2003C0140 /* Global.h */,
+				CA2DE9A41BDBDBD2003C0140 /* image.jpg */,
+				CA2DE9A51BDBDBD2003C0140 /* image.png */,
+				CA2DE9A61BDBDBD2003C0140 /* main.cpp */,
+				CA2DE9AD1BDBDBD2003C0140 /* Player.cpp */,
+				CA2DE9AE1BDBDBD2003C0140 /* Player.h */,
 				CA19EC361BD4F05E00A57472 /* Agario */,
 				CA19EC351BD4F05E00A57472 /* Products */,
 			);
@@ -65,7 +136,6 @@
 		CA19EC361BD4F05E00A57472 /* Agario */ = {
 			isa = PBXGroup;
 			children = (
-				CA19EC4C1BD4F09F00A57472 /* Agar */,
 				CA19EC3E1BD4F05E00A57472 /* Resources */,
 				CA19EC371BD4F05E00A57472 /* Supporting Files */,
 			);
@@ -88,23 +158,63 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
-		CA19EC4C1BD4F09F00A57472 /* Agar */ = {
+		CA2DE9791BDBDBD1003C0140 /* Build */ = {
 			isa = PBXGroup;
 			children = (
-				CA19EC4D1BD4F09F00A57472 /* Bubble.cpp */,
-				CA19EC4E1BD4F09F00A57472 /* Bubble.h */,
-				CA19EC4F1BD4F09F00A57472 /* Carre.cpp */,
-				CA19EC501BD4F09F00A57472 /* Carre.sln */,
-				CA19EC511BD4F09F00A57472 /* Carre.vcxproj */,
-				CA19EC521BD4F09F00A57472 /* Carre.vcxproj.filters */,
-				CA19EC531BD4F09F00A57472 /* Entity.cpp */,
-				CA19EC541BD4F09F00A57472 /* Entity.h */,
-				CA19EC551BD4F09F00A57472 /* Global.h */,
-				CA19EC561BD4F09F00A57472 /* image.jpg */,
-				CA19EC571BD4F09F00A57472 /* image.png */,
+				CA2DE97A1BDBDBD1003C0140 /* Debug */,
 			);
-			name = Agar;
-			path = ../../Agar;
+			name = Build;
+			path = ../Agar/Build;
+			sourceTree = "<group>";
+		};
+		CA2DE97A1BDBDBD1003C0140 /* Debug */ = {
+			isa = PBXGroup;
+			children = (
+				CA2DE97B1BDBDBD1003C0140 /* Carre.ilk */,
+				CA2DE97C1BDBDBD1003C0140 /* Carre.pdb */,
+			);
+			path = Debug;
+			sourceTree = "<group>";
+		};
+		CA2DE9841BDBDBD1003C0140 /* Debug */ = {
+			isa = PBXGroup;
+			children = (
+				CA2DE9851BDBDBD1003C0140 /* Carre.log */,
+				CA2DE9861BDBDBD1003C0140 /* Carre.tlog */,
+				CA2DE98E1BDBDBD1003C0140 /* sfml-audio-d-2.ilk */,
+				CA2DE98F1BDBDBD1003C0140 /* sfml-audio-d.exp */,
+				CA2DE9901BDBDBD1003C0140 /* sfml-audio-d.pdb */,
+				CA2DE9911BDBDBD1003C0140 /* sfml-graphics-d-2.ilk */,
+				CA2DE9921BDBDBD1003C0140 /* sfml-graphics-d.exp */,
+				CA2DE9931BDBDBD1003C0140 /* sfml-graphics-d.pdb */,
+				CA2DE9941BDBDBD1003C0140 /* sfml-network-d-2.ilk */,
+				CA2DE9951BDBDBD1003C0140 /* sfml-network-d.exp */,
+				CA2DE9961BDBDBD1003C0140 /* sfml-network-d.pdb */,
+				CA2DE9971BDBDBD2003C0140 /* sfml-system-d-2.ilk */,
+				CA2DE9981BDBDBD2003C0140 /* sfml-system-d.exp */,
+				CA2DE9991BDBDBD2003C0140 /* sfml-system-d.pdb */,
+				CA2DE99A1BDBDBD2003C0140 /* sfml-window-d-2.ilk */,
+				CA2DE99B1BDBDBD2003C0140 /* sfml-window-d.exp */,
+				CA2DE99C1BDBDBD2003C0140 /* sfml-window-d.pdb */,
+				CA2DE99D1BDBDBD2003C0140 /* vc140.idb */,
+				CA2DE99E1BDBDBD2003C0140 /* vc140.pdb */,
+			);
+			name = Debug;
+			path = ../Agar/Debug;
+			sourceTree = "<group>";
+		};
+		CA2DE9861BDBDBD1003C0140 /* Carre.tlog */ = {
+			isa = PBXGroup;
+			children = (
+				CA2DE9871BDBDBD1003C0140 /* Carre.lastbuildstate */,
+				CA2DE9881BDBDBD1003C0140 /* CL.command.1.tlog */,
+				CA2DE9891BDBDBD1003C0140 /* CL.read.1.tlog */,
+				CA2DE98A1BDBDBD1003C0140 /* CL.write.1.tlog */,
+				CA2DE98B1BDBDBD1003C0140 /* link.command.1.tlog */,
+				CA2DE98C1BDBDBD1003C0140 /* link.read.1.tlog */,
+				CA2DE98D1BDBDBD1003C0140 /* link.write.1.tlog */,
+			);
+			path = Carre.tlog;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -164,12 +274,32 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CA19EC5C1BD4F09F00A57472 /* Carre.vcxproj.filters in Resources */,
-				CA19EC5A1BD4F09F00A57472 /* Carre.sln in Resources */,
-				CA19EC5E1BD4F09F00A57472 /* image.jpg in Resources */,
-				CA19EC5B1BD4F09F00A57472 /* Carre.vcxproj in Resources */,
+				CA2DE9BF1BDBDBD2003C0140 /* link.write.1.tlog in Resources */,
+				CA2DE9CE1BDBDBD2003C0140 /* sfml-window-d.pdb in Resources */,
+				CA2DE9AF1BDBDBD2003C0140 /* Bubble.cpp~ in Resources */,
+				CA2DE9B91BDBDBD2003C0140 /* Carre.lastbuildstate in Resources */,
+				CA2DE9BB1BDBDBD2003C0140 /* CL.read.1.tlog in Resources */,
 				CA19EC441BD4F05E00A57472 /* sansation.ttf in Resources */,
-				CA19EC5F1BD4F09F00A57472 /* image.png in Resources */,
+				CA2DE9BA1BDBDBD2003C0140 /* CL.command.1.tlog in Resources */,
+				CA2DE9CF1BDBDBD2003C0140 /* vc140.idb in Resources */,
+				CA2DE9C01BDBDBD2003C0140 /* sfml-audio-d-2.ilk in Resources */,
+				CA2DE9CC1BDBDBD2003C0140 /* sfml-window-d-2.ilk in Resources */,
+				CA2DE9B81BDBDBD2003C0140 /* Carre.log in Resources */,
+				CA2DE9CB1BDBDBD2003C0140 /* sfml-system-d.pdb in Resources */,
+				CA2DE9C21BDBDBD2003C0140 /* sfml-audio-d.pdb in Resources */,
+				CA2DE9C81BDBDBD2003C0140 /* sfml-network-d.pdb in Resources */,
+				CA2DE9B11BDBDBD2003C0140 /* Carre.pdb in Resources */,
+				CA2DE9C91BDBDBD2003C0140 /* sfml-system-d-2.ilk in Resources */,
+				CA2DE9C61BDBDBD2003C0140 /* sfml-network-d-2.ilk in Resources */,
+				CA2DE9BC1BDBDBD2003C0140 /* CL.write.1.tlog in Resources */,
+				CA2DE9C51BDBDBD2003C0140 /* sfml-graphics-d.pdb in Resources */,
+				CA2DE9BE1BDBDBD2003C0140 /* link.read.1.tlog in Resources */,
+				CA2DE9C31BDBDBD2003C0140 /* sfml-graphics-d-2.ilk in Resources */,
+				CA2DE9B01BDBDBD2003C0140 /* Carre.ilk in Resources */,
+				CA2DE9D01BDBDBD2003C0140 /* vc140.pdb in Resources */,
+				CA2DE9BD1BDBDBD2003C0140 /* link.command.1.tlog in Resources */,
+				CA2DE9D41BDBDBD2003C0140 /* image.png in Resources */,
+				CA2DE9D31BDBDBD2003C0140 /* image.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -196,9 +326,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CA19EC581BD4F09F00A57472 /* Bubble.cpp in Sources */,
-				CA19EC5D1BD4F09F00A57472 /* Entity.cpp in Sources */,
-				CA19EC591BD4F09F00A57472 /* Carre.cpp in Sources */,
+				CA2DE9CA1BDBDBD2003C0140 /* sfml-system-d.exp in Sources */,
+				CA2DE9D21BDBDBD2003C0140 /* Food.cpp in Sources */,
+				CA2DE9D51BDBDBD2003C0140 /* main.cpp in Sources */,
+				CA2DE9B71BDBDBD2003C0140 /* Cell.cpp in Sources */,
+				CA2DE9D11BDBDBD2003C0140 /* Entity.cpp in Sources */,
+				CA2DE9CD1BDBDBD2003C0140 /* sfml-window-d.exp in Sources */,
+				CA2DE9C11BDBDBD2003C0140 /* sfml-audio-d.exp in Sources */,
+				CA2DE9D91BDBDBD2003C0140 /* Player.cpp in Sources */,
+				CA2DE9C41BDBDBD2003C0140 /* sfml-graphics-d.exp in Sources */,
+				CA2DE9C71BDBDBD2003C0140 /* sfml-network-d.exp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -336,6 +473,7 @@
 				CA19EC4B1BD4F05E00A57472 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

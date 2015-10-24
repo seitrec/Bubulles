@@ -7,6 +7,6 @@ class Food :
 public:
 	Food();
 	~Food();
-	void getEaten(Entity cell);
+    void getEaten(Entity cell);
 };
 

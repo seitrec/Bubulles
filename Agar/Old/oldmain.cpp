@@ -1,7 +1,7 @@
 #include <vector>
 #include <SFML/Graphics.hpp>
-#include "Entity.h"
-#include "Bubble.h"
+#include "oldEntity.h"
+#include "oldBubble.h"
 #include "Global.h"
 #include <math.h>
 
@@ -9,7 +9,6 @@ int worldSize = 2000;
 int initialFood = 200;
 using namespace std;
 
-//test melchior voire si vous me voyez. et là je push.
 
 bool checkCollision(Entity bubble, Entity entity)
 {

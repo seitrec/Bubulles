@@ -17,8 +17,9 @@ void Cell::split(sf::Vector2f target)
 {
 }
 
-void Cell::eat(Entity Entity)
+void Cell::eat(Entity entity)
 {
+    entity.getEaten(*this);
 }
 
 void Cell::getEaten(Entity cell)

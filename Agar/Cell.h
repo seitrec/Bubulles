@@ -11,7 +11,7 @@ public:
 	~Cell();
 	void split(sf::Vector2f target);
 	void eat(Entity Entity);
-	void getEaten(Entity cell);
+    void getEaten(Entity cell);
 	void eject();
 
 };
