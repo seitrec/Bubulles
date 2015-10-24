@@ -1,29 +1,29 @@
-#ifndef DEF_Entity
-#define DEF_Entity
-
-#include <string>
-#include <vector>
+#pragma once
 #include <SFML/Graphics.hpp>
 
-class Entity :public sf::CircleShape
+
+class Entity :
+	public sf::CircleShape
 {
 public:
 	Entity();
 	~Entity();
-	sf::Vector2f getCenter();
+	sf::Vector2f getPosition();
+	void setPosition2(sf::Vector2f position);
 	float getSize();
-	void setSize(float radius);
-	void setColor(sf::Color);
+	void setSize(float size);
+	void move(sf::Vector2f target);
 	sf::Color getColor();
-	Entity getClosest(std::vector<Entity> lEntity);
+	void setColor(sf::Color);
+	bool checkCollision(Entity entity);
+	void draw(sf::RenderWindow * ptrWindow);
 
 protected:
+	sf::Vector2f m_position;
 	float m_size;
-	int m_currentX;
-	int m_currentY;
 	sf::Color m_color;
-	int m_positionX;
-	int m_positionY;
+	float m_speed;
+	float m_speedBonus;
+	float m_timeBonus;
 };
 
-#endif

@@ -1,86 +1,78 @@
 #include <vector>
-#include <SFML/Graphics.hpp>
-#include "Entity.h"
-#include "Bubble.h"
-#include "Global.h"
 #include <math.h>
+#include <SFML/Graphics.hpp>
+#include "Global.h"
+#include "Entity.h"
+#include "Cell.h"
+#include "Food.h"
+#include "Player.h"
 
-int worldSize = 2000;
-int initialFood = 200;
 using namespace std;
 
-//test melchior voire si vous me voyez. et lÃ  je push.
-
-bool checkCollision(Entity bubble, Entity entity)
-{
-	if (sqrt(pow((bubble.getCenter().x - entity.getCenter().x),2) + pow((bubble.getCenter().y - entity.getCenter().y),2))
-		< fabs(bubble.getSize()-entity.getSize()/2))
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
-}
+int worldSize = 2000; //Le monde est limité à un carré de 2000x2000px
+int initialFood = 200; //Nourriture générée avant le début du jeu
 
 int main()
 {
-	// crï¿½ation de la fenï¿½tre
-	sf::RenderWindow window(sf::VideoMode(800, 800), "Agar");
+	// Création de la fênêtre et de la vue et limitation du framerate
+	sf::RenderWindow window(sf::VideoMode(800, 800), "AgarIO C++");
 	sf::View view(sf::Vector2f(300, 300), sf::Vector2f(800, 800));
 	window.setVerticalSyncEnabled(true);
 	window.setFramerateLimit(30);
+	sf::RenderWindow *ptrWindow= &window;
 
-	//chrono
+	//Lancement du chrono, l'objet clock gère le temps.
 	sf::Clock clock;
-	vector<Entity> lEntity;
-	vector<Bubble> lBubble;
-	Bubble bubble;
-	bubble.setSize(10);
-	Bubble bot;
-	bot.setSize(10);
-	lBubble.push_back(bubble);
-	int lBubblesize;
 
-	int entityGenerated = 0;
-
+	//Génération de la nourriture initiale
+	vector<Food> lFood;
 	for (int i(0); i < initialFood; ++i)
 	{
-		Entity entity;
-		lEntity.push_back(entity);
+		lFood.push_back(Food());
 	}
 
-	// on fait tourner le programme tant que la fenï¿½tre n'a pas ï¿½tï¿½ fermï¿½e
+	//Initialisation de la liste des joueurs (bots + real players) + Création player(s) initiaux
+	vector<Player> lPlayer;
+	lPlayer.push_back(Player());
+
+	//Création d'une cellule pour chaque Player
+	//TO DO comprendre les iterator et changer for (vector<Player>::iterator i = lPlayer.begin(); i != lPlayer.end(); ++i)
+	for (int i(0); i < lPlayer.size(); ++i)
+	{
+		lPlayer[i].addCell(Cell());
+	}
+
+
+	// on fait tourner le programme tant que la fen?tre n'a pas ?t? ferm?e
 	while (window.isOpen())
 	{
-		float mouseX = window.mapPixelToCoords(sf::Mouse::getPosition(window)).x;
-		float mouseY = window.mapPixelToCoords(sf::Mouse::getPosition(window)).y;
+		sf::Vector2f mouseCoordonates= window.mapPixelToCoords(sf::Mouse::getPosition(window));
 
-		// on traite tous les ï¿½vï¿½nements de la fenï¿½tre qui ont ï¿½tï¿½ gï¿½nï¿½rï¿½s depuis la derniï¿½re itï¿½ration de la boucle
+		// on traite tous les evenements de la fenetre qui ont ete genere depuis la derniere iteration de la boucle
 		sf::Event event;
 		while (window.pollEvent(event))
 		{
-			// on regarde le type de l'ï¿½vï¿½nement...
+			// on regarde le type de l'?v?nement...
 			switch (event.type)
 			{
-				// fenï¿½tre fermï¿½e
+				// fen?tre ferm?e
 			case sf::Event::Closed:
 				window.close();
 				break;
 
 				//Split, on ne split que si la taille minimum des bulles est > taille nourriture
 			case sf::Event::KeyPressed:
-				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+				//TO DO refaire le split
+				/*if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 				{
 					lBubblesize = lBubble.size();
 					float min_size = lBubble[0].getSize();
 
-					for (int i(0); i< lBubblesize; ++i){
-						if (lBubble[i].getSize() < min_size){
+					for (int i(0); i< lBubblesize; ++i) {
+						if (lBubble[i].getSize() < min_size) {
 							min_size = lBubble[i].getSize();
 						}
-						if (min_size <= 5){
+						if (min_size <= 5) {
 							break;
 						}
 					}
@@ -91,7 +83,7 @@ int main()
 							lBubble.push_back(lBubble[i].Split(mouseX, mouseY));
 						}
 					}
-				}
+				}*/
 				break;
 
 			default:
@@ -100,71 +92,50 @@ int main()
 		}
 
 		window.clear(sf::Color::White);
-
+		//TO DO Déplacer ça dans une fonction à part ?
+		int entityGenerated = 0;
 		if (static_cast<int>(clock.getElapsedTime().asSeconds()) % 3 == 1)
 		{
 			entityGenerated = 0;
 		}
-		if (static_cast<int>(clock.getElapsedTime().asSeconds())%3==0 && entityGenerated ==0)
+		if (static_cast<int>(clock.getElapsedTime().asSeconds()) % 3 == 0 && entityGenerated == 0)
 		{
-			Entity entity;
-			lEntity.push_back(entity);
+			lFood.push_back(Food());
 			entityGenerated = 1;
 		}
-
-		for (int i(0); i < lEntity.size(); ++i)
+		//TO DO passer en iterator ?
+		for (int i(0); i < lFood.size(); ++i)
 		{
-			window.draw(lEntity[i]);
+			window.draw(lFood[i]);
 		}
 
-		// Gestion de la nourriture
-		for (int i(0); i < lBubble.size(); ++i)
+		//On définit les target des players (par défaut le 0 suit la souris)
+		lPlayer[0].setTarget(mouseCoordonates);
+		// Les autres se déplace vers la plus proche nourriture
+		for (int i=1; i < lPlayer.size(); ++i)
 		{
-			view.setCenter(lBubble[i].getCenter());
-			/*window.draw(lBubble[i]);
-			lBubble[i].Move(mouseX, mouseY);*/
-
-			//on peut Ã©galement faire bouger le truc tout seul
-			Entity closest = lBubble[i].getClosest(lEntity);
-			view.setCenter(lBubble[i].getCenter());
-			window.draw(lBubble[i]);
-			lBubble[i].Move(closest.getPosition().x, closest.getPosition().y);
-
-			for (int u(0); u < lEntity.size(); ++u)
-			{
-				if (checkCollision(lBubble[i], lEntity[u]))
-				{
-					lBubble[i].Eat(lEntity[u].getSize());
-					lEntity.erase(lEntity.begin()+ u);
-
-				}
-				else
-				{
-					window.draw(lEntity[u]);
-				}
-			}
+			//TO DO réimplementer la définition de target des autres (bots)
 		}
 
-		// Refusion des bubbles splitÃ©es
-		if (lBubble.size() > 1)
+
+		//On fait bouger et on dessine toutes les cellules de tous les joueurs
+		for (int i = 0; i < lPlayer.size(); ++i)
 		{
-			for (int i(0); i < lBubble.size(); ++i)
-			{
-				for (int j=i+1; j < lBubble.size(); ++j)
-				{
-					if (checkCollision(lBubble[i], lBubble[j]))
-					{
-						lBubble[i].Eat(lBubble[j].getSize());
-						lBubble.erase(lBubble.begin() + j);
-					}
-				}
-			}
+			lPlayer[i].move();
+			lPlayer[i].drawCells(ptrWindow);
 		}
 
+		//On dessine la nourriture
+		//TO DO iterator ?
+		for (int u(0); u < lFood.size(); ++u)
+		{
+			lFood[u].draw(ptrWindow);
+		}
+		//On centre sur le joueur 0
+		view.setCenter(lPlayer[0].getViewCenter());
 		window.display();
-		window.setView(view);
+ 		window.setView(view);
 	}
 
 	return 0;
 }
-

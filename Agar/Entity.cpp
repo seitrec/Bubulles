@@ -1,61 +1,100 @@
+#include "Entity.h"
 #include <vector>
 #include <math.h>
-#include "Entity.h"
 #include "Global.h"
 #include <SFML/Graphics.hpp>
+
+
 using namespace std;
 
 
-Entity::Entity() : sf::CircleShape(5), m_currentX(rand() % worldSize + 1), m_currentY(rand() % worldSize + 1)
+
+Entity::Entity()
 {
-	setPosition(sf::Vector2f(m_currentX, m_currentY));
-	setColor(sf::Color(rand() % 256, rand() % 256, rand() % 256));
-	setSize(5);
 }
 
 Entity::~Entity()
 {
 }
 
-sf::Vector2f Entity::getCenter()
+sf::Vector2f Entity::getPosition()
 {
-	sf::Vector2f r(this->getPosition().x + m_size, this->getPosition().y + m_size);
-	return r;
+	return m_position;
 }
 
-void Entity::setSize(float radius)
+
+bool Entity::checkCollision(Entity entity)
 {
-	m_size = radius;
-	setRadius(radius);
+	return false;
 }
+
+void Entity::draw(sf::RenderWindow * ptrWindow)
+{
+	ptrWindow->draw(*this);
+}
+
 
 float Entity::getSize()
 {
 	return m_size;
-}
+};
+
+void Entity::setSize(float size)
+{
+	m_size = size;
+	setRadius(m_size);
+	m_speed = 5;
+};
+
+void Entity::move(sf::Vector2f target)
+{
+	/* sf::Vector2f relativeCentertoTarget((target.x) - (this->getPosition().x + m_size),
+										(target.y) - (this->getPosition().y + m_size));
+
+	float moveX = 0;
+	float moveY = 0;
+	if ((fabs(relativeCentertoTarget.x)>3 || fabs(relativeCentertoTarget.y)>3))
+	{
+		float c = sqrt((m_speed*m_speed) / (relativeCentertoTarget.x*relativeCentertoTarget.x + relativeCentertoTarget.y*relativeCentertoTarget.y));
+		moveX = c*relativeCentertoTarget.x;
+		moveY = c*relativeCentertoTarget.y;
+		if (m_position.x <0)
+		{
+			moveX = fmax(moveX, 0.0);
+		}
+		else if (m_position.x >worldSize)
+		{
+			moveX = fmin(moveX, 0);
+		}
+		if (m_position.y <0)
+		{
+			moveY = fmax(moveY, 0.0);
+		}
+		else if (m_position.y >worldSize)
+		{
+			moveY = fmin(moveY, 0);
+		}
+		move(sf::Vector2f(moveX, moveY));
+	}
+
+	setPosition2(this->getPosition() + sf::Vector2f(m_size, m_size));
+	*/
+};
+
+sf::Color Entity::getColor()
+{
+	return m_color;
+};
+
 void Entity::setColor(sf::Color color)
 {
 	m_color = color;
 	setFillColor(color);
-}
-sf::Color Entity::getColor()
-{
-	return m_color;
-}
+};
 
-Entity Entity::getClosest(vector<Entity> lEntity)
+//TO DO voir comment faire, setPosition existe déjà dans CircleShape donc on ne peut pas le redéfinir ici...
+void Entity::setPosition2(sf::Vector2f position)
 {
-	float dist_min=worldSize;
-	float dist;
-	Entity closest;
-	for (int i=0; i<lEntity.size();++i)
-	{
-		dist = sqrt(pow((lEntity[i].m_currentX - this->m_currentX),2) + pow((lEntity[i].m_currentY - this->m_currentY),2));
-		if (dist < dist_min)
-		{
-			dist_min = dist;
-			closest=lEntity[i];
-		}
-	}
-	return closest;
-}
+	m_position = position;
+	setPosition(m_position);
+};
