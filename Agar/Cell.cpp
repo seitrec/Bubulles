@@ -2,6 +2,7 @@
 #include "Global.h"
 #include "Food.h"
 #include <SFML/Graphics.hpp>
+#include <math.h>
 
 Cell::Cell()
 {
