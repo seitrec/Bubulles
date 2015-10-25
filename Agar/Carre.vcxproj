@@ -98,6 +98,7 @@
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Food.h" />
     <ClInclude Include="Global.h" />
+    <ClInclude Include="main.h" />
     <ClInclude Include="Player.h" />
   </ItemGroup>
   <ItemGroup>

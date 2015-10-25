@@ -1,4 +1,5 @@
 #include "Food.h"
+#include "Cell.h"
 #include "Global.h"
 #include <SFML/Graphics.hpp>
 using namespace std;

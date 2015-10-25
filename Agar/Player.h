@@ -1,5 +1,6 @@
 #pragma once
 #include "Cell.h"
+#include "Food.h"
 
 
 class Player
@@ -11,14 +12,15 @@ public:
 	void split();
 	void eject();
 	std::vector<Entity> getCells();
-	void addCell(Entity cell);
-	void delCell(Entity cell);
+	void addCell(Cell cell);
+	void delCell(Cell cell);
 	void setTarget(sf::Vector2f target);
 	sf::Vector2f getViewCenter();
 	void drawCells(sf::RenderWindow *ptrWindow);
+	void checkCollision(std::vector<Food> *ptrlFood);
 
 private:
-	std::vector<Entity> m_cells;
+	std::vector<Cell> m_cells;
 	sf::Vector2f m_target;
 };
 

@@ -1,4 +1,5 @@
 #pragma once
+#include "Cell.h"
 #include "Entity.h"
 
 class Food :
@@ -7,6 +8,6 @@ class Food :
 public:
 	Food();
 	~Food();
-    void getEaten(Entity cell);
+
 };
 

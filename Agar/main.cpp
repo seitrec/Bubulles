@@ -6,11 +6,12 @@
 #include "Cell.h"
 #include "Food.h"
 #include "Player.h"
+#include "main.h"
 
 using namespace std;
 
 int worldSize = 2000; //Le monde est limité à un carré de 2000x2000px
-int initialFood = 200; //Nourriture générée avant le début du jeu
+int initialFood = 10; //Nourriture générée avant le début du jeu
 
 int main()
 {
@@ -19,13 +20,15 @@ int main()
 	sf::View view(sf::Vector2f(300, 300), sf::Vector2f(800, 800));
 	window.setVerticalSyncEnabled(true);
 	window.setFramerateLimit(30);
-	sf::RenderWindow *ptrWindow= &window;
+	sf::RenderWindow *ptrWindow = &window;
+
 
 	//Lancement du chrono, l'objet clock gère le temps.
 	sf::Clock clock;
 
 	//Génération de la nourriture initiale
 	vector<Food> lFood;
+	vector<Food> *ptrlFood = &lFood;
 	for (int i(0); i < initialFood; ++i)
 	{
 		lFood.push_back(Food());
@@ -33,6 +36,7 @@ int main()
 
 	//Initialisation de la liste des joueurs (bots + real players) + Création player(s) initiaux
 	vector<Player> lPlayer;
+	vector<Player> *ptrlPlayer = &lPlayer;
 	lPlayer.push_back(Player());
 
 	//Création d'une cellule pour chaque Player
@@ -118,10 +122,11 @@ int main()
 		}
 
 
-		//On fait bouger et on dessine toutes les cellules de tous les joueurs
+		//On fait bouger, on check les collisions et on dessine toutes les cellules de tous les joueurs
 		for (int i = 0; i < lPlayer.size(); ++i)
 		{
 			lPlayer[i].move();
+			lPlayer[i].checkCollision(ptrlFood);
 			lPlayer[i].drawCells(ptrWindow);
 		}
 

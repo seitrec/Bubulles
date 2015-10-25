@@ -1,5 +1,6 @@
 #include "Cell.h"
 #include "Global.h"
+#include "Food.h"
 #include <SFML/Graphics.hpp>
 
 Cell::Cell()
@@ -19,13 +20,28 @@ void Cell::split(sf::Vector2f target)
 
 void Cell::eat(Entity entity)
 {
-    entity.getEaten(*this);
+   // entity.getEaten(*this);
 }
 
-void Cell::getEaten(Entity cell)
-{
-}
+void Cell::getEaten(Entity entity)
+{}
 
 void Cell::eject()
 {
+}
+
+void Cell::checkCollision(std::vector<Food>* ptrlFood)
+{
+	for (unsigned i = 0; i < ptrlFood->size(); ++i)
+	{
+		if (sqrt(pow((this->getPosition().x - ptrlFood->at(i).getPosition().x), 2) +
+			pow((this->getPosition().y - ptrlFood->at(i).getPosition().y), 2))
+			< fabs(this->getSize() - ptrlFood->at(i).getSize() / 2))
+		{
+			//TODO rajouter un argument à get eaten
+			ptrlFood->at(i).getEaten();
+			ptrlFood->erase(ptrlFood->begin()+i);
+		}
+	}
+
 }

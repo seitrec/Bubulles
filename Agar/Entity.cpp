@@ -22,12 +22,6 @@ sf::Vector2f Entity::getPosition()
 	return m_position;
 }
 
-
-bool Entity::checkCollision(Entity entity)
-{
-	return false;
-}
-
 void Entity::draw(sf::RenderWindow * ptrWindow)
 {
 	ptrWindow->draw(*this);
@@ -48,7 +42,8 @@ void Entity::setSize(float size)
 
 void Entity::move(sf::Vector2f target)
 {
-	/* sf::Vector2f relativeCentertoTarget((target.x) - (this->getPosition().x + m_size),
+
+	 sf::Vector2f relativeCentertoTarget((target.x) - (this->getPosition().x + m_size),
 										(target.y) - (this->getPosition().y + m_size));
 
 	float moveX = 0;
@@ -58,6 +53,7 @@ void Entity::move(sf::Vector2f target)
 		float c = sqrt((m_speed*m_speed) / (relativeCentertoTarget.x*relativeCentertoTarget.x + relativeCentertoTarget.y*relativeCentertoTarget.y));
 		moveX = c*relativeCentertoTarget.x;
 		moveY = c*relativeCentertoTarget.y;
+		
 		if (m_position.x <0)
 		{
 			moveX = fmax(moveX, 0.0);
@@ -74,11 +70,10 @@ void Entity::move(sf::Vector2f target)
 		{
 			moveY = fmin(moveY, 0);
 		}
-		move(sf::Vector2f(moveX, moveY));
+		setPosition2(sf::Vector2f(m_position.x+moveX, m_position.y+moveY));
 	}
 
-	setPosition2(this->getPosition() + sf::Vector2f(m_size, m_size));
-	*/
+	
 };
 
 sf::Color Entity::getColor()
@@ -98,3 +93,8 @@ void Entity::setPosition2(sf::Vector2f position)
 	m_position = position;
 	setPosition(m_position);
 };
+
+void Entity::getEaten()
+{
+
+}

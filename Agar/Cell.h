@@ -1,4 +1,6 @@
 #pragma once
+#include<vector>
+#include "Food.h"
 #include "Entity.h"
 #include <SFML/Graphics.hpp>
 
@@ -11,8 +13,8 @@ public:
 	~Cell();
 	void split(sf::Vector2f target);
 	void eat(Entity Entity);
-    void getEaten(Entity cell);
+    void getEaten(Entity entity);
 	void eject();
-
+	void checkCollision(std::vector<Food> *ptrlFood);
 };
 

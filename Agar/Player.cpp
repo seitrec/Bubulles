@@ -1,4 +1,5 @@
 #include "Player.h"
+#include <iostream>
 
 Player::Player()
 {
@@ -14,6 +15,7 @@ void Player::move()
 	for (int i = 0; i < m_cells.size(); ++i)
 	{
 		m_cells[i].move(m_target);
+		std::cout << m_target.x << std::endl;
 	}
 }
 
@@ -30,12 +32,12 @@ std::vector<Entity> Player::getCells()
 	return std::vector<Entity>();
 }
 
-void Player::addCell(Entity cell)
+void Player::addCell(Cell cell)
 {
 	m_cells.push_back(cell);
 }
 
-void Player::delCell(Entity cell)
+void Player::delCell(Cell cell)
 {
 }
 
@@ -57,4 +59,12 @@ void Player::drawCells(sf::RenderWindow * ptrWindow)
 		ptrWindow->draw(m_cells[i]);
 	}
 
+}
+
+void Player::checkCollision(std::vector<Food>* ptrlFood)
+{
+	for (int i = 0; i < m_cells.size(); ++i)
+	{
+		m_cells[i].checkCollision(ptrlFood);
+	}
 }

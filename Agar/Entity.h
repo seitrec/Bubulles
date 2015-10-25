@@ -1,7 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 
-
 class Entity :
 	public sf::CircleShape
 {
@@ -15,9 +14,8 @@ public:
 	void move(sf::Vector2f target);
 	sf::Color getColor();
 	void setColor(sf::Color);
-	bool checkCollision(Entity entity);
 	void draw(sf::RenderWindow * ptrWindow);
-    void getEaten(Entity cell);
+	void getEaten();
 
 protected:
 	sf::Vector2f m_position;
