@@ -26,3 +26,12 @@
 *.exe
 *.out
 *.app
+
+#Apple stuff
+*.DS_Store
+
+#VisualStudio Compiled
+.vs/
+Build/
+Debug/
+Release/

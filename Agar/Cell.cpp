@@ -7,12 +7,19 @@
 
 Cell::Cell()
 {
+<<<<<<< HEAD
 	//SetSize avant SetCenter sinon impossible de définir le centre....
 	setSize(40);
 	m_speed = 5;
 	setCenter(sf::Vector2f(800,800));
 	setColor(sf::Color(rand() % 256, rand() % 256, rand() % 256));
 }
+=======
+	setPosition2(sf::Vector2f((rand() % worldSize + 1), (rand() % worldSize + 1)));
+	setColor(sf::Color(rand() % 256, rand() % 256, rand() % 256));
+	setSize(20);
+	}
+>>>>>>> 6fd4c86642c50cbc290a684527a47975990d4762
 
 Cell::~Cell()
 {
