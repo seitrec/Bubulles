@@ -20,6 +20,25 @@ void Player::move()
 
 void Player::split()
 {
+	float min_size = m_cells[0].getSize();
+	int i=0;
+	while (i < m_cells.size() && min_size < 10)
+	{
+		if (m_cells[i].getSize() < min_size)
+		{
+			min_size = m_cells[i].getSize();
+			++i;
+		}
+	}
+	int nb_cells = m_cells.size();
+	if (min_size > 10)
+	{
+		for (int j = 0; j < nb_cells; ++j)
+		{
+			this->addCell(m_cells[j].split(m_target));
+		}
+	}
+
 }
 
 void Player::eject()
