@@ -127,6 +127,7 @@ int main()
 		{
 			lPlayer[i].move();
 			lPlayer[i].checkCollision(ptrlFood);
+
 			lPlayer[i].drawCells(ptrWindow);
 		}
 
