@@ -31,7 +31,7 @@ void Cell::eject()
 {
 }
 
-void Cell::checkCollision(std::vector<Food>* ptrlFood)
+void Cell::checkCollision(std::vector<Food>* ptrlFood) //ne faudrait-il mieux pas utiliser const& ptrlFood ? on passe l'adresse du vecteur, et on le laisse constant vu qu'on ne va pas le modifier, juste le parcourir
 {
 	for (unsigned i = 0; i < ptrlFood->size(); ++i) //mieux vaut faire ça avec un iterateur, pas un int i. cf. http://pastebin.com/NP5eyVNZ
 	{
