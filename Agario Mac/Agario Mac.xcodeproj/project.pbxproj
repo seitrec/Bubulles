@@ -1,0 +1,354 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		CAF693D91BDE833C002873DB /* sansation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CAF693D81BDE833C002873DB /* sansation.ttf */; };
+		CAF693FE1BDE8365002873DB /* Cell.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CAF693E61BDE8365002873DB /* Cell.cpp */; };
+		CAF693FF1BDE8365002873DB /* Entity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CAF693E91BDE8365002873DB /* Entity.cpp */; };
+		CAF694001BDE8365002873DB /* Food.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CAF693EB1BDE8365002873DB /* Food.cpp */; };
+		CAF694011BDE8365002873DB /* image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CAF693EE1BDE8365002873DB /* image.jpg */; };
+		CAF694021BDE8365002873DB /* image.png in Resources */ = {isa = PBXBuildFile; fileRef = CAF693EF1BDE8365002873DB /* image.png */; };
+		CAF694031BDE8365002873DB /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CAF693F01BDE8365002873DB /* main.cpp */; };
+		CAF694071BDE8365002873DB /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CAF693F81BDE8365002873DB /* Player.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		CAF693C91BDE833B002873DB /* Agario Mac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Agario Mac.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CAF693CD1BDE833C002873DB /* Agario Mac-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Agario Mac-Info.plist"; sourceTree = "<group>"; };
+		CAF693D81BDE833C002873DB /* sansation.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = sansation.ttf; sourceTree = "<group>"; };
+		CAF693E61BDE8365002873DB /* Cell.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Cell.cpp; path = ../../Agar/Cell.cpp; sourceTree = "<group>"; };
+		CAF693E71BDE8365002873DB /* Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Cell.h; path = ../../Agar/Cell.h; sourceTree = "<group>"; };
+		CAF693E91BDE8365002873DB /* Entity.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Entity.cpp; path = ../../Agar/Entity.cpp; sourceTree = "<group>"; };
+		CAF693EA1BDE8365002873DB /* Entity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Entity.h; path = ../../Agar/Entity.h; sourceTree = "<group>"; };
+		CAF693EB1BDE8365002873DB /* Food.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Food.cpp; path = ../../Agar/Food.cpp; sourceTree = "<group>"; };
+		CAF693EC1BDE8365002873DB /* Food.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Food.h; path = ../../Agar/Food.h; sourceTree = "<group>"; };
+		CAF693ED1BDE8365002873DB /* Global.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Global.h; path = ../../Agar/Global.h; sourceTree = "<group>"; };
+		CAF693EE1BDE8365002873DB /* image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = image.jpg; path = ../../Agar/image.jpg; sourceTree = "<group>"; };
+		CAF693EF1BDE8365002873DB /* image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = image.png; path = ../../Agar/image.png; sourceTree = "<group>"; };
+		CAF693F01BDE8365002873DB /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../../Agar/main.cpp; sourceTree = "<group>"; };
+		CAF693F11BDE8365002873DB /* main.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = main.h; path = ../../Agar/main.h; sourceTree = "<group>"; };
+		CAF693F81BDE8365002873DB /* Player.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Player.cpp; path = ../../Agar/Player.cpp; sourceTree = "<group>"; };
+		CAF693F91BDE8365002873DB /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Player.h; path = ../../Agar/Player.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CAF693C51BDE833B002873DB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		CAF693BF1BDE833B002873DB = {
+			isa = PBXGroup;
+			children = (
+				CAF693CB1BDE833B002873DB /* Agario Mac */,
+				CAF693CA1BDE833B002873DB /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		CAF693CA1BDE833B002873DB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CAF693C91BDE833B002873DB /* Agario Mac.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CAF693CB1BDE833B002873DB /* Agario Mac */ = {
+			isa = PBXGroup;
+			children = (
+				CAF693E11BDE8365002873DB /* Build */,
+				CAF693E61BDE8365002873DB /* Cell.cpp */,
+				CAF693E71BDE8365002873DB /* Cell.h */,
+				CAF693E81BDE8365002873DB /* Debug */,
+				CAF693E91BDE8365002873DB /* Entity.cpp */,
+				CAF693EA1BDE8365002873DB /* Entity.h */,
+				CAF693EB1BDE8365002873DB /* Food.cpp */,
+				CAF693EC1BDE8365002873DB /* Food.h */,
+				CAF693ED1BDE8365002873DB /* Global.h */,
+				CAF693EE1BDE8365002873DB /* image.jpg */,
+				CAF693EF1BDE8365002873DB /* image.png */,
+				CAF693F01BDE8365002873DB /* main.cpp */,
+				CAF693F11BDE8365002873DB /* main.h */,
+				CAF693F81BDE8365002873DB /* Player.cpp */,
+				CAF693F91BDE8365002873DB /* Player.h */,
+				CAF693D31BDE833C002873DB /* Resources */,
+				CAF693CC1BDE833B002873DB /* Supporting Files */,
+			);
+			path = "Agario Mac";
+			sourceTree = "<group>";
+		};
+		CAF693CC1BDE833B002873DB /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				CAF693CD1BDE833C002873DB /* Agario Mac-Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CAF693D31BDE833C002873DB /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				CAF693D81BDE833C002873DB /* sansation.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		CAF693E11BDE8365002873DB /* Build */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Build;
+			path = ../../Agar/Build;
+			sourceTree = "<group>";
+		};
+		CAF693E81BDE8365002873DB /* Debug */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Debug;
+			path = ../../Agar/Debug;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CAF693C81BDE833B002873DB /* Agario Mac */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CAF693DE1BDE833C002873DB /* Build configuration list for PBXNativeTarget "Agario Mac" */;
+			buildPhases = (
+				CAF693C41BDE833B002873DB /* Sources */,
+				CAF693C51BDE833B002873DB /* Frameworks */,
+				CAF693C61BDE833B002873DB /* Resources */,
+				CAF693C71BDE833B002873DB /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Agario Mac";
+			productName = "Agario Mac";
+			productReference = CAF693C91BDE833B002873DB /* Agario Mac.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CAF693C01BDE833B002873DB /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0710;
+				ORGANIZATIONNAME = "Melchior Merlin";
+				TargetAttributes = {
+					CAF693C81BDE833B002873DB = {
+						CreatedOnToolsVersion = 7.1;
+					};
+				};
+			};
+			buildConfigurationList = CAF693C31BDE833B002873DB /* Build configuration list for PBXProject "Agario Mac" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = CAF693BF1BDE833B002873DB;
+			productRefGroup = CAF693CA1BDE833B002873DB /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CAF693C81BDE833B002873DB /* Agario Mac */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		CAF693C61BDE833B002873DB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CAF693D91BDE833C002873DB /* sansation.ttf in Resources */,
+				CAF694021BDE8365002873DB /* image.png in Resources */,
+				CAF694011BDE8365002873DB /* image.jpg in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		CAF693C71BDE833B002873DB /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# This shell script simply copies required SFML dylibs/frameworks into the application bundle frameworks folder.\n# If you're using static libraries (which is not recommended) you should remove this script from your project.\n\n# SETTINGS\nCMAKE_INSTALL_FRAMEWORK_PREFIX=\"/Library/Frameworks\"\nCMAKE_INSTALL_LIB_PREFIX=\"/usr/local/lib\"\nFRAMEWORKS_FULL_PATH=\"$BUILT_PRODUCTS_DIR/$FRAMEWORKS_FOLDER_PATH/\"\n\n# Are we building a project that uses frameworks or dylibs?\ncase \"$SFML_BINARY_TYPE\" in\n    DYLIBS)\n        frameworks=\"false\"\n        ;;\n    *)\n        frameworks=\"true\"\n        ;;\nesac\n\n# Echoes to stderr\nerror () # $* message to display\n{\n    echo $* 1>&2\n    exit 2\n}\n\nassert () # $1 is a boolean, $2...N is an error message\n{\n    if [ $# -lt 2 ]\n    then\n        error \"Internal error in assert: not enough args\"\n    fi\n\n    if [ $1 -ne 0 ]\n    then\n        shift\n        error \"$*\"\n    fi\n}\n\nforce_remove () # $@ is some paths\n{\n    test $# -ge 1\n    assert $? \"force_remove() requires at least one parameter\"\n    rm -fr $@\n    assert $? \"couldn't remove $@\"\n}\n\ncopy () # $1 is a source, $2 is a destination\n{\n    test $# -eq 2\n    assert $? \"copy() requires two parameters\"\n    ditto \"$1\" \"$2\"\n    assert $? \"couldn't copy $1 to $2\"\n}\n\nrequire () # $1 is a SFML module like 'system' or 'audio'\n{\n    dest=\"$BUILT_PRODUCTS_DIR/$FRAMEWORKS_FOLDER_PATH/\"\n\n    if [ -z \"$1\" ]\n    then\n        error \"require() requires one parameter!\"\n    else\n        # clean potentially old stuff\n        force_remove \"$dest/libsfml-$1\"*\n        force_remove \"$dest/sfml-$1.framework\"\n\n        # copy SFML libraries\n        if [ \"$frameworks\" = \"true\" ]\n        then\n            source=\"$CMAKE_INSTALL_FRAMEWORK_PREFIX/sfml-$1.framework\"\n            target=\"sfml-$1.framework\"\n        elif [ \"$SFML_LINK_DYLIBS_SUFFIX\" = \"-d\" ]\n        then\n            source=\"$CMAKE_INSTALL_LIB_PREFIX/libsfml-$1-d.dylib\"\n            target=\"`readlink $source`\"\n        else\n            source=\"$CMAKE_INSTALL_LIB_PREFIX/libsfml-$1.dylib\"\n            target=\"`readlink $source`\"\n        fi\n\n        copy \"$source\" \"$dest/$target\"\n\n        # copy extra dependencies\n        if [ \"$1\" = \"audio\" ]\n        then\n            # copy \"FLAC\" \"ogg\" \"vorbis\" \"vorbisenc\" \"vorbisfile\" \"OpenAL\" frameworks too\n            for f in \"FLAC\" \"ogg\" \"vorbis\" \"vorbisenc\" \"vorbisfile\" \"OpenAL\"\n            do\n                copy \"$CMAKE_INSTALL_FRAMEWORK_PREFIX/$f.framework\" \"$dest/$f.framework\"\n            done\n        elif [ \"$1\" = \"graphics\" ]\n        then\n            copy \"$CMAKE_INSTALL_FRAMEWORK_PREFIX/freetype.framework\" \"$dest/freetype.framework\"\n        fi\n    fi\n}\n\nif [ -n \"$SFML_SYSTEM\" ]\nthen\n    require \"system\"\nfi\n\nif [ -n \"$SFML_AUDIO\" ]\nthen\n    require \"audio\"\nfi\n\nif [ -n \"$SFML_NETWORK\" ]\nthen\n    require \"network\"\nfi\n\nif [ -n \"$SFML_WINDOW\" ]\nthen\n    require \"window\"\nfi\n\nif [ -n \"$SFML_GRAPHICS\" ]\nthen\n    require \"graphics\"\nfi\n\n                ";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CAF693C41BDE833B002873DB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CAF694071BDE8365002873DB /* Player.cpp in Sources */,
+				CAF694001BDE8365002873DB /* Food.cpp in Sources */,
+				CAF693FF1BDE8365002873DB /* Entity.cpp in Sources */,
+				CAF694031BDE8365002873DB /* main.cpp in Sources */,
+				CAF693FE1BDE8365002873DB /* Cell.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		CAF693DC1BDE833C002873DB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = (
+					i386,
+					x86_64,
+				);
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				FRAMEWORK_SEARCH_PATHS = (
+					/Library/Frameworks/,
+					"$(inherited)",
+				);
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				HEADER_SEARCH_PATHS = (
+					/usr/local/include/,
+					"$(inherited)",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					/usr/local/lib/,
+					"$(inherited)",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"$(SFML_SYSTEM)",
+					"$(SFML_WINDOW)",
+					"$(SFML_GRAPHICS)",
+					"$(SFML_AUDIO)",
+					"$(SFML_NETWORK)",
+				);
+				SFML_AUDIO = "$(SFML_LINK_PREFIX) sfml-audio$(SFML_LINK_SUFFIX)";
+				SFML_BINARY_TYPE = FRAMEWORKS;
+				SFML_GRAPHICS = "$(SFML_LINK_PREFIX) sfml-graphics$(SFML_LINK_SUFFIX)";
+				SFML_LINK_DYLIBS_PREFIX = "-l";
+				SFML_LINK_DYLIBS_SUFFIX = "";
+				SFML_LINK_FRAMEWORKS_PREFIX = "-framework";
+				SFML_LINK_FRAMEWORKS_SUFFIX = "";
+				SFML_LINK_PREFIX = "$(SFML_LINK_$(SFML_BINARY_TYPE)_PREFIX)";
+				SFML_LINK_SUFFIX = "$(SFML_LINK_$(SFML_BINARY_TYPE)_SUFFIX)";
+				SFML_NETWORK = "$(SFML_LINK_PREFIX) sfml-network$(SFML_LINK_SUFFIX)";
+				SFML_SYSTEM = "$(SFML_LINK_PREFIX) sfml-system$(SFML_LINK_SUFFIX)";
+				SFML_WINDOW = "$(SFML_LINK_PREFIX) sfml-window$(SFML_LINK_SUFFIX)";
+				SUPPORTED_PLATFORMS = macosx;
+			};
+			name = Debug;
+		};
+		CAF693DD1BDE833C002873DB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = (
+					i386,
+					x86_64,
+				);
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				FRAMEWORK_SEARCH_PATHS = (
+					/Library/Frameworks/,
+					"$(inherited)",
+				);
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				HEADER_SEARCH_PATHS = (
+					/usr/local/include/,
+					"$(inherited)",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					/usr/local/lib/,
+					"$(inherited)",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"$(SFML_SYSTEM)",
+					"$(SFML_WINDOW)",
+					"$(SFML_GRAPHICS)",
+					"$(SFML_AUDIO)",
+					"$(SFML_NETWORK)",
+				);
+				SFML_AUDIO = "$(SFML_LINK_PREFIX) sfml-audio$(SFML_LINK_SUFFIX)";
+				SFML_BINARY_TYPE = FRAMEWORKS;
+				SFML_GRAPHICS = "$(SFML_LINK_PREFIX) sfml-graphics$(SFML_LINK_SUFFIX)";
+				SFML_LINK_DYLIBS_PREFIX = "-l";
+				SFML_LINK_DYLIBS_SUFFIX = "";
+				SFML_LINK_FRAMEWORKS_PREFIX = "-framework";
+				SFML_LINK_FRAMEWORKS_SUFFIX = "";
+				SFML_LINK_PREFIX = "$(SFML_LINK_$(SFML_BINARY_TYPE)_PREFIX)";
+				SFML_LINK_SUFFIX = "$(SFML_LINK_$(SFML_BINARY_TYPE)_SUFFIX)";
+				SFML_NETWORK = "$(SFML_LINK_PREFIX) sfml-network$(SFML_LINK_SUFFIX)";
+				SFML_SYSTEM = "$(SFML_LINK_PREFIX) sfml-system$(SFML_LINK_SUFFIX)";
+				SFML_WINDOW = "$(SFML_LINK_PREFIX) sfml-window$(SFML_LINK_SUFFIX)";
+				SUPPORTED_PLATFORMS = macosx;
+			};
+			name = Release;
+		};
+		CAF693DF1BDE833C002873DB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "Agario Mac/Agario Mac-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		CAF693E01BDE833C002873DB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "Agario Mac/Agario Mac-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CAF693C31BDE833B002873DB /* Build configuration list for PBXProject "Agario Mac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CAF693DC1BDE833C002873DB /* Debug */,
+				CAF693DD1BDE833C002873DB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CAF693DE1BDE833C002873DB /* Build configuration list for PBXNativeTarget "Agario Mac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CAF693DF1BDE833C002873DB /* Debug */,
+				CAF693E01BDE833C002873DB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CAF693C01BDE833B002873DB /* Project object */;
+}

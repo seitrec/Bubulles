@@ -8,6 +8,7 @@
 #include "Player.h"
 #include "main.h"
 
+//test. ˆ enlever si vous lisez.
 using namespace std;
 
 int worldSize = 2000; //Le monde est limité à un carré de 2000x2000px

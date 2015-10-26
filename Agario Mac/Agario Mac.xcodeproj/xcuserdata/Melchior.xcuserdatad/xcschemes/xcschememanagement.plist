@@ -4,7 +4,7 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Agario.xcscheme</key>
+		<key>Agario Mac.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
@@ -12,7 +12,7 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>CA19EC331BD4F05E00A57472</key>
+		<key>CAF693C81BDE833B002873DB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
