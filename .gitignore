@@ -27,8 +27,8 @@
 *.out
 *.app
 
-#Libs
-*.ilk
-*.exp
-*.pdb
-*.tlog
+#VisualStudio Compiled
+.vs/
+Build/
+Debug/
+Release/
