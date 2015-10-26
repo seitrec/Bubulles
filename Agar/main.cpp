@@ -50,7 +50,8 @@ int main()
 	// on fait tourner le programme tant que la fen?tre n'a pas ?t? ferm?e
 	while (window.isOpen())
 	{
-		sf::Vector2f mouseCoordonates= window.mapPixelToCoords(sf::Mouse::getPosition(window));
+		sf::Vector2f mouseCoordonates = window.mapPixelToCoords(sf::Mouse::getPosition(window));
+		//sf::Vector2f mouseCoordonates = sf::Vector2f(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
 
 		// on traite tous les evenements de la fenetre qui ont ete genere depuis la derniere iteration de la boucle
 		sf::Event event;
@@ -126,8 +127,20 @@ int main()
 		for (int i = 0; i < lPlayer.size(); ++i)
 		{
 			lPlayer[i].move();
-			lPlayer[i].checkCollision(ptrlFood);
 
+			// On fait toutes les actions relatives à manger les Foods
+			for (int u = 0; u < lFood.size(); ++u)
+			{
+				for (int j = 0; j < lPlayer[i].getCells().size(); ++j)
+				{
+					if (lPlayer[i].getCells()[j].checkCollision(lFood[u]))
+					{
+						if (lPlayer[i].getCells()[j].getSize()>1.1*lFood[u].getSize())
+						{
+							//lPlayer[i].getCells()[j].setSize(lPlayer[i].getCells()[j].getSize() + lFood[u].getSize());
+							lFood.erase(lFood.begin() + u);
+							--u;
+			}}}}
 			lPlayer[i].drawCells(ptrWindow);
 		}
 

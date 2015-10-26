@@ -13,8 +13,8 @@ public:
 	~Cell();
 	void split(sf::Vector2f target);
 	void eat(Entity Entity);
-    void getEaten(Entity entity);
 	void eject();
-	void checkCollision(std::vector<Food> *ptrlFood);
+	bool checkCollision(Entity &entity);
+//	void actionCollision(Entity& entity,Player& player, std::vector<Food>& lFood, std::vector<Player>& lPlayer);
 };
 

@@ -1,15 +1,18 @@
 #include "Cell.h"
 #include "Global.h"
 #include "Food.h"
+#include "Player.h"
 #include <SFML/Graphics.hpp>
 #include <math.h>
 
 Cell::Cell()
 {
-	setPosition2(sf::Vector2f((rand() % worldSize + 1), (rand() % worldSize + 1)));
-	setColor(sf::Color(rand() % 256, rand() % 256, rand() % 256));
+	//SetSize avant SetCenter sinon impossible de définir le centre....
 	setSize(40);
-	}
+	m_speed = 5;
+	setCenter(sf::Vector2f(800,800));
+	setColor(sf::Color(rand() % 256, rand() % 256, rand() % 256));
+}
 
 Cell::~Cell()
 {
@@ -19,30 +22,34 @@ void Cell::split(sf::Vector2f target)
 {
 }
 
-void Cell::eat(Entity entity) //melchior : je pense que Victor a raison, il faut faire cela dans la fonction checkcollision, auquel cas la fonction eat n'a plus de sens.
+void Cell::eat(Entity entity) 
 {
-   // entity.getEaten(*this);
 }
 
-void Cell::getEaten(Entity entity)
-{}
 
 void Cell::eject()
 {
 }
 
-void Cell::checkCollision(std::vector<Food>* ptrlFood) //ne faudrait-il mieux pas utiliser const& ptrlFood ? on passe l'adresse du vecteur, et on le laisse constant vu qu'on ne va pas le modifier, juste le parcourir
-{
-	for (unsigned i = 0; i < ptrlFood->size(); ++i) //mieux vaut faire a avec un iterateur, pas un int i. cf. http://pastebin.com/NP5eyVNZ
-	{
-		if (sqrt(pow((this->getPosition().x - ptrlFood->at(i).getPosition().x), 2) +
-			pow((this->getPosition().y - ptrlFood->at(i).getPosition().y), 2))
-			< fabs(this->getSize() - ptrlFood->at(i).getSize() / 2))
-		{
-			//TODO rajouter un argument à get eaten
-			ptrlFood->at(i).getEaten();
-			ptrlFood->erase(ptrlFood->begin()+i);
-		}
-	}
 
+bool Cell::checkCollision(Entity &entity) //ne faudrait-il mieux pas utiliser const& ptrlFood ? on passe l'adresse du vecteur, et on le laisse constant vu qu'on ne va pas le modifier, juste le parcourir
+{
+	return (sqrt(pow((this->getCenter().x - entity.getCenter().x), 2) +
+		pow((this->getCenter().y - entity.getCenter().y), 2))
+		< fabs(this->getSize() - entity.getSize() / 2));
 }
+/*
+void Cell::actionCollision(Entity & entity, Player & player, std::vector<Food>& lFood, std::vector<Player>& lPlayer)
+{
+	float difEatMin = 1.1;
+	if (this->getSize() >= entity.getSize()*difEatMin)
+	{
+		entity.getEaten(*this, player, lPlayer);
+
+	}
+	else
+	{
+		//Faire qqch de graphique
+	}
+}
+*/

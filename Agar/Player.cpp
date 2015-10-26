@@ -15,7 +15,6 @@ void Player::move()
 	for (int i = 0; i < m_cells.size(); ++i)
 	{
 		m_cells[i].move(m_target);
-		std::cout << m_target.x << std::endl;
 	}
 }
 
@@ -27,9 +26,9 @@ void Player::eject()
 {
 }
 
-std::vector<Entity> Player::getCells()
+std::vector<Cell> Player::getCells()
 {
-	return std::vector<Entity>();
+	return m_cells;
 }
 
 void Player::addCell(Cell cell)
@@ -49,7 +48,7 @@ void Player::setTarget(sf::Vector2f target)
 sf::Vector2f Player::getViewCenter()
 {
 	//TO DO faire un truc intelligent (le barycentre des cellules et du poids ?)
-	return m_cells[0].getPosition();
+	return m_cells[0].getCenter();
 }
 
 void Player::drawCells(sf::RenderWindow * ptrWindow)
@@ -65,6 +64,6 @@ void Player::checkCollision(std::vector<Food>* ptrlFood)
 {
 	for (int i = 0; i < m_cells.size(); ++i)
 	{
-		m_cells[i].checkCollision(ptrlFood);
+		m_cells[i].checkCollision(m_cells[0]);
 	}
 }

@@ -11,7 +11,7 @@ public:
 	void move();
 	void split();
 	void eject();
-	std::vector<Entity> getCells();
+	std::vector<Cell> getCells();
 	void addCell(Cell cell);
 	void delCell(Cell cell);
 	void setTarget(sf::Vector2f target);

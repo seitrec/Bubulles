@@ -1,5 +1,6 @@
 #include "Entity.h"
 #include <vector>
+#include <iostream>
 #include <math.h>
 #include "Global.h"
 #include <SFML/Graphics.hpp>
@@ -17,8 +18,10 @@ Entity::~Entity()
 {
 }
 
-sf::Vector2f Entity::getPosition()
+
+sf::Vector2f Entity::getCenter()
 {
+	//sf::Vector2f center= this->getPosition() + sf::Vector2f(m_size, m_size);
 	return m_position;
 }
 
@@ -26,6 +29,7 @@ void Entity::draw(sf::RenderWindow * ptrWindow)
 {
 	ptrWindow->draw(*this);
 }
+
 
 
 float Entity::getSize()
@@ -37,14 +41,13 @@ void Entity::setSize(float size)
 {
 	m_size = size;
 	setRadius(m_size);
-	m_speed = 5;
 };
 
 void Entity::move(sf::Vector2f target)
-{
+{	//On pourrait globalement utiliser des vecteurs partout ici
 
-	 sf::Vector2f relativeCentertoTarget((target.x) - (this->getPosition().x + m_size),
-										(target.y) - (this->getPosition().y + m_size));
+	 sf::Vector2f relativeCentertoTarget((target.x) - (this->getCenter().x),
+										(target.y) - (this->getCenter().y));
 
 	float moveX = 0;
 	float moveY = 0;
@@ -70,7 +73,14 @@ void Entity::move(sf::Vector2f target)
 		{
 			moveY = fmin(moveY, 0);
 		}
-		setPosition2(sf::Vector2f(m_position.x+moveX, m_position.y+moveY));
+		std::cout << target.x << std::endl;
+		std::cout << target.y << std::endl;
+		std::cout << m_position.x << std::endl;
+		std::cout << m_position.y << std::endl;
+		std::cout << moveX << std::endl;
+		std::cout << moveY << std::endl;
+
+		setCenter(sf::Vector2f(m_position.x+moveX, m_position.y+moveY));
 	}
 
 	
@@ -87,14 +97,9 @@ void Entity::setColor(sf::Color color)
 	setFillColor(color);
 };
 
-//TO DO voir comment faire, setPosition existe déjà dans CircleShape donc on ne peut pas le redéfinir ici...
-void Entity::setPosition2(sf::Vector2f position)
+
+void Entity::setCenter(sf::Vector2f position)
 {
 	m_position = position;
-	setPosition(m_position);
+	setPosition(m_position - sf::Vector2f(m_size, m_size));
 };
-
-void Entity::getEaten()
-{
-
-}
