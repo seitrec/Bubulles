@@ -1,5 +1,6 @@
 #include <vector>
 #include <math.h>
+#include <iostream>
 #include <SFML/Graphics.hpp>
 #include "Global.h"
 #include "Entity.h"
@@ -21,9 +22,19 @@ int main()
 	sf::RenderWindow window(sf::VideoMode(800, 800), "AgarIO C++");
 	sf::View view(sf::Vector2f(300, 300), sf::Vector2f(800, 800));
 	window.setVerticalSyncEnabled(true);
-	window.setFramerateLimit(30);
+	window.setFramerateLimit(60);
 	sf::RenderWindow *ptrWindow = &window;
 
+	sf::Texture texture;
+	if (!texture.loadFromFile("bg.png")) {
+		cout << "Echec chargement de la texture" << endl;
+	}
+	texture.setRepeated(true);
+	sf::Sprite sprite;
+	sprite.setTexture(texture);
+	//sprite.scale(sf::Vector2f(2.f, 2.f));
+	sprite.setTextureRect(sf::IntRect(00, 00, worldSize, worldSize));
+	sprite.setColor(sf::Color(255, 255, 255, 64));
 
 	//Lancement du chrono, l'objet clock g�re le temps.
 	sf::Clock clock;
@@ -85,6 +96,7 @@ int main()
 		}
 
 		window.clear(sf::Color::White);
+		window.draw(sprite);
 		//TO DO D�placer �a dans une fonction � part ?
 		int entityGenerated = 0;
 		if (static_cast<int>(clock.getElapsedTime().asSeconds()) % 3 == 1)
