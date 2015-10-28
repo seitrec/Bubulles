@@ -12,7 +12,7 @@
 //test. ˆ enlever si vous lisez.
 using namespace std;
 
-int worldSize = 2000; //Le monde est limitï¿½ ï¿½ un carrï¿½ de 2000x2000px
+int worldSize = 4000; //Le monde est limitï¿½ ï¿½ un carrï¿½ de 2000x2000px
 int initialFood = 100; //Nourriture gï¿½nï¿½rï¿½e avant le dï¿½but du jeu
 int initialPlayers = 5;
 
@@ -22,7 +22,7 @@ int main()
 	sf::RenderWindow window(sf::VideoMode(800, 800), "AgarIO C++");
 	sf::View view(sf::Vector2f(300, 300), sf::Vector2f(800, 800));
 	window.setVerticalSyncEnabled(true);
-	window.setFramerateLimit(60);
+	window.setFramerateLimit(30);
 	sf::RenderWindow *ptrWindow = &window;
 
 	sf::Texture texture;
