@@ -13,7 +13,7 @@ public:
 	void eject();
 	std::vector<Cell> &getCells();
 	void addCell(Cell cell);
-	void delCell(Cell cell);
+	void delCell(int k);
 	void setTarget(sf::Vector2f target);
 	sf::Vector2f getViewCenter();
 	sf::Vector2f getClosestLocation(std::vector<Food> &lFood);

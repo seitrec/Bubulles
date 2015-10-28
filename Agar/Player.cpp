@@ -107,8 +107,9 @@ void Player::addCell(Cell cell)
 	m_cells.push_back(cell);
 }
 
-void Player::delCell(Cell cell)
+void Player::delCell(int k)
 {
+	m_cells.erase(m_cells.begin() + k);
 }
 
 void Player::setTarget(sf::Vector2f target)

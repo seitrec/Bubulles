@@ -12,10 +12,10 @@
 //test. ˆ enlever si vous lisez.
 using namespace std;
 
-int worldSize = 4000; //Le monde est limitï¿½ ï¿½ un carrï¿½ de 2000x2000px
+int worldSize = 2000; 
 int windowSize = 750;
 int initialFood = 100; //Nourriture gï¿½nï¿½rï¿½e avant le dï¿½but du jeu
-int initialPlayers = 5;
+int initialPlayers = 50;
 
 int main()
 {
@@ -33,9 +33,10 @@ int main()
 	texture.setRepeated(true);
 	sf::Sprite sprite;
 	sprite.setTexture(texture);
-	//sprite.scale(sf::Vector2f(2.f, 2.f));
-	sprite.setTextureRect(sf::IntRect(00, 00, worldSize, worldSize));
-	sprite.setColor(sf::Color(255, 255, 255, 64));
+	sprite.setScale(sf::Vector2f(0.75, 0.75));
+	sprite.setTextureRect(sf::IntRect(00, 00, worldSize/0.75, worldSize / 0.75));
+	
+	sprite.setColor(sf::Color(255, 255, 255, 15));
 
 	//Lancement du chrono, l'objet clock gï¿½re le temps.
 	sf::Clock clock;
@@ -61,6 +62,7 @@ int main()
 	for (int i(0); i < lPlayer.size(); ++i)
 	{
 		lPlayer[i].addCell(Cell());
+		if (i != 0) { lPlayer[i].getCells()[0].setSize(10); } // pour qu'on est un avantage sur les bots...
 	}
 
 
@@ -147,6 +149,24 @@ int main()
 							lFood.erase(lFood.begin() + u);
 							--u;
 			}}}}
+			for (int u = 0; u < lPlayer.size(); ++u)
+			{
+				if (u != i)
+				{
+					for (int j = 0; j < lPlayer[i].getCells().size(); ++j)
+					{
+						for (int k = 0; k < lPlayer[u].getCells().size(); ++k)
+						{
+							if (lPlayer[i].getCells()[j].checkCollision(lPlayer[u].getCells()[k]) && lPlayer[i].getCells()[j].getSize()>1.05*lPlayer[u].getCells()[k].getSize())
+							{
+								lPlayer[i].getCells()[j].eat(lPlayer[u].getCells()[k]);
+								lPlayer[u].delCell(k);
+								--k;
+							}
+						}
+					}
+				}
+			}
 			lPlayer[i].drawCells(ptrWindow);
 		}
 
