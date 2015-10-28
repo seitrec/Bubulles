@@ -119,6 +119,25 @@ sf::Vector2f Player::getViewCenter()
 	return sf::Vector2f(((m_cells_zone[0] + m_cells_zone[1]) / 2), ((m_cells_zone[2] + m_cells_zone[3]) / 2));
 }
 
+sf::Vector2f Player::getClosestLocation(std::vector<Food> &lFood)
+{
+	float minDistance = worldSize;
+	float distance;
+	sf::Vector2f location = sf::Vector2f(0, 0);
+	for (int i = 0; i < lFood.size(); ++i)
+	{
+		distance = sqrt(pow((this->getViewCenter().x - lFood[i].getCenter().x), 2) +
+						pow((this->getViewCenter().y - lFood[i].getCenter().y), 2));
+
+		if (distance < minDistance)
+		{
+			minDistance = distance;
+			location = lFood[i].getCenter();
+		}
+	}
+	return location;
+}
+
 void Player::setCellZone()
 {
 	int marge = 10;

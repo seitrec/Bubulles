@@ -16,6 +16,7 @@ public:
 	void delCell(Cell cell);
 	void setTarget(sf::Vector2f target);
 	sf::Vector2f getViewCenter();
+	sf::Vector2f getClosestLocation(std::vector<Food> &lFood);
 	void setCellZone();
 	std::vector<float> &getCellZone();
 	void drawCells(sf::RenderWindow *ptrWindow);

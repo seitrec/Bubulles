@@ -39,6 +39,7 @@ int main()
 	vector<Player> lPlayer;
 	vector<Player> *ptrlPlayer = &lPlayer;
 	lPlayer.push_back(Player());
+	lPlayer.push_back(Player());
 
 	//Cr�ation d'une cellule pour chaque Player
 	//TO DO comprendre les iterator et changer for (vector<Player>::iterator i = lPlayer.begin(); i != lPlayer.end(); ++i)
@@ -103,7 +104,9 @@ int main()
 		// Les autres se d�place vers la plus proche nourriture
 		for (int i=1; i < lPlayer.size(); ++i)
 		{
-			//TO DO r�implementer la d�finition de target des autres (bots)
+			lPlayer[i].setCellZone();
+			lPlayer[i].setTarget(lPlayer[i].getClosestLocation(lFood));
+
 		}
 
 
