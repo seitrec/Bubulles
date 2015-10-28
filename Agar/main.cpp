@@ -12,8 +12,8 @@
 using namespace std;
 
 int worldSize = 2000; //Le monde est limit� � un carr� de 2000x2000px
-int initialFood = 10; //Nourriture g�n�r�e avant le d�but du jeu
-int initialPlayers = 10;
+int initialFood = 100; //Nourriture g�n�r�e avant le d�but du jeu
+int initialPlayers = 5;
 
 int main()
 {
