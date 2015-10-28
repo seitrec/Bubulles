@@ -13,6 +13,7 @@ using namespace std;
 
 int worldSize = 2000; //Le monde est limit� � un carr� de 2000x2000px
 int initialFood = 10; //Nourriture g�n�r�e avant le d�but du jeu
+int initialPlayers = 10;
 
 int main()
 {
@@ -38,8 +39,10 @@ int main()
 	//Initialisation de la liste des joueurs (bots + real players) + Cr�ation player(s) initiaux
 	vector<Player> lPlayer;
 	vector<Player> *ptrlPlayer = &lPlayer;
-	lPlayer.push_back(Player());
-	lPlayer.push_back(Player());
+	for (int i(0); i < initialPlayers; ++i)
+	{
+		lPlayer.push_back(Player());
+	}
 
 	//Cr�ation d'une cellule pour chaque Player
 	//TO DO comprendre les iterator et changer for (vector<Player>::iterator i = lPlayer.begin(); i != lPlayer.end(); ++i)

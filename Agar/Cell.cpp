@@ -8,9 +8,9 @@
 Cell::Cell()
 {
 	//SetSize avant SetCenter sinon impossible de d�finir le centre....
-	setSize(40);
+	setSize(30);
 	setSpeed(m_size);
-	setCenter(sf::Vector2f(800,800));
+	setCenter(sf::Vector2f(rand() % worldSize, rand() % worldSize));
 	setColor(sf::Color(rand() % 256, rand() % 256, rand() % 256));
 }
 
