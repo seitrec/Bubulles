@@ -73,12 +73,6 @@ void Entity::move(sf::Vector2f target)
 		{
 			moveY = fmin(moveY, 0);
 		}
-		std::cout << target.x << std::endl;
-		std::cout << target.y << std::endl;
-		std::cout << m_position.x << std::endl;
-		std::cout << m_position.y << std::endl;
-		std::cout << moveX << std::endl;
-		std::cout << moveY << std::endl;
 
 		setCenter(sf::Vector2f(m_position.x+moveX, m_position.y+moveY));
 	}
@@ -102,4 +96,4 @@ void Entity::setCenter(sf::Vector2f position)
 {
 	m_position = position;
 	setPosition(m_position - sf::Vector2f(m_size, m_size));
-};
+}

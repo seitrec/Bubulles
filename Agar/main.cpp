@@ -13,6 +13,7 @@ using namespace std;
 
 int worldSize = 2000; //Le monde est limit� � un carr� de 2000x2000px
 int initialFood = 10; //Nourriture g�n�r�e avant le d�but du jeu
+int initialPlayers = 10;
 
 int main()
 {
@@ -38,7 +39,10 @@ int main()
 	//Initialisation de la liste des joueurs (bots + real players) + Cr�ation player(s) initiaux
 	vector<Player> lPlayer;
 	vector<Player> *ptrlPlayer = &lPlayer;
-	lPlayer.push_back(Player());
+	for (int i(0); i < initialPlayers; ++i)
+	{
+		lPlayer.push_back(Player());
+	}
 
 	//Cr�ation d'une cellule pour chaque Player
 	//TO DO comprendre les iterator et changer for (vector<Player>::iterator i = lPlayer.begin(); i != lPlayer.end(); ++i)
@@ -103,7 +107,9 @@ int main()
 		// Les autres se d�place vers la plus proche nourriture
 		for (int i=1; i < lPlayer.size(); ++i)
 		{
-			//TO DO r�implementer la d�finition de target des autres (bots)
+			lPlayer[i].setCellZone();
+			lPlayer[i].setTarget(lPlayer[i].getClosestLocation(lFood));
+
 		}
 
 
@@ -111,7 +117,10 @@ int main()
 		for (int i = 0; i < lPlayer.size(); ++i)
 		{
 			lPlayer[i].move();
+			lPlayer[i].setCellZone();
+			lPlayer[i].getCellZone();
 
+			
 			// On fait toutes les actions relatives � manger les Foods
 			for (int u = 0; u < lFood.size(); ++u)
 			{
@@ -121,7 +130,7 @@ int main()
 					{
 						if (lPlayer[i].getCells()[j].getSize()>1.1*lFood[u].getSize())
 						{
-							//lPlayer[i].getCells()[j].setSize(lPlayer[i].getCells()[j].getSize() + lFood[u].getSize());
+							lPlayer[i].getCells()[j].eat(lFood[u]);
 							lFood.erase(lFood.begin() + u);
 							--u;
 			}}}}

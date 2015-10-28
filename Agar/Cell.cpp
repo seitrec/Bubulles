@@ -8,14 +8,19 @@
 Cell::Cell()
 {
 	//SetSize avant SetCenter sinon impossible de d�finir le centre....
-	setSize(40);
-	m_speed = 5;
-	setCenter(sf::Vector2f(800,800));
+	setSize(30);
+	setSpeed(m_size);
+	setCenter(sf::Vector2f(rand() % worldSize, rand() % worldSize));
 	setColor(sf::Color(rand() % 256, rand() % 256, rand() % 256));
 }
 
 Cell::~Cell()
 {
+}
+
+float Cell::getSpeed()
+{
+	return m_speed;
 }
 
 Cell Cell::split(sf::Vector2f target)
@@ -37,10 +42,17 @@ Cell Cell::split(sf::Vector2f target)
 	return child;
 }
 
-void Cell::eat(Entity entity) 
+void Cell::eat(Entity &entity) 
 {
+	m_size = sqrt(pow(m_size, 2) + pow(entity.getSize(),2));
+	this->setSize(m_size);
+	this->setSpeed(m_size);
 }
 
+void Cell::setSpeed(float size)
+{
+	m_speed = 200 / size;
+}
 
 void Cell::eject()
 {
@@ -51,7 +63,7 @@ bool Cell::checkCollision(Entity &entity) //ne faudrait-il mieux pas utiliser co
 {
 	return (sqrt(pow((this->getCenter().x - entity.getCenter().x), 2) +
 		pow((this->getCenter().y - entity.getCenter().y), 2))
-		< fabs(this->getSize() - entity.getSize() / 2));
+		< fabs(this->getSize() + entity.getSize()));
 }
 /*
 void Cell::actionCollision(Entity & entity, Player & player, std::vector<Food>& lFood, std::vector<Player>& lPlayer)
