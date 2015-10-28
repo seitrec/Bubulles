@@ -13,14 +13,15 @@
 using namespace std;
 
 int worldSize = 4000; //Le monde est limit� � un carr� de 2000x2000px
+int windowSize = 750;
 int initialFood = 100; //Nourriture g�n�r�e avant le d�but du jeu
 int initialPlayers = 5;
 
 int main()
 {
 	// Cr�ation de la f�n�tre et de la vue et limitation du framerate
-	sf::RenderWindow window(sf::VideoMode(800, 800), "AgarIO C++");
-	sf::View view(sf::Vector2f(300, 300), sf::Vector2f(800, 800));
+	sf::RenderWindow window(sf::VideoMode(windowSize, windowSize), "AgarIO C++");
+	sf::View view(sf::Vector2f(300, 300), sf::Vector2f(windowSize, windowSize));
 	window.setVerticalSyncEnabled(true);
 	window.setFramerateLimit(30);
 	sf::RenderWindow *ptrWindow = &window;

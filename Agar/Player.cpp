@@ -118,7 +118,29 @@ void Player::setTarget(sf::Vector2f target)
 
 sf::Vector2f Player::getViewCenter()
 {
-	return sf::Vector2f(((m_cells_zone[0] + m_cells_zone[1]) / 2), ((m_cells_zone[2] + m_cells_zone[3]) / 2));
+	//Si on arrive près des bords il ne faut plus prendre le centre des cellules
+	sf::Vector2f centreCells = sf::Vector2f(((m_cells_zone[0] + m_cells_zone[1]) / 2), ((m_cells_zone[2] + m_cells_zone[3]) / 2));
+	sf::Vector2f centreView = centreCells;
+
+	if (centreCells.x < windowSize / 2)
+	{
+		centreView.x = windowSize / 2;
+	}
+	else if (centreCells.x > worldSize - windowSize / 2)
+	{
+		centreView.x = worldSize - windowSize / 2;
+	}
+
+	if (centreCells.y < windowSize / 2)
+	{
+		centreView.y = windowSize / 2;
+	}
+	else if (centreCells.y > worldSize - windowSize / 2)
+	{
+		centreView.y = worldSize - windowSize / 2;
+	}
+
+	return centreView;
 }
 
 sf::Vector2f Player::getClosestLocation(std::vector<Food> &lFood)
