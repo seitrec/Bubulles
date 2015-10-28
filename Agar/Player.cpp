@@ -1,6 +1,7 @@
 #include "Player.h"
 #include "Global.h"
 #include <iostream>
+#include <math.h>
 
 Player::Player()
 {
