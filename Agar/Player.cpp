@@ -206,6 +206,14 @@ void Player::drawCells(sf::RenderWindow * ptrWindow)
 	}
 
 }
+void Player::drawName(sf::RenderWindow &window, sf::Font &font)
+{
+
+	for (int i = 0; i < m_cells.size(); ++i)
+	{
+		m_cells[i].drawName(window, font, this->getName());
+	}
+}
 
 void Player::checkCollision(std::vector<Food>* ptrlFood)
 {
@@ -213,4 +221,14 @@ void Player::checkCollision(std::vector<Food>* ptrlFood)
 	{
 		m_cells[i].checkCollision(m_cells[0]);
 	}
+}
+
+std::string Player::getName()
+{
+	return m_name;
+}
+
+void Player::setName(std::string name)
+{
+	m_name = name;
 }

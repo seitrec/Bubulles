@@ -61,6 +61,17 @@ void Cell::setSpeed(float size)
 	m_speed = 200 / size;
 }
 
+void Cell::drawName(sf::RenderWindow & window, sf::Font & font, std::string name)
+{
+	sf::Text text;
+	text.setFont(font); // font est un sf::Font
+	text.setCharacterSize(this->getSize()/2); // exprimée en pixels, pas en points !
+	text.setColor(sf::Color::White);
+	text.setString(name);
+	text.setPosition(this->getCenter()-sf::Vector2f(m_size/2,m_size/2));
+	window.draw(text);
+}
+
 void Cell::eject()
 {
 }

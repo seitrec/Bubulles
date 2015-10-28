@@ -9,12 +9,12 @@
 #include "Player.h"
 #include "main.h"
 
-//test. ˆ enlever si vous lisez.
 using namespace std;
 
+std::string namePlayer = "Victor";
 int worldSize = 2000; 
 int windowSize = 750;
-int initialFood = 100; //Nourriture gï¿½nï¿½rï¿½e avant le dï¿½but du jeu
+int initialFood = 500; //Nourriture gï¿½nï¿½rï¿½e avant le dï¿½but du jeu
 int initialPlayers = 50;
 
 int main()
@@ -35,8 +35,13 @@ int main()
 	sprite.setTexture(texture);
 	sprite.setScale(sf::Vector2f(0.75, 0.75));
 	sprite.setTextureRect(sf::IntRect(00, 00, worldSize/0.75, worldSize / 0.75));
-	
 	sprite.setColor(sf::Color(255, 255, 255, 15));
+
+	sf::Font font;
+	if (!font.loadFromFile("arial.ttf"))
+	{
+		cout << "Echec chargement de la police" << endl;
+	}
 
 	//Lancement du chrono, l'objet clock gï¿½re le temps.
 	sf::Clock clock;
@@ -55,6 +60,8 @@ int main()
 	for (int i(0); i < initialPlayers; ++i)
 	{
 		lPlayer.push_back(Player());
+		if (i!=0){ lPlayer[i].setName("bot " + std::to_string(i)); }
+		else { lPlayer[i].setName(namePlayer); }
 	}
 
 	//Crï¿½ation d'une cellule pour chaque Player
@@ -102,12 +109,14 @@ int main()
 		window.draw(sprite);
 		//TO DO Dï¿½placer ï¿½a dans une fonction ï¿½ part ?
 		int entityGenerated = 0;
-		if (static_cast<int>(clock.getElapsedTime().asSeconds()) % 3 == 1)
+		if (static_cast<int>(clock.getElapsedTime().asSeconds()) % 2 == 1)
 		{
 			entityGenerated = 0;
 		}
-		if (static_cast<int>(clock.getElapsedTime().asSeconds()) % 3 == 0 && entityGenerated == 0)
+		if (static_cast<int>(clock.getElapsedTime().asSeconds()) % 2 == 0 && entityGenerated == 0)
 		{
+			lFood.push_back(Food());
+			lFood.push_back(Food());
 			lFood.push_back(Food());
 			entityGenerated = 1;
 		}
@@ -167,7 +176,10 @@ int main()
 					}
 				}
 			}
+			
+			
 			lPlayer[i].drawCells(ptrWindow);
+			lPlayer[i].drawName(window, font);
 		}
 
 		//On dessine la nourriture
