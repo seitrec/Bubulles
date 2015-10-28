@@ -7,11 +7,17 @@
 
 Cell::Cell()
 {
+	int r = rand() % 256;
+	int v = rand() % 256;
+	int b = rand() % 256;
 	//SetSize avant SetCenter sinon impossible de d�finir le centre....
 	setSize(30);
 	setSpeed(m_size);
 	setCenter(sf::Vector2f(rand() % worldSize, rand() % worldSize));
-	setColor(sf::Color(rand() % 256, rand() % 256, rand() % 256));
+	setColor(sf::Color(r,v,b));
+	setOutlineColor(sf::Color(fmax(0, r - 40), fmax(0, v - 40), fmax(0, b - 40)));
+	setOutlineThickness(getSize()/8);
+	setPointCount(100);
 }
 
 Cell::~Cell()
@@ -29,6 +35,7 @@ Cell Cell::split(sf::Vector2f target)
 	Cell child;
 	child.setSize(this->getSize());
 	child.setColor(this->getColor());
+	child.setOutlineColor(this->getOutlineColor());
 	float relativeCenterMouseX;
 	relativeCenterMouseX = target.x - (this->getCenter().x + m_size);
 	float relativeCenterMouseY;

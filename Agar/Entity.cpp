@@ -41,6 +41,7 @@ void Entity::setSize(float size)
 {
 	m_size = size;
 	setRadius(m_size);
+	setOutlineThickness(m_size / 10);
 };
 
 void Entity::move(sf::Vector2f target)
