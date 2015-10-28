@@ -68,7 +68,10 @@ void Cell::drawName(sf::RenderWindow & window, sf::Font & font, std::string name
 	text.setCharacterSize(this->getSize()/2); // exprimée en pixels, pas en points !
 	text.setColor(sf::Color::White);
 	text.setString(name);
-	text.setPosition(this->getCenter()-sf::Vector2f(m_size/2,m_size/2));
+	sf::FloatRect textRect = text.getLocalBounds();
+	text.setOrigin(textRect.left + textRect.width / 2.0f,
+	textRect.top + textRect.height / 2.0f);
+	text.setPosition(this->getCenter());
 	window.draw(text);
 }
 
