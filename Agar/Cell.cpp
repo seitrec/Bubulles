@@ -33,6 +33,7 @@ Cell Cell::split(sf::Vector2f target)
 		float c = sqrt(((m_speed + 3 * m_size) * (m_speed + 3 * m_size)) / (relativeCenterMouseX * relativeCenterMouseX + relativeCenterMouseY * relativeCenterMouseY));
 		child.setCenter(sf::Vector2f (this->getCenter().x + c * relativeCenterMouseX, this->getCenter().y + c * relativeCenterMouseY));
 	}
+
 	return child;
 }
 
