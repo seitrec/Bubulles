@@ -124,7 +124,7 @@ int main()
 					{
 						if (lPlayer[i].getCells()[j].getSize()>1.1*lFood[u].getSize())
 						{
-							//lPlayer[i].getCells()[j].setSize(lPlayer[i].getCells()[j].getSize() + lFood[u].getSize());
+							lPlayer[i].getCells()[j].eat(lFood[u]);
 							lFood.erase(lFood.begin() + u);
 							--u;
 			}}}}

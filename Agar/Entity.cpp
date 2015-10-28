@@ -96,4 +96,4 @@ void Entity::setCenter(sf::Vector2f position)
 {
 	m_position = position;
 	setPosition(m_position - sf::Vector2f(m_size, m_size));
-};
+}

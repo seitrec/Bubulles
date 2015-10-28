@@ -13,9 +13,58 @@ Player::~Player()
 
 void Player::move()
 {
+
 	for (int i = 0; i < m_cells.size(); ++i)
 	{
-		m_cells[i].move(m_target);
+		sf::Vector2f relativeCentertoTarget((m_target.x) - (m_cells[i].getCenter().x),
+			(m_target.y) - (m_cells[i].getCenter().y));
+
+		float moveX = 0;
+		float moveY = 0;
+		if ((fabs(relativeCentertoTarget.x)>3 || fabs(relativeCentertoTarget.y)>3))
+		{
+			float c = sqrt((m_cells[i].getSpeed()*m_cells[i].getSpeed()) / (relativeCentertoTarget.x*relativeCentertoTarget.x + relativeCentertoTarget.y*relativeCentertoTarget.y));
+			moveX = c*relativeCentertoTarget.x;
+			moveY = c*relativeCentertoTarget.y;
+
+			if (m_cells[i].getCenter().x - m_cells[i].getSize() <0)
+			{
+				moveX = fmax(moveX, 0.0);
+			}
+			else if (m_cells[i].getCenter().x + m_cells[i].getSize()>worldSize)
+			{
+				moveX = fmin(moveX, 0);
+			}
+			if (m_cells[i].getCenter().y - m_cells[i].getSize() <0)
+			{
+				moveY = fmax(moveY, 0.0);
+			}
+			else if (m_cells[i].getCenter().y + m_cells[i].getSize() >worldSize)
+			{
+				moveY = fmin(moveY, 0);
+			}
+
+			Cell copieCell = m_cells[i];
+			copieCell.setSize(copieCell.getSize());
+			for (int j = 0; j < m_cells.size(); ++j)
+			{
+				if (j != i) { 
+					copieCell.setCenter(sf::Vector2f(m_cells[i].getCenter().x + moveX, m_cells[i].getCenter().y));
+					if (copieCell.checkCollision(m_cells[j]))
+					{
+						moveX = 0;
+					}
+				
+					copieCell.setCenter(sf::Vector2f(m_cells[i].getCenter().x, m_cells[i].getCenter().y + moveY));
+					if (copieCell.checkCollision(m_cells[j]))
+					{
+						moveY = 0;
+					}
+				}
+			}
+			
+			m_cells[i].setCenter(sf::Vector2f(m_cells[i].getCenter().x + moveX, m_cells[i].getCenter().y + moveY));
+		}
 	}
 }
 

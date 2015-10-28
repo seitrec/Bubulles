@@ -11,8 +11,10 @@ class Cell :
 public:
 	Cell();
 	~Cell();
+	void setSpeed(float size);
+	float getSpeed();
 	Cell split(sf::Vector2f target);
-	void eat(Entity Entity);
+	void eat(Entity &entity);
 	void eject();
 	bool checkCollision(Entity &entity);
 //	void actionCollision(Entity& entity,Player& player, std::vector<Food>& lFood, std::vector<Player>& lPlayer);
