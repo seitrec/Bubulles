@@ -11,7 +11,7 @@ class Cell :
 public:
 	Cell();
 	~Cell();
-	void split(sf::Vector2f target);
+	Cell split(sf::Vector2f target);
 	void eat(Entity Entity);
 	void eject();
 	bool checkCollision(Entity &entity);
