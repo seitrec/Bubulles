@@ -8,8 +8,8 @@ class Player
 public:
 	Player();
 	~Player();
-	void move();
-	void split();
+	void move(int);
+	void split(int);
 	void eject();
 	std::vector<Cell> &getCells();
 	void addCell(Cell cell);
@@ -28,6 +28,7 @@ public:
 	void setMoved(bool b);
 	void setScore();
 	int getScore();
+	bool canMerge(int);
 
 
 private:
@@ -36,5 +37,6 @@ private:
 	sf::Vector2f m_target;
 	std::vector<float> m_cells_zone;
 	int m_score;
+	int merge_available;
 };
 

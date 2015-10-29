@@ -12,7 +12,7 @@ Player::~Player()
 {
 }
 
-void Player::move()
+void Player::move(int splitTime)
 {
 /*	int nbCells = m_cells.size();
 	int nbMoved = 0;
@@ -52,7 +52,7 @@ void Player::move()
 		copieCell.setCenter(sf::Vector2f(m_cells[i].getCenter().x + move.x, m_cells[i].getCenter().y + move.y));
 		for (int j = i+1; j < m_cells.size(); ++j)
 		{
-				if (copieCell.checkCollisionMyCells(m_cells[j]))
+				if ((copieCell.checkCollisionMyCells(m_cells[j])) && !(canMerge(splitTime)))
 				{
 					sf::Vector2f new_target = sf::Vector2f(m_cells[i].getCenter().x - m_cells[j].getCenter().x, m_cells[i].getCenter().y - m_cells[j].getCenter().y);
 					//if (move.x > m_cells[j].move(m_target).x)
@@ -66,8 +66,12 @@ void Player::move()
 	}
 }
 
+bool Player::canMerge(int splitTime)
+{
+	return (splitTime > merge_available);
+}
 
-void Player::split()
+void Player::split(int splitTime)
 {
 	int nb_cells = m_cells.size();
 	//if (min_size > 10)
@@ -76,6 +80,7 @@ void Player::split()
 		if (m_cells[j].getSize() > 10 && m_cells.size()<16)
 		{
 			this->addCell(m_cells[j].split(m_target)); //TODO supprimer target du split
+			merge_available = splitTime + 10;
 			bool collision = m_cells[nb_cells].checkCollisionMyCells(m_cells[j]);
 			while(collision)
 			{

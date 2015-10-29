@@ -100,7 +100,8 @@ int main()
 				//Le split grâce au keyboard ne s'effectue que sur le player 0
 				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 				{
-					lPlayer[0].split();
+					int splitTime = static_cast<int>(clock.getElapsedTime().asSeconds());
+						lPlayer[0].split(splitTime);
 				}
 				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
 				{
@@ -152,7 +153,7 @@ int main()
 		for (int i = 0; i < lPlayer.size(); ++i)
 		{
 			lPlayer[i].setMoved(false);
-			lPlayer[i].move();
+			lPlayer[i].move(static_cast<int>(clock.getElapsedTime().asSeconds()));
 			lPlayer[i].setCellZone();
 			lPlayer[i].getCellZone();
 
@@ -172,7 +173,7 @@ int main()
 			}}}}
 			for (int u = 0; u < lPlayer.size(); ++u)
 			{
-				if (u != i)
+				if (lPlayer[0].canMerge(static_cast<int>(clock.getElapsedTime().asSeconds())))
 				{
 					for (int j = 0; j < lPlayer[i].getCells().size(); ++j)
 					{
@@ -183,6 +184,23 @@ int main()
 								lPlayer[i].getCells()[j].eat(lPlayer[u].getCells()[k]);
 								lPlayer[u].delCell(k);
 								--k;
+							}
+						}
+					}
+				}
+				else {
+					if (u != i)
+					{
+						for (int j = 0; j < lPlayer[i].getCells().size(); ++j)
+						{
+							for (int k = 0; k < lPlayer[u].getCells().size(); ++k)
+							{
+								if (lPlayer[i].getCells()[j].checkCollision(lPlayer[u].getCells()[k]) && lPlayer[i].getCells()[j].getSize()>1.05*lPlayer[u].getCells()[k].getSize())
+								{
+									lPlayer[i].getCells()[j].eat(lPlayer[u].getCells()[k]);
+									lPlayer[u].delCell(k);
+									--k;
+								}
 							}
 						}
 					}
