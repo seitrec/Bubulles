@@ -15,9 +15,10 @@ using namespace std;
 std::string namePlayer = "Victor";
 int worldSize = 2000; 
 int windowSize = 750;
-int initialFood = 500; //Nourriture g�n�r�e avant le d�but du jeu
-int initialPlayers = 5;
-#define PORT = 800;
+int initialFood = 1000; //Nourriture g�n�r�e avant le d�but du jeu
+int foodbySecond = 10;
+int initialPlayers = 10;
+
 int main()
 {
 
@@ -123,10 +124,12 @@ int main()
 		}
 		if (static_cast<int>(clock.getElapsedTime().asSeconds()) % 2 == 0 && entityGenerated == 0)
 		{
+			for (int i = 0; i < foodbySecond;++i)
+			{
 			lFood.push_back(Food());
-			lFood.push_back(Food());
-			lFood.push_back(Food());
+			}
 			entityGenerated = 1;
+
 		}
 		//TO DO passer en iterator ?
 		for (int i(0); i < lFood.size(); ++i)
