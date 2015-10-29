@@ -98,18 +98,3 @@ bool Cell::checkCollisionMyCells(Cell &cell) //ne faudrait-il mieux pas utiliser
 		pow((this->getCenter().y - cell.getCenter().y), 2))
 		< fabs(this->getSize() + cell.getSize()));
 }
-/*
-void Cell::actionCollision(Entity & entity, Player & player, std::vector<Food>& lFood, std::vector<Player>& lPlayer)
-{
-	float difEatMin = 1.1;
-	if (this->getSize() >= entity.getSize()*difEatMin)
-	{
-		entity.getEaten(*this, player, lPlayer);
-
-	}
-	else
-	{
-		//Faire qqch de graphique
-	}
-}
-*/
