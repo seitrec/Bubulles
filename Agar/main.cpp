@@ -94,12 +94,18 @@ int main()
 				window.close();
 				break;
 
-				//Split, on ne split que si la taille minimum des bulles est > taille nourriture
 			case sf::Event::KeyPressed:
 				//Le split grâce au keyboard ne s'effectue que sur le player 0
 				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 				{
 					lPlayer[0].split();
+				}
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
+				{
+					window.close();
+					main();
+					
+					break;
 				}
 				break;
 
