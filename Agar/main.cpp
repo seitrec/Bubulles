@@ -12,7 +12,7 @@
 
 using namespace std;
 
-std::string namePlayer = "Victor";
+std::string namePlayer = "Player";
 int worldSize = 2000; 
 int windowSize = 750;
 int initialFood = 1000; //Nourriture g�n�r�e avant le d�but du jeu
@@ -21,7 +21,8 @@ int initialPlayers = 10;
 
 int main()
 {
-
+	cout << "Quel est votre nom : " << endl;
+	cin >> namePlayer;
 	// Cr�ation de la f�n�tre et de la vue et limitation du framerate
 	sf::RenderWindow window(sf::VideoMode(windowSize, windowSize), "AgarIO C++");
 	sf::View view(sf::Vector2f(300, 300), sf::Vector2f(windowSize*2, windowSize*2));
