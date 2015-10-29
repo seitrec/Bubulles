@@ -73,7 +73,7 @@ void Player::split()
 	//if (min_size > 10)
 	for (int j = 0; j < nb_cells; ++j)
 	{
-		if (m_cells[j].getSize() > 10 && m_cells.size()<2)
+		if (m_cells[j].getSize() > 10 && m_cells.size()<16)
 		{
 			this->addCell(m_cells[j].split(m_target)); //TODO supprimer target du split
 			bool collision = m_cells[nb_cells].checkCollisionMyCells(m_cells[j]);
