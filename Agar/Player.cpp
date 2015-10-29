@@ -193,6 +193,13 @@ void Player::setCellZone()
 			m_cells_zone[3] = marge + m_cells[i].getCenter().y - m_cells[i].getSize();
 		}
 	}
+	if (m_cells.size() == 0)
+	{
+		m_cells_zone[0] = 0;
+			m_cells_zone[1] = worldSize;
+			m_cells_zone[2] = 0;
+			m_cells_zone[3] = worldSize;
+	}
 }
 
 std::vector<float> &Player::getCellZone()

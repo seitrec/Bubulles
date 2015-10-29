@@ -90,6 +90,7 @@
     <ClCompile Include="Cell.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Food.cpp" />
+    <ClCompile Include="IA.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Functions.cpp" />
@@ -100,6 +101,7 @@
     <ClInclude Include="Food.h" />
     <ClInclude Include="Global.h" />
     <ClInclude Include="client.h" />
+    <ClInclude Include="IA.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="sockets.h" />

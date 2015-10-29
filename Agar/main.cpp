@@ -18,6 +18,7 @@ int windowSize = 750;
 int initialFood = 1000; //Nourriture g�n�r�e avant le d�but du jeu
 int foodbySecond = 10;
 int initialPlayers = 10;
+int maxFood = 20000;
 
 int main()
 {
@@ -73,7 +74,7 @@ int main()
 	for (int i(0); i < lPlayer.size(); ++i)
 	{
 		lPlayer[i].addCell(Cell());
-		if (i != 0) { lPlayer[i].getCells()[0].setSize(10); } // pour qu'on est un avantage sur les bots...
+		if (i != 0) { lPlayer[i].getCells()[0].setSize(10); } // On en démarre pas à la même taille pour qu'on est un avantage sur les bots...
 	}
 
 
@@ -105,8 +106,6 @@ int main()
 				{
 					window.close();
 					main();
-					
-					break;
 				}
 				break;
 
@@ -123,7 +122,7 @@ int main()
 		{
 			entityGenerated = 0;
 		}
-		if (static_cast<int>(clock.getElapsedTime().asSeconds()) % 2 == 0 && entityGenerated == 0)
+		if (static_cast<int>(clock.getElapsedTime().asSeconds()) % 2 == 0 && entityGenerated == 0 && lFood.size()<maxFood)
 		{
 			for (int i = 0; i < foodbySecond;++i)
 			{
@@ -189,8 +188,6 @@ int main()
 					}
 				}
 			}
-			
-			
 			lPlayer[i].drawCells(ptrWindow);
 			lPlayer[i].drawCellsScore(window, font);
 			lPlayer[i].drawName(window, font);
