@@ -58,6 +58,7 @@
 
 #Compact database file
 *.sdf
+*.opensdf
 
 #Apple stuff
 
