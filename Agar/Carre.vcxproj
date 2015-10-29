@@ -92,6 +92,7 @@
     <ClCompile Include="Food.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Functions.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Cell.h" />

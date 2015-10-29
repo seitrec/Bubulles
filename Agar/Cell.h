@@ -13,6 +13,7 @@ public:
 	~Cell();
 	void setSpeed(float size);
 	void drawName(sf::RenderWindow &window, sf::Font &font, std::string name);
+	void drawScore(sf::RenderWindow &window, sf::Font &font);
 	float getSpeed();
 	Cell split(sf::Vector2f target);
 	void eat(Entity &entity);

@@ -10,7 +10,6 @@
 #include "main.h"
 
 
-
 using namespace std;
 
 std::string namePlayer = "Victor";
@@ -189,6 +188,7 @@ int main()
 			
 			
 			lPlayer[i].drawCells(ptrWindow);
+			lPlayer[i].drawCellsScore(window, font);
 			lPlayer[i].drawName(window, font);
 		}
 

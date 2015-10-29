@@ -21,10 +21,13 @@ public:
 	std::vector<float> &getCellZone();
 	void drawCells(sf::RenderWindow *ptrWindow);
 	void drawName(sf::RenderWindow &window, sf::Font &font);
+	void drawCellsScore(sf::RenderWindow &window, sf::Font &font);
 	void checkCollision(std::vector<Food> *ptrlFood);
 	std::string getName();
 	void setName(std::string name);
 	void setMoved(bool b);
+	void setScore();
+	int getScore();
 
 
 private:
@@ -32,5 +35,6 @@ private:
 	std::vector<Cell> m_cells;
 	sf::Vector2f m_target;
 	std::vector<float> m_cells_zone;
+	int m_score;
 };
 

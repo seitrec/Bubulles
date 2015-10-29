@@ -216,6 +216,14 @@ void Player::drawName(sf::RenderWindow &window, sf::Font &font)
 	}
 }
 
+void Player::drawCellsScore(sf::RenderWindow & window, sf::Font & font)
+{
+	for (int i = 0; i < m_cells.size(); ++i)
+	{
+		m_cells[i].drawScore(window, font);
+	}
+}
+
 void Player::checkCollision(std::vector<Food>* ptrlFood)
 {
 	for (int i = 0; i < m_cells.size(); ++i)
@@ -240,4 +248,20 @@ void Player::setMoved(bool b)
 	{
 		m_cells[i].setMoved(b);
 	}
+}
+
+void Player::setScore()
+{
+	float score = 0;
+	for (int i = 0; i < m_cells.size(); ++i)
+	{
+		score+=m_cells[i].getSize();
+	}
+	m_score = roundf(score);
+
+}
+
+int Player::getScore()
+{
+	return m_score;
 }

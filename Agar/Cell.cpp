@@ -17,7 +17,6 @@ Cell::Cell()
 	setColor(sf::Color(r,v,b));
 	setOutlineColor(sf::Color(fmax(0, r - 40), fmax(0, v - 40), fmax(0, b - 40)));
 	setOutlineThickness(getSize()/8);
-	setPointCount(100);
 }
 
 Cell::~Cell()
@@ -64,6 +63,20 @@ void Cell::drawName(sf::RenderWindow & window, sf::Font & font, std::string name
 	text.setOrigin(textRect.left + textRect.width / 2.0f,
 	textRect.top + textRect.height / 2.0f);
 	text.setPosition(this->getCenter());
+	window.draw(text);
+}
+
+void Cell::drawScore(sf::RenderWindow & window, sf::Font & font)
+{
+	sf::Text text;
+	text.setFont(font); // font est un sf::Font
+	text.setCharacterSize(this->getSize() / 2); // exprimée en pixels, pas en points !
+	text.setColor(sf::Color::White);
+	text.setString(std::to_string(static_cast<int>(round(this->getSize()))));
+	sf::FloatRect textRect = text.getLocalBounds();
+	text.setOrigin(textRect.left + textRect.width / 2.0f,
+					textRect.top + textRect.height / 2.0f);
+	text.setPosition(this->getCenter().x, this->getCenter().y+m_size/2);
 	window.draw(text);
 }
 
