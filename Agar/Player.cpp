@@ -47,26 +47,23 @@ void Player::move()
 	for (int i = 0; i < m_cells.size(); ++i)
 	{
 		sf::Vector2f move = m_cells[i].move(m_target);
-
-			Cell copieCell = m_cells[i];
-			copieCell.setSize(copieCell.getSize());
-			for (int j = 0; j < m_cells.size(); ++j)
-			{
-				if (j != i) { 
-					copieCell.setCenter(sf::Vector2f(m_cells[i].getCenter().x + move.x, m_cells[i].getCenter().y + move.y));
-					if (copieCell.checkCollisionMyCells(m_cells[j]))
-					{
-						//if (move.x > m_cells[j].move(m_target).x)
-						//{
-							move.x = 0;
-							move.y = 0;
-						//}
-					}
-				}
+		Cell copieCell = m_cells[i];
+		copieCell.setSize(copieCell.getSize());
+		copieCell.setCenter(sf::Vector2f(m_cells[i].getCenter().x + move.x, m_cells[i].getCenter().y + move.y));
+		for (int j = i+1; j < m_cells.size(); ++j)
+		{
+				if (copieCell.checkCollisionMyCells(m_cells[j]))
+				{
+					sf::Vector2f new_target = sf::Vector2f(m_cells[i].getCenter().x - m_cells[j].getCenter().x, m_cells[i].getCenter().y - m_cells[j].getCenter().y);
+					//if (move.x > m_cells[j].move(m_target).x)
+					//{
+					move = m_cells[i].move(m_cells[i].getCenter() + new_target);
+					//}
 			}
-			
-			m_cells[i].setCenter(sf::Vector2f(m_cells[i].getCenter().x + move.x, m_cells[i].getCenter().y + move.y));
 		}
+			
+		m_cells[i].setCenter(sf::Vector2f(m_cells[i].getCenter().x + move.x, m_cells[i].getCenter().y + move.y));
+	}
 }
 
 
