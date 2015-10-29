@@ -80,11 +80,31 @@ void Cell::eject()
 }
 
 
-bool Cell::checkCollision(Entity &entity) //ne faudrait-il mieux pas utiliser const& ptrlFood ? on passe l'adresse du vecteur, et on le laisse constant vu qu'on ne va pas le modifier, juste le parcourir
+bool Cell::checkCollision(Food &food) //ne faudrait-il mieux pas utiliser const& ptrlFood ? on passe l'adresse du vecteur, et on le laisse constant vu qu'on ne va pas le modifier, juste le parcourir
 {
-	return (sqrt(pow((this->getCenter().x - entity.getCenter().x), 2) +
-		pow((this->getCenter().y - entity.getCenter().y), 2))
-		< fabs(this->getSize() + entity.getSize()));
+	return (sqrt(pow((this->getCenter().x - food.getCenter().x), 2) +
+		pow((this->getCenter().y - food.getCenter().y), 2))
+		< fabs((this->getSize() + food.getSize())));
+}
+void Cell::setMoved(bool b)
+{
+	wasMoved = b;
+}
+bool Cell::getWasMoved()
+{
+	return wasMoved;
+}
+bool Cell::checkCollision(Cell &cell) //ne faudrait-il mieux pas utiliser const& ptrlFood ? on passe l'adresse du vecteur, et on le laisse constant vu qu'on ne va pas le modifier, juste le parcourir
+{
+	return (sqrt(pow((this->getCenter().x - cell.getCenter().x), 2) +
+		pow((this->getCenter().y - cell.getCenter().y), 2))
+		< fabs(this->getSize() - cell.getSize() / 2));
+}
+bool Cell::checkCollisionMyCells(Cell &cell) //ne faudrait-il mieux pas utiliser const& ptrlFood ? on passe l'adresse du vecteur, et on le laisse constant vu qu'on ne va pas le modifier, juste le parcourir
+{
+	return (sqrt(pow((this->getCenter().x - cell.getCenter().x), 2) +
+		pow((this->getCenter().y - cell.getCenter().y), 2))
+		< fabs(this->getSize() + cell.getSize()));
 }
 /*
 void Cell::actionCollision(Entity & entity, Player & player, std::vector<Food>& lFood, std::vector<Player>& lPlayer)

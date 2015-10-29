@@ -15,7 +15,7 @@ std::string namePlayer = "Victor";
 int worldSize = 2000; 
 int windowSize = 750;
 int initialFood = 500; //Nourriture g�n�r�e avant le d�but du jeu
-int initialPlayers = 50;
+int initialPlayers = 5;
 
 int main()
 {
@@ -140,6 +140,7 @@ int main()
 		//On fait bouger, on check les collisions et on dessine toutes les cellules de tous les joueurs
 		for (int i = 0; i < lPlayer.size(); ++i)
 		{
+			lPlayer[i].setMoved(false);
 			lPlayer[i].move();
 			lPlayer[i].setCellZone();
 			lPlayer[i].getCellZone();

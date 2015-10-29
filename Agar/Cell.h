@@ -17,7 +17,13 @@ public:
 	Cell split(sf::Vector2f target);
 	void eat(Entity &entity);
 	void eject();
-	bool checkCollision(Entity &entity);
+	bool checkCollision(Cell &cell);
+	bool checkCollisionMyCells(Cell &cell);
+	bool checkCollision(Food &food);
+	void setMoved(bool b);
+	bool getWasMoved();
 //	void actionCollision(Entity& entity,Player& player, std::vector<Food>& lFood, std::vector<Player>& lPlayer);
+private:
+	bool wasMoved;
 };
 

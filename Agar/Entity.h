@@ -11,7 +11,7 @@ public:
 	void setCenter(sf::Vector2f position);
 	float getSize();
 	void setSize(float size);
-	void move(sf::Vector2f target);
+	sf::Vector2f move(sf::Vector2f target);
 	sf::Color getColor();
 	void setColor(sf::Color);
 	void draw(sf::RenderWindow * ptrWindow);

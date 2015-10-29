@@ -44,41 +44,36 @@ void Entity::setSize(float size)
 	setOutlineThickness(m_size / 10);
 };
 
-void Entity::move(sf::Vector2f target)
+sf::Vector2f Entity::move(sf::Vector2f target)
 {	//On pourrait globalement utiliser des vecteurs partout ici
 
-	 sf::Vector2f relativeCentertoTarget((target.x) - (this->getCenter().x),
-										(target.y) - (this->getCenter().y));
+	sf::Vector2f relativeCentertoTarget(target - getCenter());
+	sf::Vector2f move = sf::Vector2f(0, 0);
 
-	float moveX = 0;
-	float moveY = 0;
 	if ((fabs(relativeCentertoTarget.x)>3 || fabs(relativeCentertoTarget.y)>3))
 	{
 		float c = sqrt((m_speed*m_speed) / (relativeCentertoTarget.x*relativeCentertoTarget.x + relativeCentertoTarget.y*relativeCentertoTarget.y));
-		moveX = c*relativeCentertoTarget.x;
-		moveY = c*relativeCentertoTarget.y;
+		move.x = c*relativeCentertoTarget.x;
+		move.y = c*relativeCentertoTarget.y;
 		
 		if (m_position.x <0)
 		{
-			moveX = fmax(moveX, 0.0);
+			move.x = fmax(move.x, 0.0);
 		}
 		else if (m_position.x >worldSize)
 		{
-			moveX = fmin(moveX, 0);
+			move.x = fmin(move.x, 0);
 		}
 		if (m_position.y <0)
 		{
-			moveY = fmax(moveY, 0.0);
+			move.y = fmax(move.y, 0.0);
 		}
 		else if (m_position.y >worldSize)
 		{
-			moveY = fmin(moveY, 0);
+			move.y = fmin(move.y, 0);
 		}
-
-		setCenter(sf::Vector2f(m_position.x+moveX, m_position.y+moveY));
 	}
-
-	
+	return move;
 };
 
 sf::Color Entity::getColor()

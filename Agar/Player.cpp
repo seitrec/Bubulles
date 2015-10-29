@@ -14,60 +14,69 @@ Player::~Player()
 
 void Player::move()
 {
+/*	int nbCells = m_cells.size();
+	int nbMoved = 0;
 
+	while (nbMoved != nbCells)
+	{
+		for (int i = 0; i < m_cells.size(); ++i)
+		{
+			if (!m_cells[i].getWasMoved())
+			{
+				//Cas à traiter quand move = 0
+				sf::Vector2f move = m_cells[i].move(m_target);
+				Cell copieCell = m_cells[i];
+				copieCell.setCenter(sf::Vector2f(m_cells[i].getCenter().x + std::copysignf(1,move.x), m_cells[i].getCenter().y));
+				for (int j = 0; j < m_cells.size(); ++j)
+				{
+					if (j != i)
+					{
+						if (copieCell.checkCollisionMyCells(m_cells[j]))
+						{
+							//Il y a collision même en bougeant d'un pixel donc on ne peut rien faire.
+						}
+						else
+						{
+							//Il y a collision
+						}
+					}
+				}
+			}
+		}
+	}*/
 	for (int i = 0; i < m_cells.size(); ++i)
 	{
-		sf::Vector2f relativeCentertoTarget((m_target.x) - (m_cells[i].getCenter().x),
-			(m_target.y) - (m_cells[i].getCenter().y));
-
-		float moveX = 0;
-		float moveY = 0;
-		if ((fabs(relativeCentertoTarget.x)>3 || fabs(relativeCentertoTarget.y)>3))
-		{
-			float c = sqrt((m_cells[i].getSpeed()*m_cells[i].getSpeed()) / (relativeCentertoTarget.x*relativeCentertoTarget.x + relativeCentertoTarget.y*relativeCentertoTarget.y));
-			moveX = c*relativeCentertoTarget.x;
-			moveY = c*relativeCentertoTarget.y;
-
-			if (m_cells[i].getCenter().x - m_cells[i].getSize() <0)
-			{
-				moveX = fmax(moveX, 0.0);
-			}
-			else if (m_cells[i].getCenter().x + m_cells[i].getSize()>worldSize)
-			{
-				moveX = fmin(moveX, 0);
-			}
-			if (m_cells[i].getCenter().y - m_cells[i].getSize() <0)
-			{
-				moveY = fmax(moveY, 0.0);
-			}
-			else if (m_cells[i].getCenter().y + m_cells[i].getSize() >worldSize)
-			{
-				moveY = fmin(moveY, 0);
-			}
+		sf::Vector2f move = m_cells[i].move(m_target);
 
 			Cell copieCell = m_cells[i];
 			copieCell.setSize(copieCell.getSize());
 			for (int j = 0; j < m_cells.size(); ++j)
 			{
 				if (j != i) { 
-					copieCell.setCenter(sf::Vector2f(m_cells[i].getCenter().x + moveX, m_cells[i].getCenter().y));
-					if (copieCell.checkCollision(m_cells[j]))
+					copieCell.setCenter(sf::Vector2f(m_cells[i].getCenter().x + move.x, m_cells[i].getCenter().y));
+					if (copieCell.checkCollisionMyCells(m_cells[j]))
 					{
-						moveX = 0;
+						if (move.x > m_cells[j].move(m_target).x)
+						{
+							move.x = m_cells[j].move(m_target).x;
+						}
 					}
 				
-					copieCell.setCenter(sf::Vector2f(m_cells[i].getCenter().x, m_cells[i].getCenter().y + moveY));
-					if (copieCell.checkCollision(m_cells[j]))
+					copieCell.setCenter(sf::Vector2f(m_cells[i].getCenter().x, m_cells[i].getCenter().y + move.y));
+					if (copieCell.checkCollisionMyCells(m_cells[j]))
 					{
-						moveY = 0;
+						if (move.y > m_cells[j].move(m_target).y)
+						{
+							move.y = m_cells[j].move(m_target).y;
+						}
 					}
 				}
 			}
 			
-			m_cells[i].setCenter(sf::Vector2f(m_cells[i].getCenter().x + moveX, m_cells[i].getCenter().y + moveY));
+			m_cells[i].setCenter(sf::Vector2f(m_cells[i].getCenter().x + move.x, m_cells[i].getCenter().y + move.y));
 		}
-	}
 }
+
 
 void Player::split()
 {
@@ -231,4 +240,12 @@ std::string Player::getName()
 void Player::setName(std::string name)
 {
 	m_name = name;
+}
+
+void Player::setMoved(bool b)
+{
+	for (int i = 0; i < m_cells.size(); ++i)
+	{
+		m_cells[i].setMoved(b);
+	}
 }

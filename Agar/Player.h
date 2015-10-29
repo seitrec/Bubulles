@@ -24,6 +24,7 @@ public:
 	void checkCollision(std::vector<Food> *ptrlFood);
 	std::string getName();
 	void setName(std::string name);
+	void setMoved(bool b);
 
 
 private:
