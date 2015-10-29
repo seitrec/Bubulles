@@ -70,7 +70,7 @@ void Cell::drawScore(sf::RenderWindow & window, sf::Font & font)
 {
 	sf::Text text;
 	text.setFont(font); // font est un sf::Font
-	text.setCharacterSize(this->getSize() / 2); // exprimée en pixels, pas en points !
+	text.setCharacterSize(this->getSize() / 3); // exprimée en pixels, pas en points !
 	text.setColor(sf::Color::White);
 	text.setString(std::to_string(static_cast<int>(round(this->getSize()))));
 	sf::FloatRect textRect = text.getLocalBounds();

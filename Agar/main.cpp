@@ -23,7 +23,7 @@ int main()
 
 	// Cr�ation de la f�n�tre et de la vue et limitation du framerate
 	sf::RenderWindow window(sf::VideoMode(windowSize, windowSize), "AgarIO C++");
-	sf::View view(sf::Vector2f(300, 300), sf::Vector2f(windowSize, windowSize));
+	sf::View view(sf::Vector2f(300, 300), sf::Vector2f(windowSize*2, windowSize*2));
 	window.setVerticalSyncEnabled(true);
 	window.setFramerateLimit(30);
 	sf::RenderWindow *ptrWindow = &window;
@@ -200,6 +200,8 @@ int main()
 		}
 		//On centre sur le joueur 0
 		view.setCenter(lPlayer[0].getViewCenter());
+		float viewSize= 200 * log(fabs(lPlayer[0].getCellZone()[0] - lPlayer[0].getCellZone()[1]));
+		view.setSize(viewSize, viewSize);
 		window.display();
  		window.setView(view);
 	}
