@@ -33,6 +33,7 @@ Cell Cell::split(sf::Vector2f target)
 	this->setSize(this->getSize()/sqrt(2));
 	Cell child;
 	child.setSize(this->getSize());
+	child.setSpeed(m_size);
 	child.setColor(this->getColor());
 	child.setOutlineColor(this->getOutlineColor());
 	sf::Vector2f move = child.move(target);
@@ -46,7 +47,7 @@ void Cell::eat(Entity &entity)
 	this->setSize(m_size);
 	this->setSpeed(m_size);
 }
-
+//test
 void Cell::setSpeed(float size)
 {
 	m_speed = 200 / size;
