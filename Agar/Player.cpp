@@ -53,22 +53,14 @@ void Player::move()
 			for (int j = 0; j < m_cells.size(); ++j)
 			{
 				if (j != i) { 
-					copieCell.setCenter(sf::Vector2f(m_cells[i].getCenter().x + move.x, m_cells[i].getCenter().y));
+					copieCell.setCenter(sf::Vector2f(m_cells[i].getCenter().x + move.x, m_cells[i].getCenter().y + move.y));
 					if (copieCell.checkCollisionMyCells(m_cells[j]))
 					{
-						if (move.x > m_cells[j].move(m_target).x)
-						{
-							move.x = m_cells[j].move(m_target).x;
-						}
-					}
-				
-					copieCell.setCenter(sf::Vector2f(m_cells[i].getCenter().x, m_cells[i].getCenter().y + move.y));
-					if (copieCell.checkCollisionMyCells(m_cells[j]))
-					{
-						if (move.y > m_cells[j].move(m_target).y)
-						{
-							move.y = m_cells[j].move(m_target).y;
-						}
+						//if (move.x > m_cells[j].move(m_target).x)
+						//{
+							move.x = 0;
+							move.y = 0;
+						//}
 					}
 				}
 			}
@@ -80,23 +72,23 @@ void Player::move()
 
 void Player::split()
 {
-	/*float min_size = m_cells[0].getSize();
-	int i=0;
-	while (i < m_cells.size() && min_size < 10)
-	{
-		if (m_cells[i].getSize() < min_size)
-		{
-			min_size = m_cells[i].getSize();
-			++i;
-		}
-	}*/
 	int nb_cells = m_cells.size();
 	//if (min_size > 10)
 	for (int j = 0; j < nb_cells; ++j)
 	{
-		if (m_cells[j].getSize() > 10)
+		if (m_cells[j].getSize() > 10 && m_cells.size()<17)
 		{
-			this->addCell(m_cells[j].split(m_target));
+			this->addCell(m_cells[j].split(m_target)); //TODO supprimer target du split
+			bool collision = m_cells[nb_cells].checkCollisionMyCells(m_cells[j]);
+			while(collision)
+			{
+				
+				sf::Vector2f move = (m_cells[nb_cells].move(m_target));
+				float norme = sqrt(move.x*move.x + move.y*move.y);
+				move = (m_cells[j].getSize()*2/norme)*move;
+				m_cells[nb_cells].setCenter(sf::Vector2f(m_cells[nb_cells].getCenter().x + move.x, m_cells[nb_cells].getCenter().y + move.y));
+				collision = m_cells[nb_cells].checkCollisionMyCells(m_cells[j]);
+			}
 		}
 	}
 

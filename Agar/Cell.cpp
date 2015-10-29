@@ -36,16 +36,8 @@ Cell Cell::split(sf::Vector2f target)
 	child.setSize(this->getSize());
 	child.setColor(this->getColor());
 	child.setOutlineColor(this->getOutlineColor());
-	float relativeCenterMouseX;
-	relativeCenterMouseX = target.x - (this->getCenter().x + m_size);
-	float relativeCenterMouseY;
-	relativeCenterMouseY = target.y - (this->getCenter().y + m_size);
-	if (fabs(relativeCenterMouseX) > 3 || fabs(relativeCenterMouseY) > 3)
-	{
-		float c = sqrt(((m_speed + 3 * m_size) * (m_speed + 3 * m_size)) / (relativeCenterMouseX * relativeCenterMouseX + relativeCenterMouseY * relativeCenterMouseY));
-		child.setCenter(sf::Vector2f (this->getCenter().x + c * relativeCenterMouseX, this->getCenter().y + c * relativeCenterMouseY));
-	}
-
+	sf::Vector2f move = child.move(target);
+	child.setCenter(sf::Vector2f(this->getCenter().x + move.x, this->getCenter().y + move.y));
 	return child;
 }
 

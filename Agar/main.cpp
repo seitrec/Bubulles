@@ -9,6 +9,8 @@
 #include "Player.h"
 #include "main.h"
 
+
+
 using namespace std;
 
 std::string namePlayer = "Victor";
@@ -16,9 +18,10 @@ int worldSize = 2000;
 int windowSize = 750;
 int initialFood = 500; //Nourriture g�n�r�e avant le d�but du jeu
 int initialPlayers = 5;
-
+#define PORT = 800;
 int main()
 {
+
 	// Cr�ation de la f�n�tre et de la vue et limitation du framerate
 	sf::RenderWindow window(sf::VideoMode(windowSize, windowSize), "AgarIO C++");
 	sf::View view(sf::Vector2f(300, 300), sf::Vector2f(windowSize, windowSize));
@@ -194,6 +197,5 @@ int main()
 		window.display();
  		window.setView(view);
 	}
-
 	return 0;
 }

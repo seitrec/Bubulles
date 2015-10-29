@@ -98,8 +98,10 @@
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Food.h" />
     <ClInclude Include="Global.h" />
+    <ClInclude Include="client.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="sockets.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
