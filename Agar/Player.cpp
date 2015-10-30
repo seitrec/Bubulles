@@ -14,36 +14,6 @@ Player::~Player()
 
 void Player::move(int splitTime)
 {
-/*	int nbCells = m_cells.size();
-	int nbMoved = 0;
-
-	while (nbMoved != nbCells)
-	{
-		for (int i = 0; i < m_cells.size(); ++i)
-		{
-			if (!m_cells[i].getWasMoved())
-			{
-				//Cas à traiter quand move = 0
-				sf::Vector2f move = m_cells[i].move(m_target);
-				Cell copieCell = m_cells[i];
-				copieCell.setCenter(sf::Vector2f(m_cells[i].getCenter().x + std::copysignf(1,move.x), m_cells[i].getCenter().y));
-				for (int j = 0; j < m_cells.size(); ++j)
-				{
-					if (j != i)
-					{
-						if (copieCell.checkCollisionMyCells(m_cells[j]))
-						{
-							//Il y a collision même en bougeant d'un pixel donc on ne peut rien faire.
-						}
-						else
-						{
-							//Il y a collision
-						}
-					}
-				}
-			}
-		}
-	}*/
 	for (int i = 0; i < m_cells.size(); ++i)
 	{
 		sf::Vector2f move = m_cells[i].move(m_target);
@@ -55,10 +25,7 @@ void Player::move(int splitTime)
 				if ((copieCell.checkCollisionMyCells(m_cells[j])) && !(canMerge(splitTime)))
 				{
 					sf::Vector2f new_target = sf::Vector2f(m_cells[i].getCenter().x - m_cells[j].getCenter().x, m_cells[i].getCenter().y - m_cells[j].getCenter().y);
-					//if (move.x > m_cells[j].move(m_target).x)
-					//{
 					move = m_cells[i].move(m_cells[i].getCenter() + new_target);
-					//}
 			}
 		}
 			
@@ -74,7 +41,6 @@ bool Player::canMerge(int splitTime)
 void Player::split(int splitTime)
 {
 	int nb_cells = m_cells.size();
-	//if (min_size > 10)
 	for (int j = 0; j < nb_cells; ++j)
 	{
 		if (m_cells[j].getSize() > 40 && m_cells.size()<16)
@@ -167,13 +133,15 @@ void Player::setIATarget(sf::Vector2f mouseCoordonates, std::vector<Food> &lFood
 	{
 		setTarget(mouseCoordonates);
 	}
-	else
+	else if (strategy.at("target").at("closest") == true)
 	{
-		if (strategy.at("target").at("closest") == true)
-		{
-			setCellZone();
-			setTarget(getClosestLocation(lFood));
-		}
+		setCellZone();
+		setTarget(getClosestLocation(lFood));
+	}
+	else if (strategy.at("target").at("human") == true)
+	{
+		setCellZone();
+		setTarget(mouseCoordonates);
 	}
 }
 
@@ -322,12 +290,12 @@ void Player::setScore()
 
 }
 
-void Player::setStrategy(bool isIA)
+void Player::setStrategy(std::string type)
 {
-	if (isIA) {
+	if (type=="Coco") {
 		strategy = { {"split", { { "spread", true }, { "aggro", true }, { "human", false } } }, { "target", { { "closest", true }, { "human", false } } } };
 	}
-	else { 
+	if (type=="Human") { 
 		strategy = { { "split",{ { "spread", false },{ "aggro", false }, { "human", true } } },{ "target",{ { "closest", false },{ "human", true } } } };
 	}
 }
