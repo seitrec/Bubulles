@@ -1,6 +1,6 @@
 #include "Cell.h"
 #include "Global.h"
-#include "Food.h"
+//#include "Food.h"
 #include "Player.h"
 #include <SFML/Graphics.hpp>
 #include <math.h>
