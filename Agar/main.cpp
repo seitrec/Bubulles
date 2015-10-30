@@ -16,7 +16,7 @@ std::string namePlayer = "Player";
 int worldSize = 2000; 
 int windowSize = 750;
 int initialFood = 1000; //Nourriture g�n�r�e avant le d�but du jeu
-int foodbySecond = 10;
+int foodbySecond = 50;
 int initialPlayers = 10;
 int maxFood = 20000;
 
@@ -77,7 +77,7 @@ int main()
 		if (i != 0) { lPlayer[i].getCells()[0].setSize(10); } // On en démarre pas à la même taille pour qu'on est un avantage sur les bots...
 	}
 
-
+	int entityGenerated = 0;
 	// on fait tourner le programme tant que la fen?tre n'a pas ?t? ferm?e
 	while (window.isOpen())
 	{
@@ -118,7 +118,6 @@ int main()
 		window.clear(sf::Color::White);
 		window.draw(sprite);
 		//TO DO D�placer �a dans une fonction � part ?
-		int entityGenerated = 0;
 		if (static_cast<int>(clock.getElapsedTime().asSeconds()) % 2 == 1)
 		{
 			entityGenerated = 0;
