@@ -10,7 +10,6 @@ Cell::Cell(int size):Entity(size), wasMoved(0)
 	int r = rand() % 256;
 	int v = rand() % 256;
 	int b = rand() % 256;
-	//SetSize avant SetCenter sinon impossible de d�finir le centre....
 	setSpeed(m_size);
 	setCenter(sf::Vector2f(rand() % WORLD_SIZE, rand() % WORLD_SIZE));
     setColor(sf::Color(r,v,b));

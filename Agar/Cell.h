@@ -3,7 +3,6 @@
 #include "Food.h"
 #include "Entity.h"
 #include <SFML/Graphics.hpp>
-#include "main.h"
 
 
 class Cell :

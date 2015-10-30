@@ -65,8 +65,7 @@ int main()
         lPlayer[i].setName("bot " + std::to_string(i));
     }
 
-	//Cr�ation d'une cellule pour chaque Player
-	//PLUS BESOIN. Géré par le constructeur.
+	//Cr�ation d'une cellule pour chaque Player....->PLUS BESOIN. Géré par le constructeur.
    
 
 	int entityGenerated = 0;
@@ -204,7 +203,9 @@ int main()
 		//TO DO iterator ?
 		for (int u(0); u < lFood.size(); ++u)
 		{
-			lFood[u].draw(ptrWindow);
+            ptrWindow->draw(lFood[u]);
+            //lFood[u].draw(ptrWindow);
+            //différence entre les deux ?
 		}
 		//On centre sur le joueur 0
 		view.setCenter(lPlayer[0].getViewCenter());
