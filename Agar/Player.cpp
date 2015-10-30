@@ -79,18 +79,15 @@ void Player::split(int splitTime)
 	{
 		if (m_cells[j].getSize() > 40 && m_cells.size()<16)
 		{
-			this->addCell(m_cells[j].split(m_target)); //TODO supprimer target du split
+			int new_cell_id = m_cells.size();
 			merge_available = splitTime + 10;
-			bool collision = m_cells[nb_cells].checkCollisionMyCells(m_cells[j]);
-			while(collision)
-			{
-				
-				sf::Vector2f move = (m_cells[nb_cells].move(m_target));
-				float norme = sqrt(move.x*move.x + move.y*move.y);
-				move = (m_cells[j].getSize()*2/norme)*move;
-				m_cells[nb_cells].setCenter(sf::Vector2f(m_cells[nb_cells].getCenter().x + move.x, m_cells[nb_cells].getCenter().y + move.y));
-				collision = m_cells[nb_cells].checkCollisionMyCells(m_cells[j]);
-			}
+			this->addCell(m_cells[j].split(m_target)); //TODO supprimer target du split
+
+
+			sf::Vector2f move = (m_cells[new_cell_id].move(m_target));
+			float norme = sqrt(move.x*move.x + move.y*move.y);
+			move = (m_cells[j].getSize()*2/norme)*move;
+			m_cells[new_cell_id].setCenter(sf::Vector2f(m_cells[new_cell_id].getCenter().x + move.x, m_cells[new_cell_id].getCenter().y + move.y));
 		}
 	}
 
