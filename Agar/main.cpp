@@ -16,8 +16,8 @@ std::string namePlayer = "Player";
 int worldSize = 2000; 
 int windowSize = 750;
 int initialFood = 1000; //Nourriture g�n�r�e avant le d�but du jeu
-int foodbySecond = 50;
-int initialPlayers = 10;
+int foodbySecond = 100;
+int initialPlayers = 5;
 int maxFood = 20000;
 
 int main()
