@@ -3,8 +3,10 @@
 #include <iostream>
 #include <math.h>
 
-Player::Player()
+Player::Player(Cell firstcell , bool isIA):m_score(0), merge_available(0)
 {
+    setStrategy(isIA);
+    addCell(firstcell);
 }
 
 
@@ -123,22 +125,22 @@ sf::Vector2f Player::getViewCenter()
 	sf::Vector2f centreCells = sf::Vector2f(((m_cells_zone[0] + m_cells_zone[1]) / 2), ((m_cells_zone[2] + m_cells_zone[3]) / 2));
 	sf::Vector2f centreView = centreCells;
 
-	if (centreCells.x < windowSize / 2)
+	if (centreCells.x < WINDOW_SIZE / 2)
 	{
-		centreView.x = windowSize / 2;
+		centreView.x = WINDOW_SIZE / 2;
 	}
-	else if (centreCells.x > worldSize - windowSize / 2)
+	else if (centreCells.x > WORLD_SIZE - WINDOW_SIZE / 2)
 	{
-		centreView.x = worldSize - windowSize / 2;
+		centreView.x = WORLD_SIZE - WINDOW_SIZE / 2;
 	}
 
-	if (centreCells.y < windowSize / 2)
+	if (centreCells.y < WINDOW_SIZE / 2)
 	{
-		centreView.y = windowSize / 2;
+		centreView.y = WINDOW_SIZE / 2;
 	}
-	else if (centreCells.y > worldSize - windowSize / 2)
+	else if (centreCells.y > WORLD_SIZE - WINDOW_SIZE / 2)
 	{
-		centreView.y = worldSize - windowSize / 2;
+		centreView.y = WORLD_SIZE - WINDOW_SIZE / 2;
 	}
 
 	return centreView;
@@ -179,7 +181,7 @@ void Player::setIATarget(sf::Vector2f mouseCoordonates, std::vector<Food> &lFood
 
 std::tuple<Cell, int> Player::getClosestCell(std::vector<Player> &lPlayer)
 {
-	float minDistance = worldSize;
+	float minDistance = WORLD_SIZE;
 	float distance;
 	Cell closestCell;
 	for (int i = 0; i < lPlayer.size(); ++i) {
@@ -201,7 +203,7 @@ std::tuple<Cell, int> Player::getClosestCell(std::vector<Player> &lPlayer)
 
 sf::Vector2f Player::getClosestLocation(std::vector<Food> &lFood)
 {
-	float minDistance = worldSize;
+	float minDistance = WORLD_SIZE;
 	float distance;
 	sf::Vector2f location = sf::Vector2f(0, 0);
 	for (int i = 0; i < lFood.size(); ++i)
@@ -224,9 +226,9 @@ void Player::setCellZone()
 	//xmax,xmin,ymax,ymin
 	m_cells_zone.clear();
 	m_cells_zone.push_back(0);
-	m_cells_zone.push_back(worldSize);
+	m_cells_zone.push_back(WORLD_SIZE);
 	m_cells_zone.push_back(0);
-	m_cells_zone.push_back(worldSize);
+	m_cells_zone.push_back(WORLD_SIZE);
 
 	for (int i = 0; i < m_cells.size(); ++i)
 	{
@@ -250,9 +252,9 @@ void Player::setCellZone()
 	if (m_cells.size() == 0)
 	{
 		m_cells_zone[0] = 0;
-		m_cells_zone[1] = worldSize;
+		m_cells_zone[1] = WORLD_SIZE;
 		m_cells_zone[2] = 0;
-		m_cells_zone[3] = worldSize;
+		m_cells_zone[3] = WORLD_SIZE;
 	}
 }
 

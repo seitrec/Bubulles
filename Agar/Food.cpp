@@ -5,14 +5,20 @@
 using namespace std;
 
 
-Food::Food()
+Food::Food(int size):Entity(size),m_buff("Normal")
 {
-	setSize(5);
-	setCenter(sf::Vector2f((rand() % worldSize + 1), (rand() % worldSize + 1)));
-	setColor(sf::Color(rand() % 256, rand() % 256, rand() % 256));
-
+	setCenter(sf::Vector2f((rand() % WORLD_SIZE + 1), (rand() % WORLD_SIZE + 1)));
+    setColor(sf::Color(rand() % 256, rand() % 256, rand() % 256));
+    randomizeBuff();
+    if (m_buff=="Virus") {setColor(sf::Color::Green);}
 }
 
 Food::~Food()
 {
+}
+
+//A implementer
+void Food:: randomizeBuff()
+{
+    
 }

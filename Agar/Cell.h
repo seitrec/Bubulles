@@ -3,13 +3,15 @@
 #include "Food.h"
 #include "Entity.h"
 #include <SFML/Graphics.hpp>
+#include "main.h"
+
 
 class Cell :
 	public Entity
 	
 {
 public:
-	Cell();
+	Cell(int size=10);
 	~Cell();
 	void setSpeed(float size);
 	void drawName(sf::RenderWindow &window, sf::Font &font, std::string name);

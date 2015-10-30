@@ -6,7 +6,7 @@
 class Player
 {
 public:
-	Player();
+	Player(Cell firstcell=Cell(10), bool isIA=1);
 	~Player();
 	void move(int);
 	void split(int);
@@ -39,9 +39,10 @@ private:
 	std::string m_name;
 	std::vector<Cell> m_cells;
 	sf::Vector2f m_target;
-	std::vector<float> m_cells_zone;
+	std::vector<float> m_cells_zone; //pourquoi un vecteur ? une zone c'est juste une liste à deux éléments non? un vecteur ça peut croitre en taille
 	int m_score;
 	std::map<std::string, std::map<std::string, bool>> strategy;
 	int merge_available;
+    bool isIA;
 };
 

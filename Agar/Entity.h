@@ -1,11 +1,12 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include "main.h"
 
 class Entity :
 	public sf::CircleShape
 {
 public:
-	Entity();
+    Entity (int size);
 	~Entity();
 	sf::Vector2f getCenter();
 	void setCenter(sf::Vector2f position);
