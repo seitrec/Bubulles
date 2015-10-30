@@ -30,7 +30,7 @@ public:
 	void setName(std::string name);
 	void setMoved(bool b);
 	void setScore();
-	void setStrategy(std::string type);
+	void setStrategy(bool isIA);
 	int getScore();
 	bool canMerge(int);
 

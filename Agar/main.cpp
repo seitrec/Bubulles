@@ -68,11 +68,11 @@ int main()
 		if (i!=0)
 		{
 			lPlayer[i].setName("bot " + std::to_string(i));
-			lPlayer[i].setStrategy("Human");
+			lPlayer[i].setStrategy(true);
 		}
 		else { 
 			lPlayer[i].setName(namePlayer);
-			lPlayer[i].setStrategy("Human");
+			lPlayer[i].setStrategy(false);
 		}
 	}	
 
@@ -143,6 +143,12 @@ int main()
 		for (int i = 0; i < lPlayer.size(); ++i)
 		{
 			lPlayer[i].splitIA(lFood, lPlayer, static_cast<int>(clock.getElapsedTime().asSeconds()));
+		}
+		
+
+		//On d�finit les target des players en fonction de leur strategy
+		for (int i=0; i < lPlayer.size(); ++i)
+		{
 			lPlayer[i].setIATarget(mouseCoordonates, lFood, lPlayer);
 		}
 
