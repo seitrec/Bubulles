@@ -144,6 +144,61 @@ sf::Vector2f Player::getViewCenter()
 	return centreView;
 }
 
+void Player::splitIA(std::vector<Food> &lFood, std::vector<Player> &lPlayer, int splitTime)
+{
+	if (!strategy.at("split").at("human")) {
+		if (strategy.at("split").at("aggro") && (m_cells.size() == 1) ) {
+			for (int i = 0; i < lPlayer.size(); ++i) {
+				Cell closestCell;
+				int distance;
+				std::tie(closestCell , distance) = getClosestCell(lPlayer);
+				if (distance <= 1.8 * m_cells[0].getSize() && m_cells[0].getSize() / sqrt(2) > 1.05* closestCell.getSize()) {
+					setTarget(closestCell.getCenter());
+					split(splitTime);
+				}
+			}
+		}
+	}
+}
+
+void Player::setIATarget(sf::Vector2f mouseCoordonates, std::vector<Food> &lFood, std::vector<Player> &lPlayer)
+{	
+	if (strategy.at("target").at("human") == true)
+	{
+		setTarget(mouseCoordonates);
+	}
+	else
+	{
+		if (strategy.at("target").at("closest") == true)
+		{
+			setCellZone();
+			setTarget(getClosestLocation(lFood));
+		}
+	}
+}
+
+std::tuple<Cell, int> Player::getClosestCell(std::vector<Player> &lPlayer)
+{
+	float minDistance = worldSize;
+	float distance;
+	Cell closestCell;
+	for (int i = 0; i < lPlayer.size(); ++i) {
+		for (int j = 0; j < lPlayer[i].m_cells.size(); ++j)
+		{
+			distance = sqrt(pow((m_cells[0].getCenter().x - lPlayer[i].m_cells[j].getCenter().x), 2) +
+				pow((m_cells[0].getCenter().y - lPlayer[i].m_cells[j].getCenter().y), 2));
+
+			//distance != 0 to avoid targetting self (it's bad and i feel bad)
+			if (distance < minDistance && distance != 0)
+			{
+				minDistance = distance;
+				closestCell = lPlayer[i].m_cells[j];
+			}
+		}
+	}
+	return std::make_tuple(closestCell, minDistance);
+}
+
 sf::Vector2f Player::getClosestLocation(std::vector<Food> &lFood)
 {
 	float minDistance = worldSize;
@@ -195,9 +250,9 @@ void Player::setCellZone()
 	if (m_cells.size() == 0)
 	{
 		m_cells_zone[0] = 0;
-			m_cells_zone[1] = worldSize;
-			m_cells_zone[2] = 0;
-			m_cells_zone[3] = worldSize;
+		m_cells_zone[1] = worldSize;
+		m_cells_zone[2] = 0;
+		m_cells_zone[3] = worldSize;
 	}
 }
 
@@ -266,6 +321,17 @@ void Player::setScore()
 	m_score = roundf(score);
 
 }
+
+void Player::setStrategy(bool isIA)
+{
+	if (isIA) {
+		strategy = { {"split", { { "spread", true }, { "aggro", true }, { "human", false } } }, { "target", { { "closest", true }, { "human", false } } } };
+	}
+	else { 
+		strategy = { { "split",{ { "spread", false },{ "aggro", false }, { "human", true } } },{ "target",{ { "closest", false },{ "human", true } } } };
+	}
+}
+
 
 int Player::getScore()
 {
