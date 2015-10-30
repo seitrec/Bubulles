@@ -138,7 +138,7 @@ void Player::setIATarget(sf::Vector2f mouseCoordonates, std::vector<Food> &lFood
 		setCellZone();
 		setTarget(getClosestLocation(lFood));
 	}
-	else if (strategy.at("target").at("human") == true)
+	else if (strategy.at("target").at("victor") == true)
 	{
 		setCellZone();
 		setTarget(mouseCoordonates);
@@ -295,8 +295,11 @@ void Player::setStrategy(std::string type)
 	if (type=="Coco") {
 		strategy = { {"split", { { "spread", true }, { "aggro", true }, { "human", false } } }, { "target", { { "closest", true }, { "human", false } } } };
 	}
-	if (type=="Human") { 
-		strategy = { { "split",{ { "spread", false },{ "aggro", false }, { "human", true } } },{ "target",{ { "closest", false },{ "human", true } } } };
+	if (type == "Human") {
+		strategy = { { "split",{ { "spread", false },{ "aggro", false },{ "human", true } } },{ "target",{ { "closest", false },{ "human", true } } } };
+	}
+	if (type == "Victor") {
+		strategy = { { "split",{ { "victor", true }} },{ "target",{ { "victor", true } } } };
 	}
 }
 
