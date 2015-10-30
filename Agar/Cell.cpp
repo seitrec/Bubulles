@@ -42,12 +42,16 @@ Cell Cell::split(sf::Vector2f target)
 	return child;
 }
 
-void Cell::eat(Entity &entity) 
+void Cell::getEaten(Entity &predator)
+{
+    predator.setSize(sqrt(pow(m_size, 2) + pow(predator.getSize(),2)));
+}
+/*void Cell::eat(Entity &entity)
 {
 	m_size = sqrt(pow(m_size, 2) + pow(entity.getSize(),2));
 	this->setSize(m_size);
 	this->setSpeed(m_size);
-}
+}*/
 
 void Cell::setSpeed(float size)
 {

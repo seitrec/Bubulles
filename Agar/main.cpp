@@ -171,9 +171,10 @@ int main()
 					{
 						if (lPlayer[i].getCells()[j].getSize()>1.1*lFood[u].getSize())
 						{
-							lPlayer[i].getCells()[j].eat(lFood[u]);
+                            lFood[u].getEaten(lPlayer[i].getCells()[j]);
 							lFood.erase(lFood.begin() + u);
 							--u;
+
 			}}}}
 			if (lPlayer[i].canMerge(static_cast<int>(clock.getElapsedTime().asSeconds())))
 			{
@@ -183,7 +184,7 @@ int main()
 					{
 						if (j != k && lPlayer[i].getCells()[j].checkCollision(lPlayer[i].getCells()[k]) && lPlayer[i].getCells()[j].getSize()>1.001*lPlayer[i].getCells()[k].getSize())
 						{
-							lPlayer[i].getCells()[j].eat(lPlayer[i].getCells()[k]);
+							lPlayer[i].getCells()[k].getEaten(lPlayer[i].getCells()[j]);
 							lPlayer[i].delCell(k);
 							if (j > k) { --j; }
 							--k;
@@ -201,13 +202,14 @@ int main()
 						{
 							if (lPlayer[i].getCells()[j].checkCollision(lPlayer[u].getCells()[k]) && lPlayer[i].getCells()[j].getSize()>1.05*lPlayer[u].getCells()[k].getSize())
 							{
-								lPlayer[i].getCells()[j].eat(lPlayer[u].getCells()[k]);
-								lPlayer[u].delCell(k);
+                                lPlayer[u].getCells()[k].getEaten(lPlayer[i].getCells()[j]);
+                                lPlayer[u].delCell(k);
 								--k;
 							}
 						}
 					}
 				}
+
 			}
 			lPlayer[i].drawCells(ptrWindow);
 			lPlayer[i].drawCellsScore(window, font);

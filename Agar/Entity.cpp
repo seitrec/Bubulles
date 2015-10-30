@@ -17,6 +17,10 @@ Entity::Entity()
 Entity::~Entity()
 {
 }
+void Entity::getEaten(Entity& predator)
+{
+    
+}
 
 
 sf::Vector2f Entity::getCenter()

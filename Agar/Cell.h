@@ -23,6 +23,7 @@ public:
 	bool checkCollision(Food &food);
 	void setMoved(bool b);
 	bool getWasMoved();
+    virtual void getEaten(Entity &predator);
 //	void actionCollision(Entity& entity,Player& player, std::vector<Food>& lFood, std::vector<Player>& lPlayer);
 private:
 	bool wasMoved;

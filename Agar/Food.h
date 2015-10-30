@@ -7,6 +7,8 @@ class Food :
 public:
 	Food();
 	~Food();
-
+    virtual void getEaten(Entity& predator);
+private:
+    std::string m_buff;
 };
 

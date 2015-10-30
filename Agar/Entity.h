@@ -15,7 +15,7 @@ public:
 	sf::Color getColor();
 	void setColor(sf::Color);
 	void draw(sf::RenderWindow * ptrWindow);
-	void getEaten(Entity* entity);
+	virtual void getEaten(Entity& predator);
 
 protected:
 	sf::Vector2f m_position;
