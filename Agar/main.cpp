@@ -67,8 +67,8 @@ int main()
 		lPlayer.push_back(Player());
 		if (i!=0)
 		{
-			lPlayer[i].setName("Coco " + std::to_string(i));
-			lPlayer[i].setStrategy("Coco");
+			lPlayer[i].setName("bot " + std::to_string(i));
+			lPlayer[i].setStrategy("Human");
 		}
 		else { 
 			lPlayer[i].setName(namePlayer);
