@@ -132,10 +132,6 @@ int main()
 
 		}
 		//TO DO passer en iterator ?
-		for (int i(0); i < lFood.size(); ++i)
-		{
-			window.draw(lFood[i]);
-		}
 
 		//On d�finit les target des players (par d�faut le 0 suit la souris)
 		lPlayer[0].setTarget(mouseCoordonates);

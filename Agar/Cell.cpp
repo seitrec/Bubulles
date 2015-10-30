@@ -47,7 +47,7 @@ void Cell::eat(Entity &entity)
 	this->setSize(m_size);
 	this->setSpeed(m_size);
 }
-//test
+
 void Cell::setSpeed(float size)
 {
 	m_speed = 200 / size;
