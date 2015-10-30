@@ -16,8 +16,8 @@ std::string namePlayer = "Player";
 int worldSize = 2000; 
 int windowSize = 750;
 int initialFood = 1000; //Nourriture g�n�r�e avant le d�but du jeu
-int foodbySecond = 100;
-int initialPlayers = 5;
+int foodbySecond = 50;
+int initialPlayers = 20;
 int maxFood = 20000;
 
 int main()
@@ -65,9 +65,16 @@ int main()
 	for (int i(0); i < initialPlayers; ++i)
 	{
 		lPlayer.push_back(Player());
-		if (i!=0){ lPlayer[i].setName("bot " + std::to_string(i)); }
-		else { lPlayer[i].setName(namePlayer); }
-	}
+		if (i!=0)
+		{
+			lPlayer[i].setName("bot " + std::to_string(i));
+			lPlayer[i].setStrategy(true);
+		}
+		else { 
+			lPlayer[i].setName(namePlayer);
+			lPlayer[i].setStrategy(false);
+		}
+	}	
 
 	//Cr�ation d'une cellule pour chaque Player
 	//TO DO comprendre les iterator et changer for (vector<Player>::iterator i = lPlayer.begin(); i != lPlayer.end(); ++i)
@@ -101,7 +108,7 @@ int main()
 				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 				{
 					int splitTime = static_cast<int>(clock.getElapsedTime().asSeconds());
-						lPlayer[0].split(splitTime);
+					lPlayer[0].split(splitTime);
 				}
 				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
 				{
@@ -131,16 +138,18 @@ int main()
 			entityGenerated = 1;
 
 		}
-		//TO DO passer en iterator ?
 
-		//On d�finit les target des players (par d�faut le 0 suit la souris)
-		lPlayer[0].setTarget(mouseCoordonates);
-		// Les autres se d�place vers la plus proche nourriture
-		for (int i=1; i < lPlayer.size(); ++i)
+		//Les bots split s'ils le souhaitent
+		for (int i = 0; i < lPlayer.size(); ++i)
 		{
-			lPlayer[i].setCellZone();
-			lPlayer[i].setTarget(lPlayer[i].getClosestLocation(lFood));
+			lPlayer[i].splitIA(lFood, lPlayer, static_cast<int>(clock.getElapsedTime().asSeconds()));
+		}
+		
 
+		//On d�finit les target des players en fonction de leur strategy
+		for (int i=0; i < lPlayer.size(); ++i)
+		{
+			lPlayer[i].setIATarget(mouseCoordonates, lFood, lPlayer);
 		}
 
 
@@ -168,13 +177,13 @@ int main()
 			}}}}
 			for (int u = 0; u < lPlayer.size(); ++u)
 			{
-				if (lPlayer[0].canMerge(static_cast<int>(clock.getElapsedTime().asSeconds())))
+				if (lPlayer[i].canMerge(static_cast<int>(clock.getElapsedTime().asSeconds())) && u == i)
 				{
 					for (int j = 0; j < lPlayer[i].getCells().size(); ++j)
 					{
 						for (int k = 0; k < lPlayer[u].getCells().size(); ++k)
 						{
-							if (lPlayer[i].getCells()[j].checkCollision(lPlayer[u].getCells()[k]) && lPlayer[i].getCells()[j].getSize()>1.05*lPlayer[u].getCells()[k].getSize())
+							if (lPlayer[i].getCells()[j].checkCollision(lPlayer[u].getCells()[k]) && lPlayer[i].getCells()[j].getSize()>1.001*lPlayer[u].getCells()[k].getSize())
 							{
 								lPlayer[i].getCells()[j].eat(lPlayer[u].getCells()[k]);
 								lPlayer[u].delCell(k);
