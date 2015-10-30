@@ -14,7 +14,7 @@ public:
 	sf::Vector2f move(sf::Vector2f target);
 	sf::Color getColor();
 	void setColor(sf::Color);
-	void draw(sf::RenderWindow * ptrWindow);
+	void draw(sf::RenderWindow * ptrWindow); //fonction inutile non ?
 	void getEaten(Entity* entity);
 
 protected:
