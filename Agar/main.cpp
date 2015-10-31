@@ -17,7 +17,7 @@ int worldSize = 2000;
 int windowSize = 750;
 int initialFood = 1000; //Nourriture g�n�r�e avant le d�but du jeu
 int foodbySecond = 50;
-int initialPlayers = 20;
+int initialPlayers = 15;
 int maxFood = 20000;
 
 int main()
