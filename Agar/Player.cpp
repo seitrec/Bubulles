@@ -158,6 +158,11 @@ void Player::splitIA(std::vector<Food> &lFood, std::vector<Player> &lPlayer, int
 				}
 			}
 		}
+		if (strategy.at("split").at("spread")) {
+			if (distance > 500) {
+				split(splitTime);
+			}
+		}
 	}
 }
 
