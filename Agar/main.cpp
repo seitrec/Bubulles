@@ -142,14 +142,14 @@ int main()
 		//Les bots split s'ils le souhaitent
 		for (int i = 0; i < lPlayer.size(); ++i)
 		{
-			lPlayer[i].splitIA(lFood, lPlayer, static_cast<int>(clock.getElapsedTime().asSeconds()));
+			lPlayer[i].splitIA(lFood, lPlayer, i, static_cast<int>(clock.getElapsedTime().asSeconds()));
 		}
 		
 
 		//On d�finit les target des players en fonction de leur strategy
 		for (int i=0; i < lPlayer.size(); ++i)
 		{
-			lPlayer[i].setIATarget(mouseCoordonates, lFood, lPlayer);
+			lPlayer[i].setIATarget(mouseCoordonates, lFood, lPlayer, i);
 		}
 
 

@@ -144,14 +144,15 @@ sf::Vector2f Player::getViewCenter()
 	return centreView;
 }
 
-void Player::splitIA(std::vector<Food> &lFood, std::vector<Player> &lPlayer, int splitTime)
+void Player::splitIA(std::vector<Food> &lFood, std::vector<Player> &lPlayer, int Player_id, int splitTime)
 {
 	if (!strategy.at("split").at("human")) {
+		Cell closestCell;
+		int distance;
+		std::tie(closestCell, distance) = getClosestCell(lPlayer, Player_id);
+
 		if (strategy.at("split").at("aggro") && (m_cells.size() == 1) ) {
 			for (int i = 0; i < lPlayer.size(); ++i) {
-				Cell closestCell;
-				int distance;
-				std::tie(closestCell , distance) = getClosestCell(lPlayer);
 				if (distance <= 1.8 * m_cells[0].getSize() && m_cells[0].getSize() / sqrt(2) > 1.05* closestCell.getSize()) {
 					setTarget(closestCell.getCenter());
 					split(splitTime);
@@ -166,7 +167,7 @@ void Player::splitIA(std::vector<Food> &lFood, std::vector<Player> &lPlayer, int
 	}
 }
 
-void Player::setIATarget(sf::Vector2f mouseCoordonates, std::vector<Food> &lFood, std::vector<Player> &lPlayer)
+void Player::setIATarget(sf::Vector2f mouseCoordonates, std::vector<Food> &lFood, std::vector<Player> &lPlayer, int Player_id)
 {	
 	if (strategy.at("target").at("human") == true)
 	{
@@ -191,22 +192,23 @@ void Player::setIATarget(sf::Vector2f mouseCoordonates, std::vector<Food> &lFood
 	}
 }
 
-std::tuple<Cell, int> Player::getClosestCell(std::vector<Player> &lPlayer)
+std::tuple<Cell, int> Player::getClosestCell(std::vector<Player> &lPlayer, int Player_id)
 {
 	float minDistance = worldSize;
 	float distance;
 	Cell closestCell;
 	for (int i = 0; i < lPlayer.size(); ++i) {
-		for (int j = 0; j < lPlayer[i].m_cells.size(); ++j)
-		{
-			distance = sqrt(pow((m_cells[0].getCenter().x - lPlayer[i].m_cells[j].getCenter().x), 2) +
-				pow((m_cells[0].getCenter().y - lPlayer[i].m_cells[j].getCenter().y), 2));
-
-			//distance != 0 to avoid targetting self (it's bad and i feel bad)
-			if (distance < minDistance && distance != 0)
+		if (i != Player_id) {
+			for (int j = 0; j < lPlayer[i].m_cells.size(); ++j)
 			{
-				minDistance = distance;
-				closestCell = lPlayer[i].m_cells[j];
+				distance = sqrt(pow((m_cells[0].getCenter().x - lPlayer[i].m_cells[j].getCenter().x), 2) +
+					pow((m_cells[0].getCenter().y - lPlayer[i].m_cells[j].getCenter().y), 2));
+
+				if (distance < minDistance)
+				{
+					minDistance = distance;
+					closestCell = lPlayer[i].m_cells[j];
+				}
 			}
 		}
 	}

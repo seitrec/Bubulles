@@ -16,9 +16,9 @@ public:
 	void delCell(int k);
 	void setTarget(sf::Vector2f target);
 	sf::Vector2f getViewCenter();
-	void splitIA(std::vector<Food> &lFood, std::vector<Player> &lPlayer, int splitTime);
-	void setIATarget(sf::Vector2f mouseCoordonates, std::vector<Food> &lFood, std::vector<Player> &lPlayer);
-	std::tuple<Cell, int> getClosestCell(std::vector<Player> &lPlayer);
+	void splitIA(std::vector<Food> &lFood, std::vector<Player> &lPlayer, int Player_id, int splitTime);
+	void setIATarget(sf::Vector2f mouseCoordonates, std::vector<Food> &lFood, std::vector<Player> &lPlayer, int Player_id);
+	std::tuple<Cell, int> getClosestCell(std::vector<Player> &lPlayer, int Player_id);
 	sf::Vector2f getClosestLocation(std::vector<Food> &lFood);
 	void setCellZone();
 	std::vector<float> &getCellZone();
