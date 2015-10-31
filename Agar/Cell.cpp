@@ -31,6 +31,7 @@ float Cell::getSpeed()
 Cell Cell::split(sf::Vector2f target)
 {
 	this->setSize(this->getSize()/sqrt(2));
+	this->setSpeed(this->m_size);
 	Cell child;
 	child.setSize(this->getSize());
 	child.setSpeed(m_size);
