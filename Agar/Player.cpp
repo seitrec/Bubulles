@@ -179,6 +179,15 @@ void Player::setIATarget(sf::Vector2f mouseCoordonates, std::vector<Food> &lFood
 			setCellZone();
 			setTarget(getClosestLocation(lFood));
 		}
+		if (strategy.at("target").at("flee") == true)
+		{
+			Cell closestCell;
+			int distance;
+			std::tie(closestCell, distance) = getClosestCell(lPlayer, Player_id);
+			if (distance < 1,5* closestCell.getSize() && closestCell.getSize() > getSmallestCellSize()) {
+				setTarget(getViewCenter() + getViewCenter() - closestCell.getCenter());
+			}
+		}
 	}
 }
 
@@ -330,11 +339,23 @@ void Player::setScore()
 void Player::setStrategy(bool isIA)
 {
 	if (isIA) {
-		strategy = { {"split", { { "spread", true }, { "aggro", true }, { "human", false } } }, { "target", { { "closest", true }, { "human", false } } } };
+		strategy = { {"split", { { "spread", true }, { "aggro", true }, { "human", false } } }, { "target", { { "closest", true }, { "flee", true }, { "human", false } } } };
 	}
 	else { 
-		strategy = { { "split",{ { "spread", false },{ "aggro", false }, { "human", true } } },{ "target",{ { "closest", false },{ "human", true } } } };
+		strategy = { { "split",{ { "spread", false },{ "aggro", false }, { "human", true } } },{ "target",{ { "closest", false },{ "flee", false }, { "human", true } } } };
 	}
+}
+
+float Player::getSmallestCellSize()
+{
+	float smallest = m_cells[0].getSize();
+	for (int i = 1; i < m_cells.size(); ++i)
+	{
+		if (m_cells[i].getSize() < smallest) {
+			smallest = m_cells[i].getSize();
+		}
+	}
+	return smallest;
 }
 
 

@@ -31,6 +31,7 @@ public:
 	void setMoved(bool b);
 	void setScore();
 	void setStrategy(bool isIA);
+	float getSmallestCellSize();
 	int getScore();
 	bool canMerge(int);
 
