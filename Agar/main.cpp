@@ -203,8 +203,8 @@ int main()
 		//TO DO iterator ?
 		for (int u(0); u < lFood.size(); ++u)
 		{
-            ptrWindow->draw(lFood[u]);
-            //lFood[u].draw(ptrWindow);
+            //ptrWindow->draw(lFood[u]);
+            lFood[u].draw(ptrWindow);
             //différence entre les deux ?
 		}
 		//On centre sur le joueur 0

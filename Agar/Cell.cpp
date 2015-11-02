@@ -14,7 +14,7 @@ Cell::Cell(int size):Entity(size), wasMoved(0)
 	setCenter(sf::Vector2f(rand() % WORLD_SIZE, rand() % WORLD_SIZE));
     setColor(sf::Color(r,v,b));
 	setOutlineColor(sf::Color(fmax(0, r - 40), fmax(0, v - 40), fmax(0, b - 40)));
-	setOutlineThickness(getSize()/8);
+	setOutlineThickness(size/8);
 }
 
 Cell::~Cell()

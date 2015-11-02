@@ -12,6 +12,7 @@ using namespace std;
 
 Entity::Entity(int size) :   m_size(size), m_speed(0), m_speedBonus(0), m_timeBonus(0)
 {
+    setSize(size);
 }
 
 Entity::~Entity()
