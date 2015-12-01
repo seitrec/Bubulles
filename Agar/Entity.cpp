@@ -49,6 +49,11 @@ void Entity::setSize(float size)
 	setOutlineThickness(fmin(m_size / 10,5));
 };
 
+void Entity::setSpeed(float size)
+{
+    m_speed = 200 / size;
+};
+
 sf::Vector2f Entity::move(sf::Vector2f target)
 {	//On pourrait globalement utiliser des vecteurs partout ici
 

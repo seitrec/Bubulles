@@ -12,7 +12,6 @@ class Cell :
 public:
 	Cell(int size=10);
 	~Cell();
-	void setSpeed(float size);
 	void drawName(sf::RenderWindow &window, sf::Font &font, std::string name);
 	void drawScore(sf::RenderWindow &window, sf::Font &font);
 	float getSpeed();

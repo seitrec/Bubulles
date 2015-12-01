@@ -20,6 +20,7 @@ Food::~Food()
 
 void Food::getEaten(Entity& predator)
 {
+    predator.setSpeed(predator.getSize());
     predator.setSize(sqrt(pow(m_size, 2) + pow(predator.getSize(),2)));
     //liste conditionnelle des autres buffs (dont virus) ici.
         //if (m_buff == <nomdebuff>) ...

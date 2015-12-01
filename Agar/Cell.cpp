@@ -43,6 +43,7 @@ Cell Cell::split(sf::Vector2f target)
 void Cell::getEaten(Entity &predator)
 {
     predator.setSize(sqrt(pow(m_size, 2) + pow(predator.getSize(),2)));
+    predator.setSpeed(predator.getSize());
 }
 /*void Cell::eat(Entity &entity)
 {
@@ -51,10 +52,7 @@ void Cell::getEaten(Entity &predator)
 	this->setSpeed(m_size);
 }*/
 
-void Cell::setSpeed(float size)
-{
-	m_speed = 200 / size;
-}
+
 
 void Cell::drawName(sf::RenderWindow & window, sf::Font & font, std::string name)
 {
