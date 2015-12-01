@@ -66,10 +66,8 @@
 		CAF693CB1BDE833B002873DB /* Agario Mac */ = {
 			isa = PBXGroup;
 			children = (
-				CAF693E11BDE8365002873DB /* Build */,
 				CAF693E61BDE8365002873DB /* Cell.cpp */,
 				CAF693E71BDE8365002873DB /* Cell.h */,
-				CAF693E81BDE8365002873DB /* Debug */,
 				CAF693E91BDE8365002873DB /* Entity.cpp */,
 				CAF693EA1BDE8365002873DB /* Entity.h */,
 				CAF693EB1BDE8365002873DB /* Food.cpp */,
@@ -101,22 +99,6 @@
 				CAF693D81BDE833C002873DB /* sansation.ttf */,
 			);
 			name = Resources;
-			sourceTree = "<group>";
-		};
-		CAF693E11BDE8365002873DB /* Build */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Build;
-			path = ../../Agar/Build;
-			sourceTree = "<group>";
-		};
-		CAF693E81BDE8365002873DB /* Debug */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Debug;
-			path = ../../Agar/Debug;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -347,6 +329,7 @@
 				CAF693E01BDE833C002873DB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

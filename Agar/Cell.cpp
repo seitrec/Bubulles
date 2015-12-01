@@ -1,22 +1,20 @@
 #include "Cell.h"
 #include "Global.h"
-#include "Food.h"
+//#include "Food.h"
 #include "Player.h"
 #include <SFML/Graphics.hpp>
 #include <math.h>
 
-Cell::Cell()
+Cell::Cell(int size):Entity(size), wasMoved(0)
 {
 	int r = rand() % 256;
 	int v = rand() % 256;
 	int b = rand() % 256;
-	//SetSize avant SetCenter sinon impossible de d�finir le centre....
-	setSize(30);
 	setSpeed(m_size);
-	setCenter(sf::Vector2f(rand() % worldSize, rand() % worldSize));
-	setColor(sf::Color(r,v,b));
+	setCenter(sf::Vector2f(rand() % WORLD_SIZE, rand() % WORLD_SIZE));
+    setColor(sf::Color(r,v,b));
 	setOutlineColor(sf::Color(fmax(0, r - 40), fmax(0, v - 40), fmax(0, b - 40)));
-	setOutlineThickness(getSize()/8);
+	setOutlineThickness(size/8);
 }
 
 Cell::~Cell()

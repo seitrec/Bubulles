@@ -11,22 +11,16 @@
 
 
 using namespace std;
+string namePlayer = "Player";
 
-std::string namePlayer = "Player";
-int worldSize = 2000; 
-int windowSize = 750;
-int initialFood = 1000; //Nourriture g�n�r�e avant le d�but du jeu
-int foodbySecond = 50;
-int initialPlayers = 15;
-int maxFood = 20000;
 
 int main()
 {
 	cout << "Quel est votre nom : " << endl;
 	cin >> namePlayer;
 	// Cr�ation de la f�n�tre et de la vue et limitation du framerate
-	sf::RenderWindow window(sf::VideoMode(windowSize, windowSize), "AgarIO C++");
-	sf::View view(sf::Vector2f(300, 300), sf::Vector2f(windowSize*2, windowSize*2));
+	sf::RenderWindow window(sf::VideoMode(WINDOW_SIZE, WINDOW_SIZE), "AgarIO C++");
+	sf::View view(sf::Vector2f(300, 300), sf::Vector2f(WINDOW_SIZE*2, WINDOW_SIZE*2));
 	window.setVerticalSyncEnabled(true);
 	window.setFramerateLimit(30);
 	sf::RenderWindow *ptrWindow = &window;
@@ -39,7 +33,7 @@ int main()
 	sf::Sprite sprite;
 	sprite.setTexture(texture);
 	sprite.setScale(sf::Vector2f(0.75, 0.75));
-	sprite.setTextureRect(sf::IntRect(00, 00, worldSize/0.75, worldSize / 0.75));
+	sprite.setTextureRect(sf::IntRect(00, 00, WORLD_SIZE/0.75, WORLD_SIZE / 0.75));
 	sprite.setColor(sf::Color(255, 255, 255, 15));
 
 	sf::Font font;
@@ -54,7 +48,7 @@ int main()
 	//G�n�ration de la nourriture initiale
 	vector<Food> lFood;
 	vector<Food> *ptrlFood = &lFood;
-	for (int i(0); i < initialFood; ++i)
+	for (int i(0); i < INITIAL_FOOD; ++i)
 	{
 		lFood.push_back(Food());
 	}
@@ -62,27 +56,17 @@ int main()
 	//Initialisation de la liste des joueurs (bots + real players) + Cr�ation player(s) initiaux
 	vector<Player> lPlayer;
 	vector<Player> *ptrlPlayer = &lPlayer;
-	for (int i(0); i < initialPlayers; ++i)
+    lPlayer.push_back(Player(Cell(20),0));
+    lPlayer[0].setName(namePlayer);
+    //bots ici
+	for (int i(1); i < INITIAL_PLAYERS; ++i)
 	{
 		lPlayer.push_back(Player());
-		if (i!=0)
-		{
-			lPlayer[i].setName("bot " + std::to_string(i));
-			lPlayer[i].setStrategy(true);
-		}
-		else { 
-			lPlayer[i].setName(namePlayer);
-			lPlayer[i].setStrategy(false);
-		}
-	}	
+        lPlayer[i].setName("bot " + std::to_string(i));
+    }
 
-	//Cr�ation d'une cellule pour chaque Player
-	//TO DO comprendre les iterator et changer for (vector<Player>::iterator i = lPlayer.begin(); i != lPlayer.end(); ++i)
-	for (int i(0); i < lPlayer.size(); ++i)
-	{
-		lPlayer[i].addCell(Cell());
-		if (i != 0) { lPlayer[i].getCells()[0].setSize(10); } // On en démarre pas à la même taille pour qu'on est un avantage sur les bots...
-	}
+	//Cr�ation d'une cellule pour chaque Player....->PLUS BESOIN. Géré par le constructeur.
+   
 
 	int entityGenerated = 0;
 	// on fait tourner le programme tant que la fen?tre n'a pas ?t? ferm?e
@@ -129,9 +113,9 @@ int main()
 		{
 			entityGenerated = 0;
 		}
-		if (static_cast<int>(clock.getElapsedTime().asSeconds()) % 2 == 0 && entityGenerated == 0 && lFood.size()<maxFood)
+		if (static_cast<int>(clock.getElapsedTime().asSeconds()) % 2 == 0 && entityGenerated == 0 && lFood.size()<MAX_FOOD)
 		{
-			for (int i = 0; i < foodbySecond;++i)
+			for (int i = 0; i < FOOD_BY_SECOND;++i)
 			{
 			lFood.push_back(Food());
 			}
@@ -169,7 +153,7 @@ int main()
 				{
 					if (lPlayer[i].getCells()[j].checkCollision(lFood[u]))
 					{
-						if (lPlayer[i].getCells()[j].getSize()>1.1*lFood[u].getSize())
+						if (lPlayer[i].getCells()[j].getSize()>EATING_RATIO*lFood[u].getSize())
 						{
                             lFood[u].getEaten(lPlayer[i].getCells()[j]);
 							lFood.erase(lFood.begin() + u);
@@ -220,7 +204,9 @@ int main()
 		//TO DO iterator ?
 		for (int u(0); u < lFood.size(); ++u)
 		{
-			lFood[u].draw(ptrWindow);
+            //ptrWindow->draw(lFood[u]);
+            lFood[u].draw(ptrWindow);
+            //différence entre les deux ?
 		}
 		//On centre sur le joueur 0
 		view.setCenter(lPlayer[0].getViewCenter());

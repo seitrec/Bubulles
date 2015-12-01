@@ -5,7 +5,7 @@ class Entity :
 	public sf::CircleShape
 {
 public:
-	Entity();
+    Entity (int size);
 	~Entity();
 	sf::Vector2f getCenter();
 	void setCenter(sf::Vector2f position);
@@ -16,7 +16,6 @@ public:
 	void setColor(sf::Color);
 	void draw(sf::RenderWindow * ptrWindow);
 	virtual void getEaten(Entity& predator);
-
 protected:
 	sf::Vector2f m_position;
 	float m_size;

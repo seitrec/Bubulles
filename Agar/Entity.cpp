@@ -6,12 +6,13 @@
 #include <SFML/Graphics.hpp>
 
 
+
 using namespace std;
 
 
-
-Entity::Entity()
+Entity::Entity(int size) :   m_size(size), m_speed(0), m_speedBonus(0), m_timeBonus(0)
 {
+    setSize(size);
 }
 
 Entity::~Entity()
@@ -64,7 +65,7 @@ sf::Vector2f Entity::move(sf::Vector2f target)
 		{
 			move.x = fmax(move.x, 0.0);
 		}
-		else if (m_position.x >worldSize)
+		else if (m_position.x >WORLD_SIZE)
 		{
 			move.x = fmin(move.x, 0);
 		}
@@ -72,7 +73,7 @@ sf::Vector2f Entity::move(sf::Vector2f target)
 		{
 			move.y = fmax(move.y, 0.0);
 		}
-		else if (m_position.y >worldSize)
+		else if (m_position.y >WORLD_SIZE)
 		{
 			move.y = fmin(move.y, 0);
 		}
