@@ -125,22 +125,22 @@ sf::Vector2f Player::getViewCenter()
 	sf::Vector2f centreCells = sf::Vector2f(((m_cells_zone[0] + m_cells_zone[1]) / 2), ((m_cells_zone[2] + m_cells_zone[3]) / 2));
 	sf::Vector2f centreView = centreCells;
 
-	if (centreCells.x < WINDOW_SIZE / 2)
+	if (centreCells.x < WINDOW_SIZE / 4)
 	{
-		centreView.x = WINDOW_SIZE / 2;
+		centreView.x = WINDOW_SIZE / 4;
 	}
-	else if (centreCells.x > WORLD_SIZE - WINDOW_SIZE / 2)
+	else if (centreCells.x > WORLD_SIZE - WINDOW_SIZE / 4)
 	{
-		centreView.x = WORLD_SIZE - WINDOW_SIZE / 2;
+		centreView.x = WORLD_SIZE - WINDOW_SIZE / 4;
 	}
 
-	if (centreCells.y < WINDOW_SIZE / 2)
+	if (centreCells.y < WINDOW_SIZE / 4)
 	{
-		centreView.y = WINDOW_SIZE / 2;
+		centreView.y = WINDOW_SIZE / 4;
 	}
-	else if (centreCells.y > WORLD_SIZE - WINDOW_SIZE / 2)
+	else if (centreCells.y > WORLD_SIZE - WINDOW_SIZE / 4)
 	{
-		centreView.y = WORLD_SIZE - WINDOW_SIZE / 2;
+		centreView.y = WORLD_SIZE - WINDOW_SIZE / 4;
 	}
 
 	return centreView;
