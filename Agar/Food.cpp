@@ -15,7 +15,7 @@ Food::Food(int size):Entity(size),m_buff("Normal")
 }
 
 Food::~Food()
-{	
+{
 }
 
 void Food::getEaten(Entity& predator)
