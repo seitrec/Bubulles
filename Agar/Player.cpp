@@ -15,37 +15,11 @@ Player::~Player()
 }
 
 void Player::move(int splitTime)
+// Changes the postion of each cell for this Player
+// param splitTime (int): time of last split, determining if this player's cells can merge or not 
+// (if they can't, they can't move through each other)
+// return null
 {
-/*	int nbCells = m_cells.size();
-	int nbMoved = 0;
-
-	while (nbMoved != nbCells)
-	{
-		for (int i = 0; i < m_cells.size(); ++i)
-		{
-			if (!m_cells[i].getWasMoved())
-			{
-				//Cas à traiter quand move = 0
-				sf::Vector2f move = m_cells[i].move(m_target);
-				Cell copieCell = m_cells[i];
-				copieCell.setCenter(sf::Vector2f(m_cells[i].getCenter().x + std::copysignf(1,move.x), m_cells[i].getCenter().y));
-				for (int j = 0; j < m_cells.size(); ++j)
-				{
-					if (j != i)
-					{
-						if (copieCell.checkCollisionMyCells(m_cells[j]))
-						{
-							//Il y a collision même en bougeant d'un pixel donc on ne peut rien faire.
-						}
-						else
-						{
-							//Il y a collision
-						}
-					}
-				}
-			}
-		}
-	}*/
 	for (int i = 0; i < m_cells.size(); ++i)
 	{
 		sf::Vector2f move = m_cells[i].move(m_target);
@@ -54,13 +28,10 @@ void Player::move(int splitTime)
 		copieCell.setCenter(sf::Vector2f(m_cells[i].getCenter().x + move.x, m_cells[i].getCenter().y + move.y));
 		for (int j = i+1; j < m_cells.size(); ++j)
 		{
-				if ((copieCell.checkCollisionMyCells(m_cells[j])) && !(canMerge(splitTime)))
+				if ((copieCell.checkStrictCollision(m_cells[j])) && !(canMerge(splitTime)))
 				{
 					sf::Vector2f new_target = sf::Vector2f(m_cells[i].getCenter().x - m_cells[j].getCenter().x, m_cells[i].getCenter().y - m_cells[j].getCenter().y);
-					//if (move.x > m_cells[j].move(m_target).x)
-					//{
 					move = m_cells[i].move(m_cells[i].getCenter() + new_target);
-					//}
 			}
 		}
 			
@@ -69,21 +40,25 @@ void Player::move(int splitTime)
 }
 
 bool Player::canMerge(int splitTime)
+// Determine if this player's cells can merge, or not
+// param splitTime (int): Time of last split
+// return unnamed (bool): 1 if cells can merge, 0 else
 {
 	return (splitTime > merge_available);
 }
 
 void Player::split(int splitTime)
+// Splits all this player's cells that can split
 {
 	int nb_cells = m_cells.size();
 	//if (min_size > 10)
 	for (int j = 0; j < nb_cells; ++j)
 	{
-		if (m_cells[j].getSize() > 40 && m_cells.size()<16)
+		if (m_cells[j].getSize() > 40)
 		{
 			int new_cell_id = m_cells.size();
 			merge_available = splitTime + 10;
-			this->addCell(m_cells[j].split(m_target)); //TODO supprimer target du split
+			this->addCell(m_cells[j].split(m_target));
 
 
 			sf::Vector2f move = (m_cells[new_cell_id].move(m_target));
@@ -93,10 +68,6 @@ void Player::split(int splitTime)
 		}
 	}
 
-}
-
-void Player::eject()
-{
 }
 
 std::vector<Cell> &Player::getCells()
@@ -187,7 +158,7 @@ void Player::setIATarget(sf::Vector2f mouseCoordonates, std::vector<Food> &lFood
 			Cell closestCell;
 			int distance;
 			std::tie(closestCell, distance) = getClosestCell(lPlayer, Player_id);
-			if (m_cells.size() == 1 && EATING_RATIO*closestCell.getSize() < getSmallestCellSize()) {
+			if ((distance < 4*closestCell.getSize() && m_cells.size() == 1) && EATING_RATIO*closestCell.getSize() < getSmallestCellSize()) {
 				setTarget(closestCell.getCenter());
 			}
 		}
@@ -196,7 +167,7 @@ void Player::setIATarget(sf::Vector2f mouseCoordonates, std::vector<Food> &lFood
 			Cell closestCell;
 			int distance;
 			std::tie(closestCell, distance) = getClosestCell(lPlayer, Player_id);
-			if (distance < 1,5* closestCell.getSize() && closestCell.getSize() > EATING_RATIO*getSmallestCellSize()) {
+			if (distance < 4*closestCell.getSize() && closestCell.getSize() > EATING_RATIO*getSmallestCellSize()) {
 				setTarget(getViewCenter() + getViewCenter() - closestCell.getCenter());
 			}
 		}
@@ -316,7 +287,7 @@ void Player::checkCollision(std::vector<Food>* ptrlFood)
 {
 	for (int i = 0; i < m_cells.size(); ++i)
 	{
-		m_cells[i].checkCollision(m_cells[0]);
+		m_cells[i].checkCollisionCovering(m_cells[0]);
 	}
 }
 

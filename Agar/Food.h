@@ -10,6 +10,7 @@ public:
 	~Food();
     virtual void getEaten(Entity& predator);
     void randomizeBuff ();
+
 private:
     std::string m_buff;
     

@@ -10,7 +10,6 @@ public:
 	~Player();
 	void move(int);
 	void split(int);
-	void eject();
 	std::vector<Cell> &getCells();
 	void addCell(Cell cell);
 	void delCell(int k);

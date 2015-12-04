@@ -18,7 +18,7 @@ int main()
 {
 	cout << "Quel est votre nom : " << endl;
 	cin >> namePlayer;
-	// Cr�ation de la f�n�tre et de la vue et limitation du framerate
+	// Create the window and the framerate limit
 	sf::RenderWindow window(sf::VideoMode(WINDOW_SIZE, WINDOW_SIZE), "AgarIO C++");
 	sf::View view(sf::Vector2f(300, 300), sf::Vector2f(WINDOW_SIZE*2, WINDOW_SIZE*2));
 	window.setVerticalSyncEnabled(true);
@@ -42,10 +42,10 @@ int main()
 		cout << "Echec chargement de la police" << endl;
 	}
 
-	//Lancement du chrono, l'objet clock g�re le temps.
+	// Start the time reference: the Clock clock 
 	sf::Clock clock;
 
-	//G�n�ration de la nourriture initiale
+	// Initialise the first batch of food
 	vector<Food> lFood;
 	vector<Food> *ptrlFood = &lFood;
 	for (int i(0); i < INITIAL_FOOD; ++i)
@@ -53,47 +53,48 @@ int main()
 		lFood.push_back(Food());
 	}
 
-	//Initialisation de la liste des joueurs (bots + real players) + Cr�ation player(s) initiaux
+	// Initialise the list of players (bots + human players)
 	vector<Player> lPlayer;
+
+	// Initialise the real player
 	vector<Player> *ptrlPlayer = &lPlayer;
     lPlayer.push_back(Player(Cell(20),0));
     lPlayer[0].setName(namePlayer);
-    //bots ici
+
+    // Initialise the bots
 	for (int i(1); i < INITIAL_PLAYERS; ++i)
 	{
 		lPlayer.push_back(Player());
         lPlayer[i].setName("bot " + std::to_string(i));
     }
 
-	//Cr�ation d'une cellule pour chaque Player....->PLUS BESOIN. Géré par le constructeur.
-   
-
 	int entityGenerated = 0;
-	// on fait tourner le programme tant que la fen?tre n'a pas ?t? ferm?e
+	// The program continues until the window is closed. Each round of the loop processes one frame
 	while (window.isOpen())
 	{
 		sf::Vector2f mouseCoordonates = window.mapPixelToCoords(sf::Mouse::getPosition(window));
-		//sf::Vector2f mouseCoordonates = sf::Vector2f(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
 
-		// on traite tous les evenements de la fenetre qui ont ete genere depuis la derniere iteration de la boucle
+		// Process every event generated since last round of the loop
 		sf::Event event;
 		while (window.pollEvent(event))
 		{
-			// on regarde le type de l'?v?nement...
+			// Check the event type
 			switch (event.type)
 			{
-				// fen?tre ferm?e
+				// Window closed
 			case sf::Event::Closed:
 				window.close();
 				break;
 
+				// Keyboard key pressed, causing an reaction
 			case sf::Event::KeyPressed:
-				//Le split grâce au keyboard ne s'effectue que sur le player 0
+				// Spacebar causes a split for player 0 (human)
 				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 				{
 					int splitTime = static_cast<int>(clock.getElapsedTime().asSeconds());
 					lPlayer[0].split(splitTime);
 				}
+				// Return causes a reset of the program
 				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
 				{
 					window.close();
@@ -106,16 +107,19 @@ int main()
 			}
 		}
 
+		// Clean the window in order to draw the next frame
 		window.clear(sf::Color::White);
 		window.draw(sprite);
-		//TO DO D�placer �a dans une fonction � part ?
+
+		// One second we clean the buffer
 		if (static_cast<int>(clock.getElapsedTime().asSeconds()) % 2 == 1)
 		{
 			entityGenerated = 0;
 		}
+		// The other we generate FOOD_BY_SECOND new foods and increment the buffer
 		if (static_cast<int>(clock.getElapsedTime().asSeconds()) % 2 == 0 && entityGenerated == 0 && lFood.size()<MAX_FOOD)
 		{
-			for (int i = 0; i < FOOD_BY_SECOND;++i)
+			for (int i = 0; i < 2*FOOD_BY_SECOND;++i)
 			{
 			lFood.push_back(Food());
 			}
@@ -123,35 +127,34 @@ int main()
 
 		}
 
-		//Les bots split s'ils le souhaitent
+		// Bots choose if they want to split (depending on their strategy)
 		for (int i = 0; i < lPlayer.size(); ++i)
 		{
 			lPlayer[i].splitIA(lFood, lPlayer, i, static_cast<int>(clock.getElapsedTime().asSeconds()));
 		}
 		
 
-		//On d�finit les target des players en fonction de leur strategy
+		// All players (bots + human) choose the target of their move for this frame
 		for (int i=0; i < lPlayer.size(); ++i)
 		{
 			lPlayer[i].setIATarget(mouseCoordonates, lFood, lPlayer, i);
 		}
 
-
-		//On fait bouger, on check les collisions et on dessine toutes les cellules de tous les joueurs
+		// Players movements loop
 		for (int i = 0; i < lPlayer.size(); ++i)
 		{
 			lPlayer[i].setMoved(false);
-			lPlayer[i].move(static_cast<int>(clock.getElapsedTime().asSeconds()));
+			lPlayer[i].move(static_cast<int>(clock.getElapsedTime().asSeconds())); // Each player makes their move
 			lPlayer[i].setCellZone();
 			lPlayer[i].getCellZone();
 
 			
-			// On fait toutes les actions relatives � manger les Foods
+			// Food that are in covering collision with cells get eaten
 			for (int u = 0; u < lFood.size(); ++u)
 			{
 				for (int j = 0; j < lPlayer[i].getCells().size(); ++j)
 				{
-					if (lPlayer[i].getCells()[j].checkCollision(lFood[u]))
+					if (lPlayer[i].getCells()[j].checkCollisionCovering(lFood[u]))
 					{
 						if (lPlayer[i].getCells()[j].getSize()>EATING_RATIO*lFood[u].getSize())
 						{
@@ -160,13 +163,15 @@ int main()
 							--u;
 
 			}}}}
+
+			// If a player is split, can merge, and happens to have cells in covering collision, they merge
 			if (lPlayer[i].canMerge(static_cast<int>(clock.getElapsedTime().asSeconds())))
 			{
 				for (int j = 0; j < lPlayer[i].getCells().size(); ++j)
 				{
 					for (int k = 0; k < lPlayer[i].getCells().size(); ++k)
 					{
-						if (j != k && lPlayer[i].getCells()[j].checkCollision(lPlayer[i].getCells()[k]) && lPlayer[i].getCells()[j].getSize()>1.001*lPlayer[i].getCells()[k].getSize())
+						if (j != k && lPlayer[i].getCells()[j].checkCollisionCovering(lPlayer[i].getCells()[k]) && lPlayer[i].getCells()[j].getSize()>1.001*lPlayer[i].getCells()[k].getSize())
 						{
 							lPlayer[i].getCells()[k].getEaten(lPlayer[i].getCells()[j]);
 							lPlayer[i].delCell(k);
@@ -176,6 +181,8 @@ int main()
 					}
 				}
 			}
+
+			// If different players are in covering collision, the biggest one eats the other
 			for (int u = 0; u < lPlayer.size(); ++u)
 			{
 				if (u != i)
@@ -184,7 +191,7 @@ int main()
 					{
 						for (int k = 0; k < lPlayer[u].getCells().size(); ++k)
 						{
-							if (lPlayer[i].getCells()[j].checkCollision(lPlayer[u].getCells()[k]) && lPlayer[i].getCells()[j].getSize()>1.05*lPlayer[u].getCells()[k].getSize())
+							if (lPlayer[i].getCells()[j].checkCollisionCovering(lPlayer[u].getCells()[k]) && lPlayer[i].getCells()[j].getSize()>1.05*lPlayer[u].getCells()[k].getSize())
 							{
                                 lPlayer[u].getCells()[k].getEaten(lPlayer[i].getCells()[j]);
                                 lPlayer[u].delCell(k);
@@ -195,21 +202,20 @@ int main()
 				}
 
 			}
+			// Draw Cells with their new positions
 			lPlayer[i].drawCells(ptrWindow);
 			lPlayer[i].drawCellsScore(window, font);
 			lPlayer[i].drawName(window, font);
 		}
 
-		//On dessine la nourriture
-		//TO DO iterator ?
+		// Draw all foods remaining
 		for (int u(0); u < lFood.size(); ++u)
 		{
-            //ptrWindow->draw(lFood[u]);
             lFood[u].draw(ptrWindow);
-            //différence entre les deux ?
 		}
-		//On centre sur le joueur 0
+		// Center the view on player 0 (the only human)
 		view.setCenter(lPlayer[0].getViewCenter());
+		// Adjust the zoom on the human player's cell zone
 		float viewSize= 200 * log(fabs(lPlayer[0].getCellZone()[0] - lPlayer[0].getCellZone()[1]));
 		view.setSize(viewSize, viewSize);
 		window.display();

@@ -10,21 +10,17 @@ class Cell :
 	
 {
 public:
-	Cell(int size=10);
+	Cell(float size=10);
 	~Cell();
 	void drawName(sf::RenderWindow &window, sf::Font &font, std::string name);
 	void drawScore(sf::RenderWindow &window, sf::Font &font);
-	float getSpeed();
+	virtual void getEaten(Entity &predator);
 	Cell split(sf::Vector2f target);
-	void eat(Entity &entity);
-	void eject();
-	bool checkCollision(Cell &cell);
-	bool checkCollisionMyCells(Cell &cell);
-	bool checkCollision(Food &food);
+	bool checkStrictCollision(Cell &cell);
+	bool checkCollisionCovering(Entity &entity);
 	void setMoved(bool b);
 	bool getWasMoved();
-    virtual void getEaten(Entity &predator);
-//	void actionCollision(Entity& entity,Player& player, std::vector<Food>& lFood, std::vector<Player>& lPlayer);
+
 private:
 	bool wasMoved;
 };
