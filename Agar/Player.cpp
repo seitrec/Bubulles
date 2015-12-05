@@ -92,7 +92,7 @@ void Player::setTarget(sf::Vector2f target)
 
 sf::Vector2f Player::getViewCenter()
 {
-	//Si on arrive près des bords il ne faut plus prendre le centre des cellules
+	//Si on arrive prï¿½s des bords il ne faut plus prendre le centre des cellules
 	sf::Vector2f centreCells = sf::Vector2f(((m_cells_zone[0] + m_cells_zone[1]) / 2), ((m_cells_zone[2] + m_cells_zone[3]) / 2));
 	sf::Vector2f centreView = centreCells;
 
@@ -312,11 +312,18 @@ void Player::setMoved(bool b)
 void Player::setScore()
 {
 	float score = 0;
-	for (int i = 0; i < m_cells.size(); ++i)
+	if (m_cells.size() == 1)
 	{
-		score+=m_cells[i].getSize();
+		m_score = roundf(m_cells[0].getSize());
 	}
-	m_score = roundf(score);
+	else
+	{
+		for (int i = 0; i < m_cells.size(); ++i)
+		{
+			score+=pow(m_cells[i].getSize(),2);
+		}
+		m_score = roundf(sqrt(score));
+	}
 
 }
 

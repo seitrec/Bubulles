@@ -16,8 +16,6 @@ string namePlayer = "Player";
 
 int main()
 {
-	cout << "Quel est votre nom : " << endl;
-	cin >> namePlayer;
 	// Create the window and the framerate limit
 	sf::RenderWindow window(sf::VideoMode(WINDOW_SIZE, WINDOW_SIZE), "AgarIO C++");
 	sf::View view(sf::Vector2f(300, 300), sf::Vector2f(WINDOW_SIZE*2, WINDOW_SIZE*2));
@@ -59,7 +57,6 @@ int main()
 	// Initialise the real player
 	vector<Player> *ptrlPlayer = &lPlayer;
     lPlayer.push_back(Player(Cell(20),0));
-    lPlayer[0].setName(namePlayer);
 
     // Initialise the bots
 	for (int i(1); i < INITIAL_PLAYERS; ++i)
@@ -70,8 +67,117 @@ int main()
 
 	int entityGenerated = 0;
 	// The program continues until the window is closed. Each round of the loop processes one frame
+
+	// Define de intro menu and naming of the player
+
+	int menuId = 0;
+
+	sf::Texture menuTexture;
+	if (!menuTexture.loadFromFile("bulles.png")) {
+		cout << "Echec chargement de la texture" << endl;
+	}
+
+	sf::Sprite menuSprite;
+	menuSprite.setTexture(menuTexture);
+	menuSprite.setTextureRect(sf::IntRect(00, 00, WINDOW_SIZE, WINDOW_SIZE));
+	menuSprite.setColor(sf::Color(255, 255, 255, 150));
+
+	sf::Text intro("Welcome in AgarioC++ !", font);
+	intro.setColor(sf::Color::White);
+	sf::FloatRect introRect = intro.getLocalBounds();
+	intro.setStyle(sf::Text::Bold);
+	intro.setOrigin(introRect.left + introRect.width/2.0f, introRect.top + introRect.height/2.0f);
+	intro.setPosition(sf::Vector2f(375,225));
+
+	sf::Text question("Enter your name on the screen :", font);
+	question.setColor(sf::Color::White);
+	sf::FloatRect questionRect = question.getLocalBounds();
+	question.setStyle(sf::Text::Bold);
+	question.setOrigin(questionRect.left + questionRect.width/2.0f, questionRect.top + questionRect.height/2.0f);
+	question.setPosition(sf::Vector2f(375,300));
+
+	sf::Text pseudo(" ", font);
+	pseudo.setColor(sf::Color::White);
+	sf::FloatRect pseudoRect = pseudo.getLocalBounds();
+	pseudo.setStyle(sf::Text::Bold);
+	pseudo.setOrigin(pseudoRect.left + pseudoRect.width/2.0f, pseudoRect.top + pseudoRect.height/2.0f);
+	pseudo.setPosition(sf::Vector2f(325,375));
+
+	sf::Text start("Press Enter to play !", font);
+	start.setColor(sf::Color::White);
+	sf::FloatRect startRect = start.getLocalBounds();
+	start.setStyle(sf::Text::Bold);
+	start.setOrigin(startRect.left + startRect.width/2.0f, startRect.top + startRect.height/2.0f);
+	start.setPosition(sf::Vector2f(375,450));
+
+	sf::Text end("		Game Over ! \n"
+				 "Press Enter to try again", font);
+	end.setColor(sf::Color::Black);
+	sf::FloatRect endRect = start.getLocalBounds();
+	end.setStyle(sf::Text::Bold);
+	end.setCharacterSize(100);
+	end.setOrigin(endRect.left + endRect.width/2.0f, endRect.top + endRect.height/2.0f);
+	end.setPosition(sf::Vector2f(650,900));
+
+	sf::Text highscore("", font);
+	highscore.setColor(sf::Color::Black);
+	sf::FloatRect highscoreRect = start.getLocalBounds();
+	highscore.setStyle(sf::Text::Bold);
+	highscore.setCharacterSize(40);
+	highscore.setOrigin(highscoreRect.left + highscoreRect.width/2.0f, highscoreRect.top + highscoreRect.height/2.0f);
+	highscore.setPosition(sf::Vector2f(650,900));
+
+	string pseudoStr;
+
+	int maxScore = 0;
+	int bestPlayerId = 0;
+
 	while (window.isOpen())
 	{
+		while (menuId==0)
+		{
+			window.clear(sf::Color::White);
+			window.draw(menuSprite);
+
+			sf::Event event;
+
+			while (window.pollEvent(event)) {
+
+				switch (event.type) {
+					//Window closed
+					case sf::Event::Closed:
+						window.close();
+						break;
+
+					//Start playing
+					case sf::Event::KeyPressed:
+						if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return)) {
+							menuId = 1;
+							lPlayer[0].setName(pseudoStr);
+						}
+						break;
+					//Writing name
+					case sf::Event::TextEntered:
+						// Handle ASCII characters only
+						if (event.text.unicode < 128) {
+							pseudoStr += static_cast<char>(event.text.unicode);
+							pseudo.setString(pseudoStr);
+						}
+						break;
+
+					default:
+						break;
+				}
+			}
+
+			window.draw(pseudo);
+			window.draw(intro);
+			window.draw(start);
+			window.draw(question);
+
+			window.display();
+		}
+
 		sf::Vector2f mouseCoordonates = window.mapPixelToCoords(sf::Mouse::getPosition(window));
 
 		// Process every event generated since last round of the loop
@@ -162,7 +268,10 @@ int main()
 							lFood.erase(lFood.begin() + u);
 							--u;
 
-			}}}}
+						}
+					}
+				}
+			}
 
 			// If a player is split, can merge, and happens to have cells in covering collision, they merge
 			if (lPlayer[i].canMerge(static_cast<int>(clock.getElapsedTime().asSeconds())))
@@ -206,6 +315,8 @@ int main()
 			lPlayer[i].drawCells(ptrWindow);
 			lPlayer[i].drawCellsScore(window, font);
 			lPlayer[i].drawName(window, font);
+			// Update the scores
+			lPlayer[i].setScore();
 		}
 
 		// Draw all foods remaining
@@ -218,8 +329,37 @@ int main()
 		// Adjust the zoom on the human player's cell zone
 		float viewSize= 200 * log(fabs(lPlayer[0].getCellZone()[0] - lPlayer[0].getCellZone()[1]));
 		view.setSize(viewSize, viewSize);
+
+
+		// Draw the highest score
+		maxScore = 0;
+
+		for (int u = 0; u < lPlayer.size(); ++u)
+		{
+			int scorePlayer = lPlayer[u].getScore();
+			if (maxScore < scorePlayer)
+			{
+				maxScore = scorePlayer;
+				bestPlayerId = u;
+			}
+
+		}
+
+		string highscoreString = "1st :" + lPlayer[bestPlayerId].getName() + "\n(score : " + to_string(maxScore) + ")";
+		highscore.setString(highscoreString);
+		highscore.setPosition(view.getCenter().x-view.getSize().x/4,view.getCenter().y-view.getSize().y/2.2);
+		ptrWindow->draw(highscore);
+
+		// End of the game
+		if (lPlayer[0].getCells().empty())
+		{
+			window.draw(end);
+		}
+
+
 		window.display();
  		window.setView(view);
+
 	}
 	return 0;
 }
