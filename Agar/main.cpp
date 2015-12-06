@@ -159,10 +159,13 @@ int main()
 					//Writing name
 					case sf::Event::TextEntered:
 						// Handle ASCII characters only
-						if (event.text.unicode < 128) {
-							pseudoStr += static_cast<char>(event.text.unicode);
-							pseudo.setString(pseudoStr);
+						if (event.text.unicode == '\b'){
+							pseudoStr.pop_back();
 						}
+						else if (event.text.unicode < 128) {
+							pseudoStr += static_cast<char>(event.text.unicode);
+						}
+						pseudo.setString(pseudoStr);
 						break;
 
 					default:
