@@ -11,10 +11,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{AA0AACAE-0F78-4764-AB6E-D496C9BA91A0}</ProjectGuid>
+    <ProjectGuid>{E99D6624-8745-493B-BA92-712F6C8270D9}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>Carre</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <ProjectName>Agar</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
