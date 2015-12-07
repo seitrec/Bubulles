@@ -350,7 +350,7 @@ int main()
 
 		string highscoreString = "1st :" + lPlayer[bestPlayerId].getName() + "\n(score : " + to_string(maxScore) + ")";
 		highscore.setString(highscoreString);
-		highscore.setPosition(window.mapPixelToCoords(sf::Vector2i(highscore.getLocalBounds().width/2, highscore.getLocalBounds().height/2	)));
+		highscore.setPosition(window.mapPixelToCoords(sf::Vector2i(highscore.getLocalBounds().width, highscore.getLocalBounds().height)));
 		window.draw(highscore);
 
 		// End of the game
