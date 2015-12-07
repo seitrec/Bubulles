@@ -11,13 +11,13 @@ Player::Player(bool isIA):m_score(0), merge_available(0)
     Cell cell;
     if (isIA)
     {
-        cell= Cell(10, this);
+        cell= Cell(10);
     }
     else
     {
-        cell=Cell(20, this);
+        cell=Cell(20);
     }
-    addCell(cell);
+    addCell(&cell);
 }
 
 
@@ -34,20 +34,20 @@ void Player::move(int splitTime)
 	for (int i = 0; i < m_cells.size(); ++i)
 	{
 		
-        sf::Vector2f move = m_cells[i].move(m_target);
-		Cell copieCell = m_cells[i];
-		copieCell.setSize(copieCell.getSize());
-		copieCell.setCenter(sf::Vector2f(m_cells[i].getCenter().x + move.x, m_cells[i].getCenter().y + move.y));
+        sf::Vector2f move = m_cells[i]->move(m_target);
+		Cell *ptrCell = (m_cells[i]);
+		ptrCell->setSize(ptrCell->getSize());
+		ptrCell->setCenter(sf::Vector2f(ptrCell->getCenter().x + move.x, ptrCell->getCenter().y + move.y));
 		for (int j = i+1; j < m_cells.size(); ++j)
 		{
-				if ((copieCell.checkStrictCollision(m_cells[j])) && !(canMerge(splitTime)))
+				if ((ptrCell->checkStrictCollision(*m_cells[j])) && !(canMerge(splitTime)))
 				{
-					sf::Vector2f new_target = sf::Vector2f(m_cells[i].getCenter().x - m_cells[j].getCenter().x, m_cells[i].getCenter().y - m_cells[j].getCenter().y);
-					move = m_cells[i].move(m_cells[i].getCenter() + new_target);
+					sf::Vector2f new_target = sf::Vector2f(m_cells[i]->getCenter().x - m_cells[j]->getCenter().x, m_cells[i]->getCenter().y - m_cells[j]->getCenter().y);
+					move = ptrCell->move(ptrCell->getCenter() + new_target);
 			}
 		}
 			
-		m_cells[i].setCenter(sf::Vector2f(m_cells[i].getCenter().x + move.x, m_cells[i].getCenter().y + move.y));
+		m_cells[i]->setCenter(sf::Vector2f(ptrCell->getCenter().x + move.x, ptrCell->getCenter().y + move.y));
 	}
 }
 
@@ -66,23 +66,23 @@ void Player::split(int splitTime)
 	//if (min_size > 10)
 	for (int j = 0; j < nb_cells; ++j)
 	{
-		if (m_cells[j].getSize() > 40)
+		if (m_cells[j]->getSize() > 40)
 		{
-			int new_cell_id = m_cells.size();
 			merge_available = splitTime + 10;
-			m_cells[j].split(m_target);
+			m_cells[j]->split(m_target);
         }
 	}
 }
 
-std::vector<Cell> &Player::getCells()
+std::vector<Cell*> &Player::getCells()
 {
 	return m_cells;
 }
 
-void Player::addCell(Cell &cell)
+void Player::addCell(Cell *cell)
 {
 	m_cells.push_back(cell);
+    cell->setPlayer(this);
 }
 
 void Player::delCell(int k)
@@ -131,7 +131,7 @@ void Player::splitIA(std::vector<Food> &lFood, std::vector<Player> &lPlayer, int
 
 		if (strategy.at("split").at("aggro") && (m_cells.size() == 1) ) {
 			for (int i = 0; i < lPlayer.size(); ++i) {
-				if (distance <= 1.8 * m_cells[0].getSize() && m_cells[0].getSize() / sqrt(2) > 1.05* closestCell.getSize()) {
+				if (distance <= 1.8 * m_cells[0]->getSize() && m_cells[0]->getSize() / sqrt(2) > 1.05* closestCell.getSize()) {
 					setTarget(closestCell.getCenter());
 					split(splitTime);
 				}
@@ -186,15 +186,15 @@ std::tuple<Cell, int> Player::getClosestCell(std::vector<Player> &lPlayer, int P
 	Cell closestCell;
 	for (int i = 0; i < lPlayer.size(); ++i) {
 		if (i != Player_id) {
-			for (int j = 0; j < lPlayer[i].m_cells.size(); ++j)
+			for (int j = 0; j < lPlayer[i].getCells().size(); ++j)
 			{
-				distance = sqrt(pow((m_cells[0].getCenter().x - lPlayer[i].m_cells[j].getCenter().x), 2) +
-					pow((m_cells[0].getCenter().y - lPlayer[i].m_cells[j].getCenter().y), 2));
+				distance = sqrt(pow((m_cells[0]->getCenter().x - lPlayer[i].m_cells[j]->getCenter().x), 2) +
+					pow((m_cells[0]->getCenter().y - lPlayer[i].m_cells[j]->getCenter().y), 2));
 
 				if (distance < minDistance)
 				{
 					minDistance = distance;
-					closestCell = lPlayer[i].m_cells[j];
+					closestCell = *lPlayer[i].getCells()[j];
 				}
 			}
 		}
@@ -233,21 +233,21 @@ void Player::setCellZone()
 
 	for (int i = 0; i < m_cells.size(); ++i)
 	{
-		if (m_cells[i].getCenter().x + m_cells[i].getSize() > m_cells_zone[0])
+		if (m_cells[i]->getCenter().x + m_cells[i]->getSize() > m_cells_zone[0])
 		{
-			m_cells_zone[0] = marge + m_cells[i].getCenter().x + m_cells[i].getSize();
+			m_cells_zone[0] = marge + m_cells[i]->getCenter().x + m_cells[i]->getSize();
 		}
-		if (m_cells[i].getCenter().x - m_cells[i].getSize() < m_cells_zone[1])
+		if (m_cells[i]->getCenter().x - m_cells[i]->getSize() < m_cells_zone[1])
 		{
-			m_cells_zone[1] = marge + m_cells[i].getCenter().x - m_cells[i].getSize();
+			m_cells_zone[1] = marge + m_cells[i]->getCenter().x - m_cells[i]->getSize();
 		}
-		if (m_cells[i].getCenter().y + m_cells[i].getSize() > m_cells_zone[2])
+		if (m_cells[i]->getCenter().y + m_cells[i]->getSize() > m_cells_zone[2])
 		{
-			m_cells_zone[2] = marge +m_cells[i].getCenter().y + m_cells[i].getSize();
+			m_cells_zone[2] = marge +m_cells[i]->getCenter().y + m_cells[i]->getSize();
 		}
-		if (m_cells[i].getCenter().y - m_cells[i].getSize() < m_cells_zone[3])
+		if (m_cells[i]->getCenter().y - m_cells[i]->getSize() < m_cells_zone[3])
 		{
-			m_cells_zone[3] = marge + m_cells[i].getCenter().y - m_cells[i].getSize();
+			m_cells_zone[3] = marge + m_cells[i]->getCenter().y - m_cells[i]->getSize();
 		}
 	}
 	if (m_cells.size() == 0)
@@ -267,7 +267,7 @@ void Player::drawCells(sf::RenderWindow * ptrWindow)
 {
 	for (int i = 0; i < m_cells.size(); ++i)
 	{
-		ptrWindow->draw(m_cells[i]);
+		ptrWindow->draw(*m_cells[i]);
 	}
 
 }
@@ -276,7 +276,7 @@ void Player::drawName(sf::RenderWindow &window, sf::Font &font)
 
 	for (int i = 0; i < m_cells.size(); ++i)
 	{
-		m_cells[i].drawName(window, font, this->getName());
+		m_cells[i]->drawName(window, font, this->getName());
 	}
 }
 
@@ -284,7 +284,7 @@ void Player::drawCellsScore(sf::RenderWindow & window, sf::Font & font)
 {
 	for (int i = 0; i < m_cells.size(); ++i)
 	{
-		m_cells[i].drawScore(window, font);
+		m_cells[i]->drawScore(window, font);
 	}
 }
 
@@ -292,7 +292,7 @@ void Player::checkCollision(std::vector<Food>* ptrlFood)
 {
 	for (int i = 0; i < m_cells.size(); ++i)
 	{
-		m_cells[i].checkCollisionCovering(m_cells[0]);
+		m_cells[i]->checkCollisionCovering(*m_cells[0]);
 	}
 }
 
@@ -310,7 +310,7 @@ void Player::setMoved(bool b)
 {
 	for (int i = 0; i < m_cells.size(); ++i)
 	{
-		m_cells[i].setMoved(b);
+		m_cells[i]->setMoved(b);
 	}
 }
 
@@ -319,13 +319,13 @@ void Player::setScore()
 	float score = 0;
 	if (m_cells.size() == 1)
 	{
-		m_score = roundf(m_cells[0].getSize());
+		m_score = roundf(m_cells[0]->getSize());
 	}
 	else
 	{
 		for (int i = 0; i < m_cells.size(); ++i)
 		{
-			score+=pow(m_cells[i].getSize(),2);
+			score+=pow(m_cells[i]->getSize(),2);
 		}
 		m_score = roundf(sqrt(score));
 	}
@@ -344,11 +344,11 @@ void Player::setStrategy(bool isIA)
 
 float Player::getSmallestCellSize()
 {
-	float smallest = m_cells[0].getSize();
+	float smallest = m_cells[0]->getSize();
 	for (int i = 1; i < m_cells.size(); ++i)
 	{
-		if (m_cells[i].getSize() < smallest) {
-			smallest = m_cells[i].getSize();
+		if (m_cells[i]->getSize() < smallest) {
+			smallest = m_cells[i]->getSize();
 		}
 	}
 	return smallest;

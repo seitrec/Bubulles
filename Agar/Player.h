@@ -10,8 +10,8 @@ public:
 	~Player();
 	void move(int);
 	void split(int);
-	std::vector<Cell> &getCells();
-	void addCell(Cell &cell);
+	std::vector<Cell*> &getCells();
+	void addCell(Cell *cell);
 	void delCell(int k);
 	void setTarget(sf::Vector2f target);
 	sf::Vector2f getViewCenter();
@@ -37,7 +37,7 @@ public:
 
 private:
 	std::string m_name;
-	std::vector<Cell> m_cells;
+	std::vector<Cell*> m_cells;
 	sf::Vector2f m_target;
 	std::vector<float> m_cells_zone;
 	int m_score;

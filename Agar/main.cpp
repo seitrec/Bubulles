@@ -262,11 +262,11 @@ int main()
 			{
 				for (int j = 0; j < lPlayer[i].getCells().size(); ++j)
 				{
-					if (lPlayer[i].getCells()[j].checkCollisionCovering(lFood[u]))
+					if (lPlayer[i].getCells()[j]->checkCollisionCovering(lFood[u]))
 					{
-						if (lPlayer[i].getCells()[j].getSize()>EATING_RATIO*lFood[u].getSize())
+						if (lPlayer[i].getCells()[j]->getSize()>EATING_RATIO*lFood[u].getSize())
 						{
-                            lPlayer[i].getCells()[j].Eat(lFood[u]);
+                            lPlayer[i].getCells()[j]->Eat(lFood[u]);
 							lFood.erase(lFood.begin() + u);
 							--u;
 
@@ -282,9 +282,9 @@ int main()
 				{
 					for (int k = 0; k < lPlayer[i].getCells().size(); ++k)
 					{
-						if (j != k && lPlayer[i].getCells()[j].checkCollisionCovering(lPlayer[i].getCells()[k]) && lPlayer[i].getCells()[j].getSize()>1.001*lPlayer[i].getCells()[k].getSize())
+						if (j != k && lPlayer[i].getCells()[j]->checkCollisionCovering(*lPlayer[i].getCells()[k]) && lPlayer[i].getCells()[j]->getSize()>1.001*lPlayer[i].getCells()[k]->getSize())
 						{
-							lPlayer[i].getCells()[j].Eat(lPlayer[i].getCells()[k]);;
+							lPlayer[i].getCells()[j]->Eat(*lPlayer[i].getCells()[k]);;
 							lPlayer[i].delCell(k);
 							if (j > k) { --j; }
 							--k;
@@ -302,9 +302,9 @@ int main()
 					{
 						for (int k = 0; k < lPlayer[u].getCells().size(); ++k)
 						{
-							if (lPlayer[i].getCells()[j].checkCollisionCovering(lPlayer[u].getCells()[k]) && lPlayer[i].getCells()[j].getSize()>1.05*lPlayer[u].getCells()[k].getSize())
+							if (lPlayer[i].getCells()[j]->checkCollisionCovering(*lPlayer[u].getCells()[k]) && lPlayer[i].getCells()[j]->getSize()>1.05*lPlayer[u].getCells()[k]->getSize())
 							{
-                                lPlayer[i].getCells()[j].Eat(lPlayer[u].getCells()[k]);
+                                lPlayer[i].getCells()[j]->Eat(*lPlayer[u].getCells()[k]);
                                 lPlayer[u].delCell(k);
 								--k;
 							}
