@@ -6,3 +6,5 @@
 #define MAX_FOOD  20000
 #define EATING_RATIO 1.1
 
+#define VIRUS_MAX_SIZE 150
+#define VIRUS_MIN_SIZE 40

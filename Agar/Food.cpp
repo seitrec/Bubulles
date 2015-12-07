@@ -17,7 +17,7 @@ Food::Food(int size):Entity(size),m_buff("Normal")
     if (m_buff=="Virus")
     {
         setColor(sf::Color::Green);
-        //other parameters that are unique to the virus
+        setSize((VIRUS_MAX_SIZE - VIRUS_MIN_SIZE) * ((((float) rand()) / (float) RAND_MAX)) + VIRUS_MIN_SIZE ); //Sets virus size as a random between MAX_SIZE and MIN_SIZE
     }
 }
 
