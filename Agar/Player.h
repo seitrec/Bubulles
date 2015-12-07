@@ -21,7 +21,7 @@ public:
 	sf::Vector2f getClosestLocation(std::vector<Food> &lFood);
 	void setCellZone();
 	std::vector<float> &getCellZone();
-	void drawCells(sf::RenderWindow *ptrWindow);
+	void drawCells(sf::RenderWindow &window);
 	void drawName(sf::RenderWindow &window, sf::Font &font);
 	void drawCellsScore(sf::RenderWindow &window, sf::Font &font);
 	std::string getName();

@@ -19,12 +19,12 @@ Entity::~Entity()
 {
 }
 
-void Entity::draw(sf::RenderWindow * ptrWindow)
+void Entity::draw(sf::RenderWindow &window)
 // Draws an entity in a window
-// param ptrWindow (RenderWindow): the SFML window in which to draw
+// param window (RenderWindow): the SFML window in which to draw
 // return null
 {
-	ptrWindow->draw(*this);
+	window.draw(*this);
 }
 
 

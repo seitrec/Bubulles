@@ -21,8 +21,7 @@ int main()
 	sf::View view(sf::Vector2f(300, 300), sf::Vector2f(WINDOW_SIZE*2, WINDOW_SIZE*2));
 	window.setVerticalSyncEnabled(true);
 	window.setFramerateLimit(30);
-	sf::RenderWindow *ptrWindow = &window;
-
+	
 	sf::Texture texture;
 	if (!texture.loadFromFile("bg.png")) {
 		cout << "Echec chargement de la texture" << endl;
@@ -45,7 +44,6 @@ int main()
 
 	// Initialise the first batch of food
 	vector<Food> lFood;
-	vector<Food> *ptrlFood = &lFood;
 	for (int i(0); i < INITIAL_FOOD; ++i)
 	{
 		lFood.push_back(Food());
@@ -55,7 +53,6 @@ int main()
 	vector<Player> lPlayer;
 
 	// Initialise the real player
-	vector<Player> *ptrlPlayer = &lPlayer;
     lPlayer.push_back(Player(Cell(20),0));
 
     // Initialise the bots
@@ -314,7 +311,7 @@ int main()
 
 			}
 			// Draw Cells with their new positions
-			lPlayer[i].drawCells(ptrWindow);
+			lPlayer[i].drawCells(window);
 			lPlayer[i].drawCellsScore(window, font);
 			lPlayer[i].drawName(window, font);
 			// Update the scores
@@ -324,7 +321,7 @@ int main()
 		// Draw all foods remaining
 		for (int u(0); u < lFood.size(); ++u)
 		{
-            lFood[u].draw(ptrWindow);
+            lFood[u].draw(window);
 		}
 		// Center the view on player 0 (the only human)
 		view.setCenter(lPlayer[0].getViewCenter());

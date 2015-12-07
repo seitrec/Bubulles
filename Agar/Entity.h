@@ -7,7 +7,7 @@ class Entity :
 public:
     Entity (float size);
 	~Entity();
-	void draw(sf::RenderWindow * ptrWindow);
+	void draw(sf::RenderWindow &window);
 	sf::Vector2f getCenter();
 	void setCenter(sf::Vector2f position);
 	sf::Color getColor();

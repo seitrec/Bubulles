@@ -313,21 +313,21 @@ std::vector<float> &Player::getCellZone()
 }
 
 
-void Player::drawCells(sf::RenderWindow * ptrWindow)
+void Player::drawCells(sf::RenderWindow &window)
 // Draw a player's cells on the main window
-// param ptrWindow (RenderWindow): The main game window
+// param window (RenderWindow): The main game window
 // return null
 {
 	for (int i = 0; i < m_cells.size(); ++i)
 	{
-		ptrWindow->draw(m_cells[i]);
+		window.draw(m_cells[i]);
 	}
 }
 
 
 void Player::drawName(sf::RenderWindow &window, sf::Font &font)
 // Draw a player's name on his cells
-// param ptrWindow (RenderWindow): The main game window
+// param window (RenderWindow): The main game window
 // param font (Font): The font used to write the name
 // return null
 {
@@ -341,7 +341,7 @@ void Player::drawName(sf::RenderWindow &window, sf::Font &font)
 
 void Player::drawCellsScore(sf::RenderWindow & window, sf::Font & font)
 // Draw a player's Score on his cells
-// param ptrWindow (RenderWindow): The main game window
+// param window (RenderWindow): The main game window
 // param font (Font): The font used to write the score
 // return null
 {
