@@ -18,13 +18,10 @@ public:
     void Eat(Entity &prey);
 	bool checkStrictCollision(Cell &cell);
 	bool checkCollisionCovering(Entity &entity);
-	void setMoved(bool b);
-	bool getWasMoved();
     void split(sf::Vector2f target);
     void setPlayer (Player *player);
 
 private:
-	bool wasMoved;
     Player* m_player;
 };
 

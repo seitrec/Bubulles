@@ -238,7 +238,7 @@ int main()
 		// Bots choose if they want to split (depending on their strategy)
 		for (int i = 0; i < lPlayer.size(); ++i)
 		{
-			lPlayer[i].splitIA(lFood, lPlayer, i, static_cast<int>(clock.getElapsedTime().asSeconds()));
+			lPlayer[i].splitIA(lPlayer, i, static_cast<int>(clock.getElapsedTime().asSeconds()));
 		}
 		
 
@@ -251,7 +251,6 @@ int main()
 		// Players movements loop
 		for (int i = 0; i < lPlayer.size(); ++i)
 		{
-			lPlayer[i].setMoved(false);
 			lPlayer[i].move(static_cast<int>(clock.getElapsedTime().asSeconds())); // Each player makes their move
 			lPlayer[i].setCellZone();
 			lPlayer[i].getCellZone();
