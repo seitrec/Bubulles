@@ -3,7 +3,11 @@
 #include <iostream>
 #include <math.h>
 
+
 Player::Player(Cell firstcell , bool isIA):m_score(0), merge_available(0)
+// This class implements a Player, controlled either by a human or a bot, and capable of controlling cells
+// param isIA (bool): Determines if a player will be controlled by a human (0) or a bot (1)
+// return null
 {
     setStrategy(isIA);
     addCell(firstcell);
@@ -11,8 +15,10 @@ Player::Player(Cell firstcell , bool isIA):m_score(0), merge_available(0)
 
 
 Player::~Player()
+// destructor
 {
 }
+
 
 void Player::move(int splitTime)
 // Changes the postion of each cell for this Player
@@ -39,6 +45,7 @@ void Player::move(int splitTime)
 	}
 }
 
+
 bool Player::canMerge(int splitTime)
 // Determine if this player's cells can merge, or not
 // param splitTime (int): Time of last split
@@ -47,8 +54,11 @@ bool Player::canMerge(int splitTime)
 	return (splitTime > merge_available);
 }
 
+
 void Player::split(int splitTime)
 // Splits all this player's cells that can split
+// param spliTime (int): Global clock to check for merging availability
+// return null
 {
 	int nb_cells = m_cells.size();
 	//if (min_size > 10)
@@ -70,29 +80,47 @@ void Player::split(int splitTime)
 
 }
 
+
 std::vector<Cell> &Player::getCells()
+// Getter for a player's list of cells
+// return m_cells (vector<Cell>): vector of a player's cells
 {
 	return m_cells;
 }
 
+
 void Player::addCell(Cell cell)
+// Add a new cell to this player's list
+// param cell (Cell): the cell to add
+// return null
 {
 	m_cells.push_back(cell);
 }
 
+
 void Player::delCell(int k)
+// Delete a cell from this player's list
+// param k (int): Index of the cell to delete
+// return null
 {
 	m_cells.erase(m_cells.begin() + k);
 }
 
+
 void Player::setTarget(sf::Vector2f target)
+// Setter of the target for this player's move during this frame
+// param target (Vector2f): coordinates of the target location
+// return null
 {
 	m_target = target;
 }
 
+
 sf::Vector2f Player::getViewCenter()
+// Determine the position of the camera view for this player
+// return centreView (Vector2f): Coordinates of the camera center
 {
-	//Si on arrive pr�s des bords il ne faut plus prendre le centre des cellules
+	//Si on arrive pres des bords il ne faut plus prendre le centre des cellules
 	sf::Vector2f centreCells = sf::Vector2f(((m_cells_zone[0] + m_cells_zone[1]) / 2), ((m_cells_zone[2] + m_cells_zone[3]) / 2));
 	sf::Vector2f centreView = centreCells;
 
@@ -117,7 +145,13 @@ sf::Vector2f Player::getViewCenter()
 	return centreView;
 }
 
+
 void Player::splitIA(std::vector<Food> &lFood, std::vector<Player> &lPlayer, int Player_id, int splitTime)
+// All the actions related to splitting for the IAs: Depending on their designed behaviour, IAs will choose, or not, to split
+// param &lPlayer (vector<Player>): List of the players, usefull to IAs to determine if they are 'safe'
+// param Player_id (int): The id of the player trying to split
+// param splitTime (int): Global clock to check for merging availability, determining if the player can split
+// return null
 {
 	if (!strategy.at("split").at("human")) {
 		Cell closestCell;
@@ -140,7 +174,14 @@ void Player::splitIA(std::vector<Food> &lFood, std::vector<Player> &lPlayer, int
 	}
 }
 
+
 void Player::setIATarget(sf::Vector2f mouseCoordonates, std::vector<Food> &lFood, std::vector<Player> &lPlayer, int Player_id)
+// All the actions related to targetting a move for the players and IAs: Depending on their designed behaviour, IAs will choose where they want to go
+// param mouseCoordonates (Vector2f): Couple of coordinates of the mouse, for the player's move
+// param &lFood (vector<Food>): List of the foods, for the most basic move: 'I need food'
+// param &lPlayer (vector<Player>): List of the players, usefull to IAs to determine how they are 'safe'
+// param Player_id (int): The id of the player trying to move
+// return null
 {	
 	if (strategy.at("target").at("human") == true)
 	{
@@ -175,6 +216,10 @@ void Player::setIATarget(sf::Vector2f mouseCoordonates, std::vector<Food> &lFood
 }
 
 std::tuple<Cell, int> Player::getClosestCell(std::vector<Player> &lPlayer, int Player_id)
+// Process which ennemy cell is the closest to a player
+// param &lPlayer (vector<Player>): List of the players
+// param Player_id (int): The id of the player
+// return (closestCell, minDistance) (tuple<Cell, int>): closestCell is the closest cell found, and minDistance the distance to it
 {
 	float minDistance = WORLD_SIZE;
 	float distance;
@@ -198,6 +243,9 @@ std::tuple<Cell, int> Player::getClosestCell(std::vector<Player> &lPlayer, int P
 }
 
 sf::Vector2f Player::getClosestLocation(std::vector<Food> &lFood)
+// Process the closest food for a player
+// param &lFood (vector<Food>): List of all available foods
+// return location (Vector2f): Couple of coordonates of the closest food
 {
 	float minDistance = WORLD_SIZE;
 	float distance;
@@ -217,6 +265,8 @@ sf::Vector2f Player::getClosestLocation(std::vector<Food> &lFood)
 }
 
 void Player::setCellZone()
+// Updates m_cell_zone, 4 coordonates representing the smallest rectangle containing a player's cells
+// return null
 {
 	int marge = 10;
 	//xmax,xmin,ymax,ymin
@@ -254,19 +304,32 @@ void Player::setCellZone()
 	}
 }
 
+
 std::vector<float> &Player::getCellZone()
+// Getter for m_cells_zone
+// return m_cells_zone (vector): 4 coordonates representing the smallest rectangle containing a player's cells
 {
 	return m_cells_zone;
 }
+
+
 void Player::drawCells(sf::RenderWindow * ptrWindow)
+// Draw a player's cells on the main window
+// param ptrWindow (RenderWindow): The main game window
+// return null
 {
 	for (int i = 0; i < m_cells.size(); ++i)
 	{
 		ptrWindow->draw(m_cells[i]);
 	}
-
 }
+
+
 void Player::drawName(sf::RenderWindow &window, sf::Font &font)
+// Draw a player's name on his cells
+// param ptrWindow (RenderWindow): The main game window
+// param font (Font): The font used to write the name
+// return null
 {
 
 	for (int i = 0; i < m_cells.size(); ++i)
@@ -275,7 +338,12 @@ void Player::drawName(sf::RenderWindow &window, sf::Font &font)
 	}
 }
 
+
 void Player::drawCellsScore(sf::RenderWindow & window, sf::Font & font)
+// Draw a player's Score on his cells
+// param ptrWindow (RenderWindow): The main game window
+// param font (Font): The font used to write the score
+// return null
 {
 	for (int i = 0; i < m_cells.size(); ++i)
 	{
@@ -283,33 +351,26 @@ void Player::drawCellsScore(sf::RenderWindow & window, sf::Font & font)
 	}
 }
 
-void Player::checkCollision(std::vector<Food>* ptrlFood)
-{
-	for (int i = 0; i < m_cells.size(); ++i)
-	{
-		m_cells[i].checkCollisionCovering(m_cells[0]);
-	}
-}
 
 std::string Player::getName()
+// Getter of a player's name
+// return m_name (string): this player's name
 {
 	return m_name;
 }
 
+
 void Player::setName(std::string name)
+// Setter of a player's name
+// param name (string): this player's name
 {
 	m_name = name;
 }
 
-void Player::setMoved(bool b)
-{
-	for (int i = 0; i < m_cells.size(); ++i)
-	{
-		m_cells[i].setMoved(b);
-	}
-}
 
 void Player::setScore()
+// Updater of a player's score
+// return null
 {
 	float score = 0;
 	if (m_cells.size() == 1)
@@ -324,20 +385,20 @@ void Player::setScore()
 		}
 		m_score = roundf(sqrt(score));
 	}
-
 }
 
-void Player::setStrategy(bool isIA)
+
+int Player::getScore()
+// Getter of a player's score
+// return m_score (int): The score
 {
-	if (isIA) {
-		strategy = { {"split", { { "spread", true }, { "aggro", true }, { "human", false } } }, { "target", { { "closest", true }, { "flee", true },{ "stalk", true }, { "human", false } } } };
-	}
-	else { 
-		strategy = { { "split",{ { "spread", false },{ "aggro", false }, { "human", true } } },{ "target",{ { "closest", false },{ "flee", false },{ "stalk", false }, { "human", true } } } };
-	}
+	return m_score;
 }
+
 
 float Player::getSmallestCellSize()
+// Process the smallest cell's size for a player
+// return smallest (float): The size of the smallest cell
 {
 	float smallest = m_cells[0].getSize();
 	for (int i = 1; i < m_cells.size(); ++i)
@@ -350,7 +411,16 @@ float Player::getSmallestCellSize()
 }
 
 
-int Player::getScore()
+void Player::setStrategy(bool isIA)
+// Define the strategies of IAs with a map of keywords associated with true or false.
+// The idea is to ultimately semi-randomise the bool, in order to make several different IAs
+// param isIA (bool): Used to make the difference between a new IA and a new Human
+// return null
 {
-	return m_score;
+	if (isIA) {
+		strategy = { { "split",{ { "spread", true },{ "aggro", true },{ "human", false } } },{ "target",{ { "closest", true },{ "flee", true },{ "stalk", true },{ "human", false } } } };
+	}
+	else {
+		strategy = { { "split",{ { "spread", false },{ "aggro", false },{ "human", true } } },{ "target",{ { "closest", false },{ "flee", false },{ "stalk", false },{ "human", true } } } };
+	}
 }

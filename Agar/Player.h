@@ -24,10 +24,8 @@ public:
 	void drawCells(sf::RenderWindow *ptrWindow);
 	void drawName(sf::RenderWindow &window, sf::Font &font);
 	void drawCellsScore(sf::RenderWindow &window, sf::Font &font);
-	void checkCollision(std::vector<Food> *ptrlFood);
 	std::string getName();
 	void setName(std::string name);
-	void setMoved(bool b);
 	void setScore();
 	void setStrategy(bool isIA);
 	float getSmallestCellSize();
@@ -39,7 +37,7 @@ private:
 	std::string m_name;
 	std::vector<Cell> m_cells;
 	sf::Vector2f m_target;
-	std::vector<float> m_cells_zone; //pourquoi un vecteur ? une zone c'est juste une liste à deux éléments non? un vecteur ça peut croitre en taille
+	std::vector<float> m_cells_zone;
 	int m_score;
 	std::map<std::string, std::map<std::string, bool>> strategy;
 	int merge_available;

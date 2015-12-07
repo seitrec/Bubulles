@@ -11,7 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{AA0AACAE-0F78-4764-AB6E-D496C9BA91A0}</ProjectGuid>
+    <ProjectGuid>{54DA83E7-051D-41BA-8EEE-F49695513587}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>Carre</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>

@@ -5,7 +5,7 @@
 #include <math.h>
 
 
-Cell::Cell(float size):Entity(size), wasMoved(0)
+Cell::Cell(float size):Entity(size)
 // This class implements an subClass of Entity (controlled by a player/IA) capable of moving, splitting, and eating
 // param size (float): the radius of the disc
 // return null
@@ -116,21 +116,4 @@ bool Cell::checkStrictCollision(Cell &cell)
 	return (sqrt(pow((this->getCenter().x - cell.getCenter().x), 2) +
 		pow((this->getCenter().y - cell.getCenter().y), 2))
 		< fabs(this->getSize() + cell.getSize()));
-}
-
-
-void Cell::setMoved(bool b)
-// Setter of the boolean wasMoved, used to determine if this cell was moved this frame
-// param b (bool): the value to set
-// return null
-{
-	wasMoved = b;
-}
-
-
-bool Cell::getWasMoved()
-// Getter of the boolean wasMoved, used to determine if this cell was moved this frame
-// return wasMoved (bool): 1 if it was actually moved, 0 else
-{
-	return wasMoved;
 }
