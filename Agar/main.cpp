@@ -350,15 +350,14 @@ int main()
 
 		string highscoreString = "1st :" + lPlayer[bestPlayerId].getName() + "\n(score : " + to_string(maxScore) + ")";
 		highscore.setString(highscoreString);
-		highscore.setPosition(view.getCenter().x-view.getSize().x/4,view.getCenter().y-view.getSize().y/2.2);
-		ptrWindow->draw(highscore);
+		highscore.setPosition(window.mapPixelToCoords(sf::Vector2i(highscore.getLocalBounds().width/2, highscore.getLocalBounds().height/2	)));
+		window.draw(highscore);
 
 		// End of the game
 		if (lPlayer[0].getCells().empty())
 		{
 			window.draw(end);
 		}
-
 
 		window.display();
  		window.setView(view);
