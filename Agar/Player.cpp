@@ -28,7 +28,7 @@ Player::~Player()
 
 void Player::move(int splitTime)
 // Changes the postion of each cell for this Player
-// param splitTime (int): time of last split, determining if this player's cells can merge or not 
+// param splitTime (int): Global clock to check for merging availability, determining if this player's cells can merge or not 
 // (if they can't, they can't move through each other)
 // return null
 {
@@ -56,7 +56,7 @@ void Player::move(int splitTime)
 
 bool Player::canMerge(int splitTime)
 // Determine if this player's cells can merge, or not
-// param splitTime (int): Time of last split
+// param splitTime (int): Global clock to check for merging availability
 // return unnamed (bool): 1 if cells can merge, 0 else
 {
 	return (splitTime > merge_available);
@@ -65,18 +65,14 @@ bool Player::canMerge(int splitTime)
 
 void Player::split(int splitTime)
 // Splits all this player's cells that can split
-// param spliTime (int): Time of last split
+// param spliTime (int): Global clock to check for merging availability
 // return null
 {
 	int nb_cells = m_cells.size();
 	//if (min_size > 10)
 	for (int j = 0; j < nb_cells; ++j)
 	{
-		if (m_cells[j]->getSize() > 40)
-		{
-			merge_available = splitTime + 10;
-			m_cells[j]->split(m_target);
-        }
+        m_cells[j]->split(m_target, splitTime);
 	}
 }
 
@@ -150,7 +146,7 @@ void Player::splitIA(std::vector<Player*> &lPlayer, int Player_id, int splitTime
 // All the actions related to splitting for the IAs: Depending on their designed behaviour, IAs will choose, or not, to split
 // param &lPlayer (vector<Player>): List of the players, usefull to IAs to determine if they are 'safe'
 // param Player_id (int): The id of the player trying to split
-// param splitTime (int): Time of last split, determining if the player can split
+// param splitTime (int): Global clock to check for merging availability, determining if the player can split
 // return null
 {
 	if (!strategy.at("split").at("human")) {
@@ -418,4 +414,10 @@ float Player::getSmallestCellSize()
 int Player::getScore()
 {
 	return m_score;
+}
+
+int Player::setMergeAvailable(int merge_avail)
+{
+    merge_available=merge_avail;
+    return merge_available;
 }

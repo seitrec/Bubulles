@@ -31,6 +31,7 @@ public:
 	float getSmallestCellSize();
 	int getScore();
 	bool canMerge(int);
+    int setMergeAvailable(int merge_avail);
 
 
 private:

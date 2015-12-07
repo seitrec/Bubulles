@@ -13,3 +13,7 @@
 #define VIRUS_MIN_SIZE 40
 
 #define BASE_SPEED  200
+
+#define COOLDOWN_AFTER_SPLIT 10
+
+#define MIN_SPLIT_SIZE 40

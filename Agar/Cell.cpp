@@ -67,7 +67,7 @@ void Cell::drawScore(sf::RenderWindow & window, sf::Font & font)
 }
 
 
-void Cell::Eat(Entity &prey)
+void Cell::Eat(Entity &prey, int splitTime)
 // Method to call when this cell eats by an entity called prey
 // param prey (Entity): the Entity that is eaten by this
 // return null
@@ -85,7 +85,7 @@ void Cell::Eat(Entity &prey)
             float direction_x = pos_init_x + size_init*cos(theta);
             float direction_y = pos_init_y + size_init*sin(theta);
             sf::Vector2f target(direction_x, direction_y);
-            split(target);
+            split(target, splitTime);
         }
     }
     if (prey.getBuff()=="Speed")
@@ -100,21 +100,30 @@ void Cell::Eat(Entity &prey)
 }
 
 
-void Cell::split(sf::Vector2f target)
+void Cell::split(sf::Vector2f target, int splitTime)
 // Split an Cell in two, by dividing this entity's mass by 2, and creating a clone to the target location
-// param target (Vector2f): target direction where to create the clone
+// param target (Vector2f): target direction where to create the clone, splitTime (int) : global clock to check for merging
 // return child (Cell): Clone of the reduced cell, that appears close to it towards target location
 {
-    setSize(m_size / sqrt(2));
-    setSpeed(m_size);
-    Cell* ptrChild = new Cell(m_player, m_size);
-    ptrChild->setColor(getColor());
-    ptrChild->setOutlineColor(getOutlineColor());
-    
-    sf::Vector2f move = ptrChild->move(target);
-    ptrChild->setCenter(sf::Vector2f(this->getCenter().x + move.x, this->getCenter().y + move.y));
-    m_player->addCell(ptrChild);
-    m_player->merge_available=;
+    if (m_size>MIN_SPLIT_SIZE)
+    {
+        //reduce current cell size and generate pointer to generated cell (child)
+        setSize(m_size / sqrt(2));
+        setSpeed(m_size);
+        Cell* ptrChild = new Cell(m_player, m_size);
+        ptrChild->setColor(getColor());
+        ptrChild->setOutlineColor(getOutlineColor());
+        
+        //move the child toward mousepointer
+        sf::Vector2f move = ptrChild->move(target);
+        float norme = sqrt (move.x*move.x+move.y*move.y);
+        move = (m_size*2/norme)*move;
+        ptrChild->setCenter(sf::Vector2f(this->getCenter().x + move.x, this->getCenter().y + move.y));
+        
+        //add the child to the player's list and update the cooldown for merging
+        m_player->setMergeAvailable(splitTime+ COOLDOWN_AFTER_SPLIT);
+        m_player->addCell(ptrChild);
+    }
 }
 
 

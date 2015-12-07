@@ -264,7 +264,7 @@ int main()
 					{
 						if (lPlayer[i]->getCells()[j]->getSize()>EATING_RATIO*lFood[u].getSize())
 						{
-                            lPlayer[i]->getCells()[j]->Eat(lFood[u]);
+                            lPlayer[i]->getCells()[j]->Eat(lFood[u], static_cast<int>(clock.getElapsedTime().asSeconds()));
 							lFood.erase(lFood.begin() + u);
 							--u;
 
