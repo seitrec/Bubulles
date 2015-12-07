@@ -76,16 +76,13 @@ void Cell::Eat(Entity &prey)
 	// or if the cell we attempt to eat is currently immune for a short while). For more information on buffs, see the Food class.
     if (prey.getBuff()=="Virus")
     {
-        float pos_init_x = m_position.x;
-        float pos_init_y = m_position.y;
-        float size_init = m_size;
         for (int i=0; i<10; i++)
         {
 			float theta = i * 3.14 / 5;
-            float direction_x = pos_init_x + size_init*cos(theta);
-            float direction_y = pos_init_y + size_init*sin(theta);
+            float direction_x = this->getCenter().x + this->getSize()*cos(theta);
+            float direction_y = this->getCenter().y + this->getSize()*sin(theta);
             sf::Vector2f target(direction_x, direction_y);
-            split(target);
+            this->split(target);
         }
     }
     if (prey.getBuff()=="Speed")
@@ -114,7 +111,6 @@ void Cell::split(sf::Vector2f target)
     sf::Vector2f move = ptrChild->move(target);
     ptrChild->setCenter(sf::Vector2f(this->getCenter().x + move.x, this->getCenter().y + move.y));
     m_player->addCell(ptrChild);
-    m_player->merge_available=;
 }
 
 
