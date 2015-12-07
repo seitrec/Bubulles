@@ -11,7 +11,7 @@ class Cell :
 	
 {
 public:
-	Cell(float size=10);
+	Cell(float size=10 , Player *playerptr=nullptr);
 	~Cell();
 	void drawName(sf::RenderWindow &window, sf::Font &font, std::string name);
 	void drawScore(sf::RenderWindow &window, sf::Font &font);
@@ -20,8 +20,7 @@ public:
 	bool checkCollisionCovering(Entity &entity);
 	void setMoved(bool b);
 	bool getWasMoved();
-    void split(sf::Vector2f target);
-    void setPlayer (Player *player);
+    Cell split(sf::Vector2f target);
 
 private:
 	bool wasMoved;

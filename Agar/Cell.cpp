@@ -5,7 +5,7 @@
 #include <math.h>
 
 
-Cell::Cell(float size):Entity(size), wasMoved(0)
+Cell::Cell(float size, Player *playerptr):Entity(size), wasMoved(0)
 // This class implements an subClass of Entity (controlled by a player/IA) capable of moving, splitting, and eating
 // param size (float): the radius of the disc
 // return null
@@ -18,6 +18,7 @@ Cell::Cell(float size):Entity(size), wasMoved(0)
     setColor(sf::Color(r,v,b));
 	setOutlineColor(sf::Color(fmax(0, r - 40), fmax(0, v - 40), fmax(0, b - 40)));
 	setOutlineThickness(size/8);
+    m_player= playerptr;
 }
 
 
@@ -95,7 +96,7 @@ void Cell::Eat(Entity &prey)
 }
 
 
-void Cell::split(sf::Vector2f target)
+Cell Cell::split(sf::Vector2f target)
 // Split an Cell in two, by dividing this entity's mass by 2, and creating a clone to the target location
 // param target (Vector2f): target direction where to create the clone
 // return child (Cell): Clone of the reduced cell, that appears close to it towards target location
@@ -103,12 +104,12 @@ void Cell::split(sf::Vector2f target)
     this->setSize(this->getSize()/sqrt(2));
     this->setSpeed(this->m_size);
     Cell child(this->getSize());
-    Cell * ptrChild = &child;
-    ptrChild->setColor(this->getColor());
-    ptrChild->setOutlineColor(this->getOutlineColor());
-    sf::Vector2f move = ptrChild->move(target);
-    ptrChild->setCenter(sf::Vector2f(this->getCenter().x + move.x, this->getCenter().y + move.y));
-    m_player->addCell(ptrChild);
+    child.setColor(this->getColor());
+    child.setOutlineColor(this->getOutlineColor());
+    sf::Vector2f move = child.move(target);
+    child.setCenter(sf::Vector2f(this->getCenter().x + move.x, this->getCenter().y + move.y));
+    m_player->addCell(child);
+    return child;
 }
 
 
@@ -135,10 +136,6 @@ bool Cell::checkStrictCollision(Cell &cell)
 		< fabs(this->getSize() + cell.getSize()));
 }
 
-void Cell::setPlayer(Player *player)
-{
-    m_player=player;
-}
 
 void Cell::setMoved(bool b)
 // Setter of the boolean wasMoved, used to determine if this cell was moved this frame
