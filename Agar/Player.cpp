@@ -258,7 +258,7 @@ sf::Vector2f Player::getClosestLocation(std::vector<Food> &lFood)
 		distance = sqrt(pow((this->getViewCenter().x - lFood[i].getCenter().x), 2) +
 						pow((this->getViewCenter().y - lFood[i].getCenter().y), 2));
 
-		if (distance < minDistance)
+		if (distance < minDistance && lFood[i].getBuff() != "virus")
 		{
 			minDistance = distance;
 			location = lFood[i].getCenter();
