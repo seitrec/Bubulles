@@ -16,8 +16,8 @@ public:
 	void setSize(float size);
     void setSpeed(float size);
 	sf::Vector2f move(sf::Vector2f target);
-	virtual void getEaten(Entity& predator);
-
+    std::string getBuff ();
+    
 protected:
 	sf::Vector2f m_position;
 	float m_size;
@@ -25,5 +25,7 @@ protected:
 	float m_speed;
 	float m_speedBonus;
 	float m_timeBonus;
+    std::string m_buff;
+    
 };
 

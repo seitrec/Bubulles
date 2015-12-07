@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CAC66EF51C149BA800C139A4 /* arial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CAC66EF21C149BA800C139A4 /* arial.ttf */; };
+		CAC66EF61C149BA800C139A4 /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = CAC66EF31C149BA800C139A4 /* bg.png */; };
+		CAC66EF71C149BA800C139A4 /* bulles.png in Resources */ = {isa = PBXBuildFile; fileRef = CAC66EF41C149BA800C139A4 /* bulles.png */; };
 		CAF693D91BDE833C002873DB /* sansation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CAF693D81BDE833C002873DB /* sansation.ttf */; };
 		CAF693FE1BDE8365002873DB /* Cell.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CAF693E61BDE8365002873DB /* Cell.cpp */; };
 		CAF693FF1BDE8365002873DB /* Entity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CAF693E91BDE8365002873DB /* Entity.cpp */; };
@@ -18,6 +21,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CAC66EF21C149BA800C139A4 /* arial.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = arial.ttf; path = ../../Agar/arial.ttf; sourceTree = "<group>"; };
+		CAC66EF31C149BA800C139A4 /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bg.png; path = ../../Agar/bg.png; sourceTree = "<group>"; };
+		CAC66EF41C149BA800C139A4 /* bulles.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bulles.png; path = ../../Agar/bulles.png; sourceTree = "<group>"; };
 		CAF693C91BDE833B002873DB /* Agario Mac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Agario Mac.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAF693CD1BDE833C002873DB /* Agario Mac-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Agario Mac-Info.plist"; sourceTree = "<group>"; };
 		CAF693D81BDE833C002873DB /* sansation.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = sansation.ttf; sourceTree = "<group>"; };
@@ -96,6 +102,9 @@
 		CAF693D31BDE833C002873DB /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				CAC66EF21C149BA800C139A4 /* arial.ttf */,
+				CAC66EF31C149BA800C139A4 /* bg.png */,
+				CAC66EF41C149BA800C139A4 /* bulles.png */,
 				CAF693D81BDE833C002873DB /* sansation.ttf */,
 			);
 			name = Resources;
@@ -158,8 +167,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CAC66EF61C149BA800C139A4 /* bg.png in Resources */,
 				CAF693D91BDE833C002873DB /* sansation.ttf in Resources */,
+				CAC66EF71C149BA800C139A4 /* bulles.png in Resources */,
 				CAF694021BDE8365002873DB /* image.png in Resources */,
+				CAC66EF51C149BA800C139A4 /* arial.ttf in Resources */,
 				CAF694011BDE8365002873DB /* image.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

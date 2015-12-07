@@ -13,7 +13,6 @@
 using namespace std;
 string namePlayer = "Player";
 
-
 int main()
 {
 	// Create the window and the framerate limit
@@ -56,12 +55,12 @@ int main()
 
 	// Initialise the real player
 	vector<Player> *ptrlPlayer = &lPlayer;
-    lPlayer.push_back(Player(Cell(20),0));
+    lPlayer.push_back(Player(0));
 
     // Initialise the bots
 	for (int i(1); i < INITIAL_PLAYERS; ++i)
 	{
-		lPlayer.push_back(Player());
+		lPlayer.push_back(Player(1));
         lPlayer[i].setName("bot " + std::to_string(i));
     }
 
@@ -267,7 +266,7 @@ int main()
 					{
 						if (lPlayer[i].getCells()[j].getSize()>EATING_RATIO*lFood[u].getSize())
 						{
-                            lFood[u].getEaten(lPlayer[i].getCells()[j]);
+                            lPlayer[i].getCells()[j].Eat(lFood[u]);
 							lFood.erase(lFood.begin() + u);
 							--u;
 
@@ -285,7 +284,7 @@ int main()
 					{
 						if (j != k && lPlayer[i].getCells()[j].checkCollisionCovering(lPlayer[i].getCells()[k]) && lPlayer[i].getCells()[j].getSize()>1.001*lPlayer[i].getCells()[k].getSize())
 						{
-							lPlayer[i].getCells()[k].getEaten(lPlayer[i].getCells()[j]);
+							lPlayer[i].getCells()[j].Eat(lPlayer[i].getCells()[k]);;
 							lPlayer[i].delCell(k);
 							if (j > k) { --j; }
 							--k;
@@ -305,7 +304,7 @@ int main()
 						{
 							if (lPlayer[i].getCells()[j].checkCollisionCovering(lPlayer[u].getCells()[k]) && lPlayer[i].getCells()[j].getSize()>1.05*lPlayer[u].getCells()[k].getSize())
 							{
-                                lPlayer[u].getCells()[k].getEaten(lPlayer[i].getCells()[j]);
+                                lPlayer[i].getCells()[j].Eat(lPlayer[u].getCells()[k]);
                                 lPlayer[u].delCell(k);
 								--k;
 							}

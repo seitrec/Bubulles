@@ -2,11 +2,22 @@
 #include "Global.h"
 #include <iostream>
 #include <math.h>
+#include "Cell.h"
 
-Player::Player(Cell firstcell , bool isIA):m_score(0), merge_available(0)
+
+Player::Player(bool isIA):m_score(0), merge_available(0)
 {
     setStrategy(isIA);
-    addCell(firstcell);
+    Cell cell;
+    if (isIA)
+    {
+        cell= Cell(10, this);
+    }
+    else
+    {
+        cell=Cell(20, this);
+    }
+    addCell(cell);
 }
 
 
@@ -22,7 +33,8 @@ void Player::move(int splitTime)
 {
 	for (int i = 0; i < m_cells.size(); ++i)
 	{
-		sf::Vector2f move = m_cells[i].move(m_target);
+		
+        sf::Vector2f move = m_cells[i].move(m_target);
 		Cell copieCell = m_cells[i];
 		copieCell.setSize(copieCell.getSize());
 		copieCell.setCenter(sf::Vector2f(m_cells[i].getCenter().x + move.x, m_cells[i].getCenter().y + move.y));
@@ -58,16 +70,9 @@ void Player::split(int splitTime)
 		{
 			int new_cell_id = m_cells.size();
 			merge_available = splitTime + 10;
-			this->addCell(m_cells[j].split(m_target));
-
-
-			sf::Vector2f move = (m_cells[new_cell_id].move(m_target));
-			float norme = sqrt(move.x*move.x + move.y*move.y);
-			move = (m_cells[j].getSize()*2/norme)*move;
-			m_cells[new_cell_id].setCenter(sf::Vector2f(m_cells[new_cell_id].getCenter().x + move.x, m_cells[new_cell_id].getCenter().y + move.y));
-		}
+			m_cells[j].split(m_target);
+        }
 	}
-
 }
 
 std::vector<Cell> &Player::getCells()
@@ -75,7 +80,7 @@ std::vector<Cell> &Player::getCells()
 	return m_cells;
 }
 
-void Player::addCell(Cell cell)
+void Player::addCell(Cell &cell)
 {
 	m_cells.push_back(cell);
 }
@@ -92,7 +97,7 @@ void Player::setTarget(sf::Vector2f target)
 
 sf::Vector2f Player::getViewCenter()
 {
-	//Si on arrive pr�s des bords il ne faut plus prendre le centre des cellules
+	//Si on arrive près des bords il ne faut plus prendre le centre des cellules
 	sf::Vector2f centreCells = sf::Vector2f(((m_cells_zone[0] + m_cells_zone[1]) / 2), ((m_cells_zone[2] + m_cells_zone[3]) / 2));
 	sf::Vector2f centreView = centreCells;
 

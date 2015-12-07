@@ -6,7 +6,7 @@
 #include <SFML/Graphics.hpp>
 using namespace std;
 
-Entity::Entity(float size) :   m_size(size), m_speed(0), m_speedBonus(0), m_timeBonus(0)
+Entity::Entity(float size) :   m_size(size), m_speed(0), m_speedBonus(0), m_timeBonus(0), m_buff("None")
 // This class implements an Entity: A disc SFML shape with a few attributes
 // param size (float): the radius of the disc
 // return null
@@ -79,18 +79,17 @@ void Entity::setSpeed(float size)
 // param size (float): the new size to which the speed must be correlated
 // return null
 {
-	m_speed = 200 / size;
+	m_speed = BASE_SPEED / size;
 };
 
-sf::Vector2f Entity::move(sf::Vector2f target)
-// Process the new coordinates of this entity for the next frame, given a target and using this entity's speed
+sf::Vector2f Entity::move(sf::Vector2f target)// Process the new coordinates of this entity for the next frame, given a target and using this entity's speed
 // param target (Vector2f): Coordinates of this entity's target point
 // return move (Vector2f): Coordinates of this entity for the next frame
 {
 
 	sf::Vector2f relativeCentertoTarget(target - getCenter());
 	sf::Vector2f move = sf::Vector2f(0, 0);
-
+    //Check if the cell has a speed buff, and create a real speed
 	if ((fabs(relativeCentertoTarget.x)>3 || fabs(relativeCentertoTarget.y)>3))
 	{
 		float c = sqrt((m_speed*m_speed) / (relativeCentertoTarget.x*relativeCentertoTarget.x + relativeCentertoTarget.y*relativeCentertoTarget.y));
@@ -117,10 +116,10 @@ sf::Vector2f Entity::move(sf::Vector2f target)
 	return move;
 };
 
-void Entity::getEaten(Entity& predator)
-// Method to call when the this entity is eaten by another entity predator
-// param predator (Entity): the Entity (likely a Cell) that eats this entity
-// return null
-{
 
+
+std::string Entity:: getBuff()
+//Getter (string) of the buff of this entity. For more information on buffs, refer to the Food class
+{
+    return m_buff;
 }

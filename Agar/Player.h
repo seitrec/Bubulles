@@ -1,17 +1,17 @@
 #pragma once
 #include "Cell.h"
 #include "Food.h"
-
+class Cell;
 
 class Player
 {
 public:
-	Player(Cell firstcell=Cell(10), bool isIA=1);
+	Player(bool isIA);
 	~Player();
 	void move(int);
 	void split(int);
 	std::vector<Cell> &getCells();
-	void addCell(Cell cell);
+	void addCell(Cell &cell);
 	void delCell(int k);
 	void setTarget(sf::Vector2f target);
 	sf::Vector2f getViewCenter();
@@ -39,7 +39,7 @@ private:
 	std::string m_name;
 	std::vector<Cell> m_cells;
 	sf::Vector2f m_target;
-	std::vector<float> m_cells_zone; //pourquoi un vecteur ? une zone c'est juste une liste à deux éléments non? un vecteur ça peut croitre en taille
+	std::vector<float> m_cells_zone;
 	int m_score;
 	std::map<std::string, std::map<std::string, bool>> strategy;
 	int merge_available;
