@@ -125,14 +125,14 @@ sf::Vector2f Player::getViewCenter()
 void Player::splitIA(std::vector<Food> &lFood, std::vector<Player> &lPlayer, int Player_id, int splitTime)
 {
 	if (!strategy.at("split").at("human")) {
-		Cell closestCell;
+		Cell* closestCell;
 		int distance;
 		std::tie(closestCell, distance) = getClosestCell(lPlayer, Player_id);
 
 		if (strategy.at("split").at("aggro") && (m_cells.size() == 1) ) {
 			for (int i = 0; i < lPlayer.size(); ++i) {
-				if (distance <= 1.8 * m_cells[0]->getSize() && m_cells[0]->getSize() / sqrt(2) > 1.05* closestCell.getSize()) {
-					setTarget(closestCell.getCenter());
+				if (distance <= 1.8 * m_cells[0]->getSize() && m_cells[0]->getSize() / sqrt(2) > 1.05* closestCell->getSize()) {
+					setTarget(closestCell->getCenter());
 					split(splitTime);
 				}
 			}
@@ -160,30 +160,30 @@ void Player::setIATarget(sf::Vector2f mouseCoordonates, std::vector<Food> &lFood
 		}
 		if (strategy.at("target").at("stalk") == true)
 		{
-			Cell closestCell;
+			Cell* closestCell;
 			int distance;
 			std::tie(closestCell, distance) = getClosestCell(lPlayer, Player_id);
-			if ((distance < 4*closestCell.getSize() && m_cells.size() == 1) && EATING_RATIO*closestCell.getSize() < getSmallestCellSize()) {
-				setTarget(closestCell.getCenter());
+			if ((distance < 4*closestCell->getSize() && m_cells.size() == 1) && EATING_RATIO*closestCell->getSize() < getSmallestCellSize()) {
+				setTarget(closestCell->getCenter());
 			}
 		}
 		if (strategy.at("target").at("flee") == true)
 		{
-			Cell closestCell;
+			Cell* closestCell;
 			int distance;
 			std::tie(closestCell, distance) = getClosestCell(lPlayer, Player_id);
-			if (distance < 4*closestCell.getSize() && closestCell.getSize() > EATING_RATIO*getSmallestCellSize()) {
-				setTarget(getViewCenter() + getViewCenter() - closestCell.getCenter());
+			if (distance < 4*closestCell->getSize() && closestCell->getSize() > EATING_RATIO*getSmallestCellSize()) {
+				setTarget(getViewCenter() + getViewCenter() - closestCell->getCenter());
 			}
 		}
 	}
 }
 
-std::tuple<Cell, int> Player::getClosestCell(std::vector<Player> &lPlayer, int Player_id)
+std::tuple<Cell*, int> Player::getClosestCell(std::vector<Player> &lPlayer, int Player_id)
 {
 	float minDistance = WORLD_SIZE;
 	float distance;
-	Cell closestCell;
+	Cell *closestCell;
 	for (int i = 0; i < lPlayer.size(); ++i) {
 		if (i != Player_id) {
 			for (int j = 0; j < lPlayer[i].getCells().size(); ++j)
@@ -194,7 +194,7 @@ std::tuple<Cell, int> Player::getClosestCell(std::vector<Player> &lPlayer, int P
 				if (distance < minDistance)
 				{
 					minDistance = distance;
-					closestCell = *lPlayer[i].getCells()[j];
+					closestCell = lPlayer[i].getCells()[j];
 				}
 			}
 		}
