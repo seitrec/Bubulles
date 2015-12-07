@@ -4,7 +4,7 @@
 #define INITIAL_FOOD 1000 // Food generated at the initialisation of the game
 #define FOOD_BY_SECOND 25
 #define MAX_FOOD  20000
-
+#define M_PI = 3,14
 #define INITIAL_PLAYERS 20
 
 #define EATING_RATIO 1.1

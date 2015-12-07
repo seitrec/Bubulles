@@ -71,12 +71,13 @@ void Cell::Eat(Entity &prey)
 // param prey (Entity): the Entity that is eaten by this
 // return null
 {
-    // Conditional buff action list (for example : if the food gives a speed bonus "buff", or if the cell we attempt to eat is currently immune for a short while). For more information on buffs, see the Food class.
+    // Conditional buff action list (for example : if the food gives a speed bonus "buff", 
+	// or if the cell we attempt to eat is currently immune for a short while). For more information on buffs, see the Food class.
     if (prey.getBuff()=="Virus")
     {
         for (int i=0; i<10; i++)
         {
-            float theta = i*M_PI/5;
+			float theta = i * 3.14 / 5;
             float direction_x = this->getCenter().x + this->getSize()*cos(theta);
             float direction_y = this->getCenter().y + this->getSize()*sin(theta);
             sf::Vector2f target(direction_x, direction_y);
