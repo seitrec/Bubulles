@@ -5,8 +5,8 @@
 #include <math.h>
 
 
-Cell::Cell(float size):Entity(size)
-// This class implements a subClass of Entity (controlled by a player/IA) capable of moving, splitting, and eating
+Cell::Cell(float size):Entity(size), wasMoved(0)
+// This class implements an subClass of Entity (controlled by a player/IA) capable of moving, splitting, and eating
 // param size (float): the radius of the disc
 // return null
 {	
@@ -16,7 +16,7 @@ Cell::Cell(float size):Entity(size)
 	setSpeed(m_size);
 	setCenter(sf::Vector2f(rand() % WORLD_SIZE, rand() % WORLD_SIZE));
     setColor(sf::Color(r,v,b));
-	setOutlineColor(sf::Color(fmax(0, r - 40), fmax(0, v - 40), fmax(0, b - 40	)));
+	setOutlineColor(sf::Color(fmax(0, r - 40), fmax(0, v - 40), fmax(0, b - 40)));
 	setOutlineThickness(size/8);
 }
 
@@ -138,4 +138,20 @@ bool Cell::checkStrictCollision(Cell &cell)
 void Cell::setPlayer(Player *player)
 {
     m_player=player;
+}
+
+void Cell::setMoved(bool b)
+// Setter of the boolean wasMoved, used to determine if this cell was moved this frame
+// param b (bool): the value to set
+// return null
+{
+	wasMoved = b;
+}
+
+
+bool Cell::getWasMoved()
+// Getter of the boolean wasMoved, used to determine if this cell was moved this frame
+// return wasMoved (bool): 1 if it was actually moved, 0 else
+{
+	return wasMoved;
 }
