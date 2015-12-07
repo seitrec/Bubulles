@@ -8,9 +8,11 @@ class Food :
 public:
     Food(int size=5);
 	~Food();
+    virtual void getEaten(Entity& predator);
     void randomizeBuff ();
 
 private:
+    std::string m_buff;
     
 
 };

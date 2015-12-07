@@ -5,7 +5,7 @@
 #include <math.h>
 
 
-Cell::Cell(float size, Player *playerptr):Entity(size), wasMoved(0)
+Cell::Cell(float size):Entity(size), wasMoved(0)
 // This class implements an subClass of Entity (controlled by a player/IA) capable of moving, splitting, and eating
 // param size (float): the radius of the disc
 // return null
@@ -18,7 +18,6 @@ Cell::Cell(float size, Player *playerptr):Entity(size), wasMoved(0)
     setColor(sf::Color(r,v,b));
 	setOutlineColor(sf::Color(fmax(0, r - 40), fmax(0, v - 40), fmax(0, b - 40)));
 	setOutlineThickness(size/8);
-    m_player= playerptr;
 }
 
 
@@ -67,49 +66,31 @@ void Cell::drawScore(sf::RenderWindow & window, sf::Font & font)
 }
 
 
-void Cell::Eat(Entity &prey)
-// Method to call when this cell eats by an entity called prey
-// param prey (Entity): the Entity that is eaten by this
+void Cell::getEaten(Entity &predator)
+// Method to call when the this entity is eaten by another entity predator
+// param predator (Entity): the Entity (likely a Cell) that eats this entity
 // return null
 {
-    // Conditional buff action list (for example : if the food gives a speed bonus "buff", or if the cell we attempt to eat is currently immune for a short while). For more information on buffs, see the Food class.
-    if (prey.getBuff()=="Virus")
-    {
-        for (int i=0; i<10; i++)
-        {
-            float theta = i*M_PI/5;
-            float direction_x = this->getCenter().x + this->getSize()*cos(theta);
-            float direction_y = this->getCenter().y + this->getSize()*sin(theta);
-            sf::Vector2f target(direction_x, direction_y);
-            this->split(target);
-        }
-    }
-    if (prey.getBuff()=="Speed")
-    {
-        m_buff="Faster";
-    }
-    else //default case
-    {
-        this->setSize(sqrt(pow(m_size, 2) + pow(prey.getSize(),2)));
-        this->setSpeed(this->getSize());
-    }
+    predator.setSize(sqrt(pow(m_size, 2) + pow(predator.getSize(),2)));
+    predator.setSpeed(predator.getSize());
 }
 
 
 Cell Cell::split(sf::Vector2f target)
-// Split an Cell in two, by dividing this entity's mass by 2, and creating a clone to the target location
+// Split a Cell in two, by dividing this cell's mass by 2, and creating a clone to the target location
 // param target (Vector2f): target direction where to create the clone
 // return child (Cell): Clone of the reduced cell, that appears close to it towards target location
 {
-    this->setSize(this->getSize()/sqrt(2));
-    this->setSpeed(this->m_size);
-    Cell child(this->getSize());
-    child.setColor(this->getColor());
-    child.setOutlineColor(this->getOutlineColor());
-    sf::Vector2f move = child.move(target);
-    child.setCenter(sf::Vector2f(this->getCenter().x + move.x, this->getCenter().y + move.y));
-    m_player->addCell(child);
-    return child;
+	this->setSize(this->getSize()/sqrt(2));
+	this->setSpeed(this->m_size);
+	Cell child;
+	child.setSize(this->getSize());
+	child.setSpeed(m_size);
+	child.setColor(this->getColor());
+	child.setOutlineColor(this->getOutlineColor());
+	sf::Vector2f move = child.move(target);
+	child.setCenter(sf::Vector2f(this->getCenter().x + move.x, this->getCenter().y + move.y));
+	return child;
 }
 
 
