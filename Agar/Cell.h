@@ -1,5 +1,5 @@
 #pragma once
-#include <vector>
+#include<vector>
 #include "Food.h"
 #include "Entity.h"
 #include <SFML/Graphics.hpp>
@@ -11,7 +11,7 @@ class Cell :
 	
 {
 public:
-    Cell( Player* player, float size=10.);
+	Cell(float size=10);
 	~Cell();
 	void drawName(sf::RenderWindow &window, sf::Font &font, std::string name);
 	void drawScore(sf::RenderWindow &window, sf::Font &font);

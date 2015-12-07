@@ -11,12 +11,16 @@ Player::Player(bool isIA):m_score(0), merge_available(0)
 // return null
 {
     setStrategy(isIA);
-    Cell* cell = new Cell(this);
-    if (!isIA)
+    Cell cell;
+    if (isIA)
     {
-        cell->setSize(20);
+        cell= Cell(10);
     }
-    addCell(cell);
+    else
+    {
+        cell=Cell(20);
+    }
+    addCell(&cell);
 }
 
 
@@ -36,9 +40,8 @@ void Player::move(int splitTime)
 	{
 		
         sf::Vector2f move = m_cells[i]->move(m_target);
-		Cell* ptrCell = m_cells[i];
-        float size = ptrCell->getSize();
-		ptrCell->setSize(size);
+		Cell *ptrCell = (m_cells[i]);
+		ptrCell->setSize(ptrCell->getSize());
 		ptrCell->setCenter(sf::Vector2f(ptrCell->getCenter().x + move.x, ptrCell->getCenter().y + move.y));
 		for (int j = i+1; j < m_cells.size(); ++j)
 		{
@@ -95,6 +98,7 @@ void Player::addCell(Cell *cell)
 // return null
 {
 	m_cells.push_back(cell);
+    cell->setPlayer(this);
 }
 
 
@@ -146,7 +150,7 @@ sf::Vector2f Player::getViewCenter()
 }
 
 
-void Player::splitIA(std::vector<Player*> &lPlayer, int Player_id, int splitTime)
+void Player::splitIA(std::vector<Player> &lPlayer, int Player_id, int splitTime)
 // All the actions related to splitting for the IAs: Depending on their designed behaviour, IAs will choose, or not, to split
 // param &lPlayer (vector<Player>): List of the players, usefull to IAs to determine if they are 'safe'
 // param Player_id (int): The id of the player trying to split
@@ -175,7 +179,7 @@ void Player::splitIA(std::vector<Player*> &lPlayer, int Player_id, int splitTime
 }
 
 
-void Player::setIATarget(sf::Vector2f mouseCoordonates, std::vector<Food> &lFood, std::vector<Player*> &lPlayer, int Player_id)
+void Player::setIATarget(sf::Vector2f mouseCoordonates, std::vector<Food> &lFood, std::vector<Player> &lPlayer, int Player_id)
 // All the actions related to targetting a move for the players and IAs: Depending on their designed behaviour, IAs will choose where they want to go
 // param mouseCoordonates (Vector2f): Couple of coordinates of the mouse, for the player's move
 // param &lFood (vector<Food>): List of the foods, for the most basic move: 'I need food'
@@ -216,8 +220,7 @@ void Player::setIATarget(sf::Vector2f mouseCoordonates, std::vector<Food> &lFood
 }
 
 
-
-std::tuple<Cell*, int> Player::getClosestCell(std::vector<Player*> &lPlayer, int Player_id)
+std::tuple<Cell*, int> Player::getClosestCell(std::vector<Player> &lPlayer, int Player_id)
 // Process which ennemy cell is the closest to a player
 // param &lPlayer (vector<Player>): List of the players
 // param Player_id (int): The id of the player
@@ -228,15 +231,15 @@ std::tuple<Cell*, int> Player::getClosestCell(std::vector<Player*> &lPlayer, int
 	Cell *closestCell;
 	for (int i = 0; i < lPlayer.size(); ++i) {
 		if (i != Player_id) {
-			for (int j = 0; j < lPlayer[i]->getCells().size(); ++j)
+			for (int j = 0; j < lPlayer[i].getCells().size(); ++j)
 			{
-				distance = sqrt(pow((m_cells[0]->getCenter().x - lPlayer[i]->m_cells[j]->getCenter().x), 2) +
-					pow((m_cells[0]->getCenter().y - lPlayer[i]->m_cells[j]->getCenter().y), 2));
+				distance = sqrt(pow((m_cells[0]->getCenter().x - lPlayer[i].m_cells[j]->getCenter().x), 2) +
+					pow((m_cells[0]->getCenter().y - lPlayer[i].m_cells[j]->getCenter().y), 2));
 
 				if (distance < minDistance)
 				{
 					minDistance = distance;
-					closestCell = lPlayer[i]->getCells()[j];
+					closestCell = lPlayer[i].getCells()[j];
 				}
 			}
 		}

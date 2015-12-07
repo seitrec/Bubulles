@@ -5,7 +5,7 @@
 #include <math.h>
 
 
-Cell::Cell(Player* player, float size):Entity(size)
+Cell::Cell(float size):Entity(size)
 // This class implements a subClass of Entity (controlled by a player/IA) capable of moving, splitting, and eating
 // param size (float): the radius of the disc
 // return null
@@ -18,7 +18,6 @@ Cell::Cell(Player* player, float size):Entity(size)
     setColor(sf::Color(r,v,b));
 	setOutlineColor(sf::Color(fmax(0, r - 40), fmax(0, v - 40), fmax(0, b - 40	)));
 	setOutlineThickness(size/8);
-    m_player= player;
 }
 
 
@@ -102,12 +101,12 @@ void Cell::split(sf::Vector2f target)
 // param target (Vector2f): target direction where to create the clone
 // return child (Cell): Clone of the reduced cell, that appears close to it towards target location
 {
-    setSize(m_size / sqrt(2));
-    setSpeed(m_size);
-    Cell* ptrChild = new Cell(m_player, m_size);
-    ptrChild->setColor(getColor());
-    ptrChild->setOutlineColor(getOutlineColor());
-    
+    this->setSize(this->getSize()/sqrt(2));
+    this->setSpeed(this->m_size);
+    Cell child(this->getSize());
+    Cell * ptrChild = &child;
+    ptrChild->setColor(this->getColor());
+    ptrChild->setOutlineColor(this->getOutlineColor());
     sf::Vector2f move = ptrChild->move(target);
     ptrChild->setCenter(sf::Vector2f(this->getCenter().x + move.x, this->getCenter().y + move.y));
     m_player->addCell(ptrChild);

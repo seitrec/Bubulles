@@ -44,22 +44,24 @@ int main()
 
 	// Initialise the first batch of food
 	vector<Food> lFood;
+	vector<Food> *ptrlFood = &lFood;
 	for (int i(0); i < INITIAL_FOOD; ++i)
 	{
 		lFood.push_back(Food());
 	}
 
 	// Initialise the list of players (bots + human players)
-	vector<Player*> lPlayer;
+	vector<Player> lPlayer;
 
 	// Initialise the real player
-    lPlayer.push_back(new Player(0));
+	vector<Player> *ptrlPlayer = &lPlayer;
+    lPlayer.push_back(Player(0));
 
     // Initialise the bots
 	for (int i(1); i < INITIAL_PLAYERS; ++i)
 	{
-		lPlayer.push_back(new Player(1));
-        lPlayer[i]->setName("bot " + std::to_string(i));
+		lPlayer.push_back(Player(1));
+        lPlayer[i].setName("bot " + std::to_string(i));
     }
 
 	int entityGenerated = 0;
@@ -150,7 +152,7 @@ int main()
 					case sf::Event::KeyPressed:
 						if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return)) {
 							menuId = 1;
-							lPlayer[0]->setName(pseudoStr);
+							lPlayer[0].setName(pseudoStr);
 						}
 						break;
 					//Writing name
@@ -198,7 +200,7 @@ int main()
 				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 				{
 					int splitTime = static_cast<int>(clock.getElapsedTime().asSeconds());
-					lPlayer[0]->split(splitTime);
+					lPlayer[0].split(splitTime);
 				}
 				// Return causes a reset of the program
 				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
@@ -236,35 +238,34 @@ int main()
 		// Bots choose if they want to split (depending on their strategy)
 		for (int i = 0; i < lPlayer.size(); ++i)
 		{
-			lPlayer[i]->splitIA(lPlayer, i, static_cast<int>(clock.getElapsedTime().asSeconds()));
+			lPlayer[i].splitIA(lPlayer, i, static_cast<int>(clock.getElapsedTime().asSeconds()));
 		}
 		
 
 		// All players (bots + human) choose the target of their move for this frame
 		for (int i=0; i < lPlayer.size(); ++i)
 		{
-			lPlayer[i]->setIATarget(mouseCoordonates, lFood, lPlayer, i);
+			lPlayer[i].setIATarget(mouseCoordonates, lFood, lPlayer, i);
 		}
 
 		// Players movements loop
 		for (int i = 0; i < lPlayer.size(); ++i)
 		{
-			lPlayer[i]->setCellZone();
-            lPlayer[i]->move(static_cast<int>(clock.getElapsedTime().asSeconds())); // Each player makes their move
-			
-			lPlayer[i]->getCellZone();
+			lPlayer[i].move(static_cast<int>(clock.getElapsedTime().asSeconds())); // Each player makes their move
+			lPlayer[i].setCellZone();
+			lPlayer[i].getCellZone();
 
 			
 			// Food that are in covering collision with cells get eaten
 			for (int u = 0; u < lFood.size(); ++u)
 			{
-				for (int j = 0; j < lPlayer[i]->getCells().size(); ++j)
+				for (int j = 0; j < lPlayer[i].getCells().size(); ++j)
 				{
-					if (lPlayer[i]->getCells()[j]->checkCollisionCovering(lFood[u]))
+					if (lPlayer[i].getCells()[j]->checkCollisionCovering(lFood[u]))
 					{
-						if (lPlayer[i]->getCells()[j]->getSize()>EATING_RATIO*lFood[u].getSize())
+						if (lPlayer[i].getCells()[j]->getSize()>EATING_RATIO*lFood[u].getSize())
 						{
-                            lPlayer[i]->getCells()[j]->Eat(lFood[u]);
+                            lPlayer[i].getCells()[j]->Eat(lFood[u]);
 							lFood.erase(lFood.begin() + u);
 							--u;
 
@@ -274,16 +275,16 @@ int main()
 			}
 
 			// If a player is split, can merge, and happens to have cells in covering collision, they merge
-			if (lPlayer[i]->canMerge(static_cast<int>(clock.getElapsedTime().asSeconds())))
+			if (lPlayer[i].canMerge(static_cast<int>(clock.getElapsedTime().asSeconds())))
 			{
-				for (int j = 0; j < lPlayer[i]->getCells().size(); ++j)
+				for (int j = 0; j < lPlayer[i].getCells().size(); ++j)
 				{
-					for (int k = 0; k < lPlayer[i]->getCells().size(); ++k)
+					for (int k = 0; k < lPlayer[i].getCells().size(); ++k)
 					{
-						if (j != k && lPlayer[i]->getCells()[j]->checkCollisionCovering(*lPlayer[i]->getCells()[k]) && lPlayer[i]->getCells()[j]->getSize()>1.001*lPlayer[i]->getCells()[k]->getSize())
+						if (j != k && lPlayer[i].getCells()[j]->checkCollisionCovering(*lPlayer[i].getCells()[k]) && lPlayer[i].getCells()[j]->getSize()>1.001*lPlayer[i].getCells()[k]->getSize())
 						{
-							lPlayer[i]->getCells()[j]->Eat(*lPlayer[i]->getCells()[k]);;
-							lPlayer[i]->delCell(k);
+							lPlayer[i].getCells()[j]->Eat(*lPlayer[i].getCells()[k]);;
+							lPlayer[i].delCell(k);
 							if (j > k) { --j; }
 							--k;
 						}
@@ -296,14 +297,14 @@ int main()
 			{
 				if (u != i)
 				{
-					for (int j = 0; j < lPlayer[i]->getCells().size(); ++j)
+					for (int j = 0; j < lPlayer[i].getCells().size(); ++j)
 					{
-						for (int k = 0; k < lPlayer[u]->getCells().size(); ++k)
+						for (int k = 0; k < lPlayer[u].getCells().size(); ++k)
 						{
-							if (lPlayer[i]->getCells()[j]->checkCollisionCovering(*lPlayer[u]->getCells()[k]) && lPlayer[i]->getCells()[j]->getSize()>1.05*lPlayer[u]->getCells()[k]->getSize())
+							if (lPlayer[i].getCells()[j]->checkCollisionCovering(*lPlayer[u].getCells()[k]) && lPlayer[i].getCells()[j]->getSize()>1.05*lPlayer[u].getCells()[k]->getSize())
 							{
-                                lPlayer[i]->getCells()[j]->Eat(*lPlayer[u]->getCells()[k]);
-                                lPlayer[u]->delCell(k);
+                                lPlayer[i].getCells()[j]->Eat(*lPlayer[u].getCells()[k]);
+                                lPlayer[u].delCell(k);
 								--k;
 							}
 						}
@@ -312,11 +313,11 @@ int main()
 
 			}
 			// Draw Cells with their new positions
-			lPlayer[i]->drawCells(ptrWindow);
-			lPlayer[i]->drawCellsScore(window, font);
-			lPlayer[i]->drawName(window, font);
+			lPlayer[i].drawCells(ptrWindow);
+			lPlayer[i].drawCellsScore(window, font);
+			lPlayer[i].drawName(window, font);
 			// Update the scores
-			lPlayer[i]->setScore();
+			lPlayer[i].setScore();
 		}
 
 		// Draw all foods remaining
@@ -325,9 +326,9 @@ int main()
             lFood[u].draw(ptrWindow);
 		}
 		// Center the view on player 0 (the only human)
-		view.setCenter(lPlayer[0]->getViewCenter());
+		view.setCenter(lPlayer[0].getViewCenter());
 		// Adjust the zoom on the human player's cell zone
-		float viewSize= 200 * log(fabs(lPlayer[0]->getCellZone()[0] - lPlayer[0]->getCellZone()[1]));
+		float viewSize= 200 * log(fabs(lPlayer[0].getCellZone()[0] - lPlayer[0].getCellZone()[1]));
 		view.setSize(viewSize, viewSize);
 
 
@@ -336,7 +337,7 @@ int main()
 
 		for (int u = 0; u < lPlayer.size(); ++u)
 		{
-			int scorePlayer = lPlayer[u]->getScore();
+			int scorePlayer = lPlayer[u].getScore();
 			if (maxScore < scorePlayer)
 			{
 				maxScore = scorePlayer;
@@ -345,13 +346,13 @@ int main()
 
 		}
 
-		string highscoreString = "1st :" + lPlayer[bestPlayerId]->getName() + "\n(score : " + to_string(maxScore) + ")";
+		string highscoreString = "1st :" + lPlayer[bestPlayerId].getName() + "\n(score : " + to_string(maxScore) + ")";
 		highscore.setString(highscoreString);
 		highscore.setPosition(window.mapPixelToCoords(sf::Vector2i(highscoreRect.left + highscoreRect.width / 2.0f, highscoreRect.top + highscoreRect.height / 2.0f)));
 		window.draw(highscore);
 
 		// End of the game
-		if (lPlayer[0]->getCells().empty())
+		if (lPlayer[0].getCells().empty())
 		{
 			window.draw(end);
 		}

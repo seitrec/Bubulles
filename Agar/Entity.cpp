@@ -71,7 +71,7 @@ void Entity::setSize(float size)
 {
 	m_size = size;
 	setRadius(m_size);
-	setOutlineThickness(fmin(m_size / 10., 5.));
+	setOutlineThickness(fmin(m_size / 10,5));
 };
 
 void Entity::setSpeed(float size)
