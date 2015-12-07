@@ -14,7 +14,11 @@ Food::Food(int size):Entity(size),m_buff("Normal")
 	setCenter(sf::Vector2f((rand() % WORLD_SIZE + 1), (rand() % WORLD_SIZE + 1)));
     setColor(sf::Color(rand() % 256, rand() % 256, rand() % 256));
     randomizeBuff();
-    if (m_buff=="Virus") {setColor(sf::Color::Green);}
+    if (m_buff=="Virus")
+    {
+        setColor(sf::Color::Green);
+        //other parameters that are unique to the virus
+    }
 }
 
 
@@ -37,7 +41,13 @@ void Food::getEaten(Entity& predator)
 
 
 void Food:: randomizeBuff()
-// Please build this doc while implementing the method
+// This is a buff name generation method that is called by the constructor to initiate each food.
+// The vast majority of foods should be basic food units, but, for more game functionality, we can devise different "buffs" that the food units can contain. Examples: a speed buff that lasts for a certain duration, an invincibility buff, etc... Imagination of the game's designers is the limit here.
+// For now, only "viruses" are implemented : foods that, if consumed, split the player into 10 small cells. They should be avoided at all costs by players.
 {
-    
+    float dice = ((float) rand()) / (float) RAND_MAX;
+    if (dice>=0.995)
+    {
+        m_buff="Virus";
+    }
 }

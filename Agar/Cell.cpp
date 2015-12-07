@@ -81,7 +81,8 @@ Cell Cell::split(sf::Vector2f target)
 // param target (Vector2f): target direction where to create the clone
 // return child (Cell): Clone of the reduced cell, that appears close to it towards target location
 {
-	this->setSize(this->getSize()/sqrt(2));
+	
+    this->setSize(this->getSize()/sqrt(2));
 	this->setSpeed(this->m_size);
 	Cell child;
 	child.setSize(this->getSize());

@@ -5,3 +5,4 @@
 #define INITIAL_PLAYERS 20
 #define MAX_FOOD  20000
 #define EATING_RATIO 1.1
+
